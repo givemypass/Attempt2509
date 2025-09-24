@@ -1,0 +1,3 @@
+[submodule "Assets/Scripts/SelfishFramework"]
+	path = Assets/Scripts/SelfishFramework
+	url = git@github.com:givemypass/SelfishFramework.git
