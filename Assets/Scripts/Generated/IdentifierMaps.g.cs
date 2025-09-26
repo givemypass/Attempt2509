@@ -8,6 +8,11 @@ namespace SelfishFramework.Src.Unity.Generated
         public const int FinishLevelState = 1590688746;
         public const int LevelState = 1862850834;
     }
+    public static class InputIdentifierMap
+    {
+        public const int Touch = -232097233;
+        public const int TouchDelta = -1758337362;
+    }
     public static class UIIdentifierMap
     {
         public const int GameScreen_UIIdentifier = 892950120;
