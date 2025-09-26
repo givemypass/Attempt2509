@@ -7,7 +7,7 @@ namespace Core.Services
     {
         private string _loadedScene;
 
-        public async UniTask LoadScene(string sceneName)
+        public async UniTask LoadSceneAsync(string sceneName)
         {
             if (_loadedScene != null)
                 SceneManager.UnloadSceneAsync(_loadedScene);
