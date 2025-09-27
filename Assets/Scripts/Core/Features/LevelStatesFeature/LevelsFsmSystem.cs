@@ -13,7 +13,11 @@ namespace Core.Features.LevelStatesFeature
         {
             ref var fsmComponent = ref Owner.Get<LevelsFsmComponent>();
             var fsm = new StateMachine(Owner);
-            fsm.AddState(new SpawnTilesState(fsm));
+            
+            var spawnTilesState = new SpawnTilesState(fsm);
+            World.DependencyContainer.Resolve(spawnTilesState);
+            fsm.AddState(spawnTilesState);
+            
             fsm.AddState(new ChangeColorState(fsm));
             fsm.AddState(new EliminateTilesState(fsm));
             fsm.AddStateTransition(LevelStateIdentifierMap.SpawnTilesState, new DefaultTransition(LevelStateIdentifierMap.ChangeColorState));

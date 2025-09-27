@@ -33,6 +33,21 @@ namespace Core.Services
                 _ when direction == Vector2Int.left => _currentPalette.Color4,
                 _ => throw new ArgumentException("Invalid direction"),
             };
-        } 
+        }
+
+        public Color RandomColorFromCurrentPalette()
+        {
+            if (_currentPalette == null)
+                GeneratePalette();
+            
+            return UnityEngine.Random.Range(0,4) switch
+            {
+                0 => _currentPalette.Color1,
+                1 => _currentPalette.Color2,
+                2 => _currentPalette.Color3,
+                3 => _currentPalette.Color4,
+                _ => throw new ArgumentException("Invalid random value"),
+            };
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Core.Features.GameScreenFeature.Mono
 {
@@ -8,6 +9,29 @@ namespace Core.Features.GameScreenFeature.Mono
         [SerializeField] private Vector2 _size;
         
         [SerializeField] private Vector2Int _gridSize;
+
+        public readonly Dictionary<(int, int), TileMonoComponent> Tiles = new();
+        
+        public bool TryGetFreeCell(out int x, out int y, out Vector2 pos)
+        {
+            for (y = 0; y < _gridSize.y; y++)
+            {
+                for (x = 0; x < _gridSize.x; x++)
+                {
+                    if (Tiles.ContainsKey((x,y)))
+                        continue;
+                    
+                    pos = GetPointPosition(x, y);
+                    pos = transform.TransformPoint(pos);
+                    return true;
+                }
+            }
+
+            x = -1;
+            y = -1;
+            pos = Vector2.zero;
+            return false;
+        }
 
         private Vector3 GetPointPosition(int i, int j)
         {

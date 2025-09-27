@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b621d4a68564743bf70b036e60b1b50, type: 3}
   m_Name: GlobalConfigProvider
   m_EditorClassIdentifier: 
+  _config:
+    TilePrefab: {fileID: 4206961214192674359, guid: 8ca6f20af4843d844a654afa5237392f,
+      type: 3}

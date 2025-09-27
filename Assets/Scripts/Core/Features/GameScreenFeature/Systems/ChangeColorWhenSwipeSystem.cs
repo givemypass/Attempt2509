@@ -1,4 +1,5 @@
-﻿using Core.Features.GameScreenFeature.Components;
+﻿using Core.CommonComponents;
+using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.SwipeDetection.Commands;
 using Core.Services;
@@ -32,6 +33,10 @@ namespace Core.Features.GameScreenFeature.Systems
             
             Owner.Remove<WaitForChangingColorComponent>();
             var color = _colorPaletteService.GetColor(command.Direction);
+            Owner.Set(new ColorComponent
+            {
+                Color = color,
+            });
             _monoComponent.BackgroundImage.color = color;
         }
     }
