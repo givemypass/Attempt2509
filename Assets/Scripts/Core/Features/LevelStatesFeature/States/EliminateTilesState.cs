@@ -1,23 +1,20 @@
 ﻿using SelfishFramework.Src.Core;
-using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.StateMachine;
 using SelfishFramework.Src.Unity.Generated;
 
-namespace Core.Features.LevelStatesFeature
+namespace Core.Features.LevelStatesFeature.States
 {
-    public class SpawnTilesState : BaseFSMState
+    public class EliminateTilesState : BaseFSMState
     {
-        public override int StateID => LevelStateIdentifierMap.SpawnTilesState;
+        public override int StateID => LevelStateIdentifierMap.EliminateTilesState;
 
-        public override int NextStateID => LevelStateIdentifierMap.ChangeColorState;
 
-        public SpawnTilesState(StateMachine stateMachine) : base(stateMachine)
+        public EliminateTilesState(StateMachine stateMachine) : base(stateMachine)
         {
         }
 
         public override void Enter(Entity entity)
         {
-            SLog.Log("spawn tiles");
             EndState();
         }
 

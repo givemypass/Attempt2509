@@ -4,12 +4,11 @@ using SelfishFramework.Src.Core.Filter;
 using SelfishFramework.Src.StateMachine;
 using SelfishFramework.Src.Unity.Generated;
 
-namespace Core.Features.LevelStatesFeature
+namespace Core.Features.LevelStatesFeature.States
 {
     public class ChangeColorState : BaseFSMState
     {
         public override int StateID => LevelStateIdentifierMap.ChangeColorState;
-        public override int NextStateID => LevelStateIdentifierMap.SpawnTilesState;
     
         private readonly Filter _filter;
 

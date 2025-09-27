@@ -1,4 +1,5 @@
-﻿using SelfishFramework.Src.Core;
+﻿using Core.Features.LevelStatesFeature.States;
+using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.SystemModules;
 using SelfishFramework.Src.Core.Systems;
 using SelfishFramework.Src.StateMachine;
@@ -14,6 +15,11 @@ namespace Core.Features.LevelStatesFeature
             var fsm = new StateMachine(Owner);
             fsm.AddState(new SpawnTilesState(fsm));
             fsm.AddState(new ChangeColorState(fsm));
+            fsm.AddState(new EliminateTilesState(fsm));
+            fsm.AddStateTransition(LevelStateIdentifierMap.SpawnTilesState, new DefaultTransition(LevelStateIdentifierMap.ChangeColorState));
+            fsm.AddStateTransition(LevelStateIdentifierMap.ChangeColorState, new DefaultTransition(LevelStateIdentifierMap.EliminateTilesState));
+            fsm.AddStateTransition(LevelStateIdentifierMap.EliminateTilesState, new DefaultTransition(LevelStateIdentifierMap.SpawnTilesState));
+            
             fsm.ChangeState(LevelStateIdentifierMap.SpawnTilesState);
             
             fsmComponent.Fsm = fsm;

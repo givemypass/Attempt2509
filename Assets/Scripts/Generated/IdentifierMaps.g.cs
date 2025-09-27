@@ -17,6 +17,7 @@ namespace SelfishFramework.Src.Unity.Generated
     public static class LevelStateIdentifierMap
     {
         public const int ChangeColorState = -1702612233;
+        public const int EliminateTilesState = 331013733;
         public const int SpawnTilesState = -854198952;
     }
     public static class UIIdentifierMap
