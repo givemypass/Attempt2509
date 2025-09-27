@@ -1,4 +1,6 @@
-﻿using Core.Features.SwipeDetection.Components;
+﻿using Core.CommonSystems;
+using Core.Features.GameScreenFeature.Systems;
+using Core.Features.SwipeDetection.Components;
 using Core.Features.SwipeDetection.Systems;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Unity;
@@ -17,6 +19,7 @@ namespace Core.CommonActors
         {
             base.SetSystems();
             Entity.AddSystem<SwipeDirectionDetectorSystem>();
+            Entity.AddSystem<KeyboardSwipeDetectionSystem>();
             Entity.AddSystem<InputListenSystem>();
         }
     }

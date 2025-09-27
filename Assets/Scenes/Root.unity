@@ -276,7 +276,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3f12db0a654592949139e62027bf16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _colorPaletteConfig: {fileID: 11400000, guid: 8eecefe4173101e4082d75a853c12ee1,
+  _colorPaletteConfigProvider: {fileID: 11400000, guid: f14979fddabaa7b4fb20d8d0d1596ce0,
+    type: 2}
+  _globalConfigProvider: {fileID: 11400000, guid: 4bc59b51c120d1c40b46f5c3ff143623,
     type: 2}
 --- !u!114 &1537049736
 MonoBehaviour:

@@ -109,6 +109,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Arrows"",
+                    ""type"": ""Value"",
+                    ""id"": ""3ba51f84-6984-4316-b2bc-be3060847122"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -155,6 +164,61 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""action"": ""TouchDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""acfd1507-d251-4893-9871-c34bc0f3c0c8"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrows"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""27d132d2-4d80-49f9-8553-6ddaa3de9d0a"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrows"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""5a9ebd79-96b9-4da5-b81f-6ee0fb8987a9"",
+                    ""path"": ""<Keyboard>/downArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrows"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""0db6b477-bc47-48ac-b7e4-a27aa8ccecc3"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrows"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c329a959-3c2d-4ddf-b8ac-0d6e7629b666"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Arrows"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -165,6 +229,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Map = asset.FindActionMap("Map", throwIfNotFound: true);
         m_Map_Touch = m_Map.FindAction("Touch", throwIfNotFound: true);
         m_Map_TouchDelta = m_Map.FindAction("TouchDelta", throwIfNotFound: true);
+        m_Map_Arrows = m_Map.FindAction("Arrows", throwIfNotFound: true);
     }
 
     ~@InputActions()
@@ -247,6 +312,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private List<IMapActions> m_MapActionsCallbackInterfaces = new List<IMapActions>();
     private readonly InputAction m_Map_Touch;
     private readonly InputAction m_Map_TouchDelta;
+    private readonly InputAction m_Map_Arrows;
     /// <summary>
     /// Provides access to input actions defined in input action map "Map".
     /// </summary>
@@ -266,6 +332,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Map/TouchDelta".
         /// </summary>
         public InputAction @TouchDelta => m_Wrapper.m_Map_TouchDelta;
+        /// <summary>
+        /// Provides access to the underlying input action "Map/Arrows".
+        /// </summary>
+        public InputAction @Arrows => m_Wrapper.m_Map_Arrows;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -298,6 +368,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @TouchDelta.started += instance.OnTouchDelta;
             @TouchDelta.performed += instance.OnTouchDelta;
             @TouchDelta.canceled += instance.OnTouchDelta;
+            @Arrows.started += instance.OnArrows;
+            @Arrows.performed += instance.OnArrows;
+            @Arrows.canceled += instance.OnArrows;
         }
 
         /// <summary>
@@ -315,6 +388,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @TouchDelta.started -= instance.OnTouchDelta;
             @TouchDelta.performed -= instance.OnTouchDelta;
             @TouchDelta.canceled -= instance.OnTouchDelta;
+            @Arrows.started -= instance.OnArrows;
+            @Arrows.performed -= instance.OnArrows;
+            @Arrows.canceled -= instance.OnArrows;
         }
 
         /// <summary>
@@ -369,5 +445,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnTouchDelta(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Arrows" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnArrows(InputAction.CallbackContext context);
     }
 }

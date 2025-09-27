@@ -54,6 +54,8 @@ MonoBehaviour:
       Identifier: {fileID: 11400000, guid: 4a27338efa07d3246be9e90a21d454fa, type: 2}
     - ActionName: TouchDelta
       Identifier: {fileID: 11400000, guid: 6bf21d4953af7e344a063f20e7e5c609, type: 2}
+    - ActionName: Arrows
+      Identifier: {fileID: 11400000, guid: 65a85422114fa984da7d237deefe87ea, type: 2}
   SwipeDetectionComponent:
     MinSwipeDistance: 0.1
     Detecting: 0

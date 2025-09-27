@@ -10,6 +10,7 @@ namespace SelfishFramework.Src.Unity.Generated
     }
     public static class InputIdentifierMap
     {
+        public const int Arrows = -221331057;
         public const int Touch = -232097233;
         public const int TouchDelta = -1758337362;
     }

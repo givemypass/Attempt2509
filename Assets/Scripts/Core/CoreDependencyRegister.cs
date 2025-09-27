@@ -8,14 +8,17 @@ namespace Core
 {
     public class CoreDependencyRegister : SDependencyRegister
     {
-        [SerializeField] private ColorPaletteConfig _colorPaletteConfig;
+        [SerializeField] private ColorPaletteConfigProvider _colorPaletteConfigProvider;
+        [SerializeField] private GlobalConfigProvider _globalConfigProvider;
         
         protected override World World => SManager.World;
 
         public override void Register()
         {
+            Container.Register(_colorPaletteConfigProvider);
+            Container.Register(_globalConfigProvider);
             Container.Register(new SceneService());
-            Container.Register(_colorPaletteConfig);
+            Container.Register(new ColorPaletteService());
         }
     }
 }

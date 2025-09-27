@@ -12,6 +12,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
     {
         private const string SCENE_NAME = "Level";
         
+        [Inject] private ColorPaletteService _colorPaletteService;
         [Inject] private SceneService _sceneManager;
         [Inject] private UIService _uiService;
 
@@ -28,6 +29,8 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         private async UniTask ProcessStateAsync()
         {
+            _colorPaletteService.GeneratePalette();
+            
             await _sceneManager.LoadSceneAsync(SCENE_NAME);
             await _uiService.ShowUIAsync(UIIdentifierMap.GameScreen_UIIdentifier);
         }

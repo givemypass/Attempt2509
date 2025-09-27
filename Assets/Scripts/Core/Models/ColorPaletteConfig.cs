@@ -6,8 +6,20 @@ namespace Core.Models
     [CreateAssetMenu(menuName = "Configs/ColorPaletteConfig", fileName = "ColorPaletteConfig", order = 0)]
     public class ColorPaletteConfig : ScriptableObject
     {
-        [SerializeField] private ColorPaletteSO[] _palettes;
+        public Color Color1;
+        public Color Color2;
+        public Color Color3;
+        public Color Color4;
 
-        public IEnumerable<ColorPaletteSO> Palettes => _palettes;
+        public IEnumerable<Color> AllColors
+        {
+            get
+            {
+                yield return Color1;
+                yield return Color2;
+                yield return Color3;
+                yield return Color4;
+            }
+        }
     }
 }
