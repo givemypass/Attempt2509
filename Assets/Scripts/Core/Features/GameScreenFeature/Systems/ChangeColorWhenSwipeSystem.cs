@@ -1,10 +1,11 @@
-﻿using Core.Features.GameScreenFeature.Mono;
+﻿using Core.Features.GameScreenFeature.Components;
+using Core.Features.GameScreenFeature.Mono;
 using Core.Features.SwipeDetection.Commands;
 using Core.Services;
+using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
 using SelfishFramework.Src.Core.CommandBus;
 using SelfishFramework.Src.Core.Systems;
-using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity;
 
 namespace Core.Features.GameScreenFeature.Systems
@@ -16,7 +17,7 @@ namespace Core.Features.GameScreenFeature.Systems
         [Inject] private ColorPaletteService _colorPaletteService;
         
         private GameScreenMonoComponent _monoComponent;
-        
+
         public override void InitSystem()
         {
             Owner.AsActor().TryGetComponent(out _monoComponent);
@@ -24,9 +25,13 @@ namespace Core.Features.GameScreenFeature.Systems
 
         void IReactGlobal<SwipeDetectedCommand>.ReactGlobal(SwipeDetectedCommand command)
         {
-            var color = _colorPaletteService.GetColor(command.Direction);
-            SLog.Log($"Change color to {color}");
+            if (!Owner.Has<WaitForChangingColorComponent>())
+            {
+                return;
+            }
             
+            Owner.Remove<WaitForChangingColorComponent>();
+            var color = _colorPaletteService.GetColor(command.Direction);
             _monoComponent.BackgroundImage.color = color;
         }
     }

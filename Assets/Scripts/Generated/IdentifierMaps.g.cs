@@ -14,6 +14,11 @@ namespace SelfishFramework.Src.Unity.Generated
         public const int Touch = -232097233;
         public const int TouchDelta = -1758337362;
     }
+    public static class LevelStateIdentifierMap
+    {
+        public const int ChangeColorState = -1702612233;
+        public const int SpawnTilesState = -854198952;
+    }
     public static class UIIdentifierMap
     {
         public const int GameScreen_UIIdentifier = 892950120;
