@@ -9,7 +9,6 @@ namespace Core.Features.GameScreenFeature
     public partial class GameScreenUiActor : UIActor
     {
         public GridMonoProviderComponent GridMonoProviderComponent;
-        public GameScreenTagComponent GameScreenTagComponent;
         public LevelsFsmComponent LevelsFsmComponent;
         
         protected override void SetSystems()

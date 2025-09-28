@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using SelfishFramework.Src.Core;
 using UnityEngine;
 
 namespace Core.Features.GameScreenFeature.Mono
@@ -10,7 +11,7 @@ namespace Core.Features.GameScreenFeature.Mono
         
         [SerializeField] private Vector2Int _gridSize;
 
-        public readonly Dictionary<(int, int), TileMonoComponent> Tiles = new();
+        public readonly Dictionary<(int, int), Entity> Tiles = new();
         
         public bool TryGetFreeCell(out int x, out int y, out Vector2 pos)
         {

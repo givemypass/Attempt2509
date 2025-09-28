@@ -1,4 +1,5 @@
-﻿using Core.Features.GameScreenFeature.Components;
+﻿using Core.Features.GameScreenFeature;
+using Core.Features.GameScreenFeature.Components;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Filter;
 using SelfishFramework.Src.StateMachine;
@@ -14,7 +15,7 @@ namespace Core.Features.LevelStatesFeature.States
 
         public ChangeColorState(StateMachine stateMachine) : base(stateMachine)
         {
-            _filter = stateMachine.World.Filter.With<GameScreenTagComponent>()
+            _filter = stateMachine.World.Filter.With<GameScreenUiActorComponent>()
                 .Without<WaitForChangingColorComponent>().Build();
         }
 

@@ -1,6 +1,8 @@
 ﻿using Core.CommonComponents;
+using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
+using Core.Features.TilesFeature;
 using Core.Models;
 using Core.Services;
 using DG.Tweening;
@@ -24,7 +26,7 @@ namespace Core.Features.LevelStatesFeature.States
 
         public SpawnTilesState(StateMachine stateMachine) : base(stateMachine)
         {
-            _filter = stateMachine.World.Filter.With<GameScreenTagComponent>().With<GridMonoProviderComponent>().Build();
+            _filter = stateMachine.World.Filter.With<GameScreenUiActorComponent>().With<GridMonoProviderComponent>().Build();
         }
 
         public override void Enter(Entity entity)
@@ -36,13 +38,23 @@ namespace Core.Features.LevelStatesFeature.States
                 var grid = gridMonoProviderComponent.Grid;
                 if (grid.TryGetFreeCell(out var x, out var y, out var position))
                 {
-                    var tilePrefab = _globalConfigProvider.Get.TilePrefab;
-                    var tile = Object.Instantiate(tilePrefab, position, Quaternion.identity, grid.transform);
-                    tile.transform.localScale = Vector3.zero;
+                    var simpleTileActor = _globalConfigProvider.Get.SimpleTilePrefab;
+                    var tileActor = Object.Instantiate(simpleTileActor, position, Quaternion.identity, grid.transform);
+                    tileActor.TryInitialize();
+                    tileActor.transform.localScale = Vector3.zero;
                     var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(colorComponent.Color);
-                    tile.Image.color = color;
-                    grid.Tiles[(x, y)] = tile;
-                    tile.transform.DOScale(Vector3.one, 0.2f).SetLink(tile.gameObject);
+                    var monoComponent = tileActor.GetComponent<SimpleTileMonoComponent>();
+                    monoComponent.Image.color = color;
+                    tileActor.Entity.Set(new GridPositionComponent
+                    {
+                        Position = new Vector2Int(x, y),
+                    });
+                    tileActor.Entity.Set(new ColorComponent
+                    {
+                        Color = color,
+                    });
+                    grid.Tiles[(x, y)] = tileActor.Entity;
+                    tileActor.transform.DOScale(Vector3.one, 0.2f).SetLink(tileActor.gameObject);
                 }
                 EndState();
                 break;

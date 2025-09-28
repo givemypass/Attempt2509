@@ -4,7 +4,7 @@ using SelfishFramework.Src.Core.Components;
 namespace Core.Features.GameScreenFeature.Components
 {
     [Serializable]
-    public struct GameScreenTagComponent : IComponent
+    public struct TileCommonTagComponent : IComponent
     {
     }
 }

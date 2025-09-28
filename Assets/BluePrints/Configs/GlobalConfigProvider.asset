@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: GlobalConfigProvider
   m_EditorClassIdentifier: 
   _config:
-    TilePrefab: {fileID: 4206961214192674359, guid: 8ca6f20af4843d844a654afa5237392f,
+    SimpleTilePrefab: {fileID: 4946827765781032923, guid: 8ca6f20af4843d844a654afa5237392f,
       type: 3}
