@@ -12,7 +12,7 @@ namespace Core.Services
         void GeneratePalette();
         ColorPaletteConfig GetCurrentPalette();
         Color GetColor(Vector2Int direction);
-        Color RandomColorFromCurrentPaletteExcept(Color except);
+        Color RandomColorFromCurrentPaletteExcept(Color? except = null, Color? except2 = null, Color? except3 = null);
     }
 
     [Injectable]
@@ -44,13 +44,13 @@ namespace Core.Services
             };
         }
 
-        public Color RandomColorFromCurrentPaletteExcept(Color except)
+        public Color RandomColorFromCurrentPaletteExcept(Color? except = null, Color? except2 = null, Color? except3 = null)
         {
             if (_currentPalette == null)
                 GeneratePalette();
 
-            var color = except;
-            while (color == except)
+            Color color;
+            do
             {
                 color = UnityEngine.Random.Range(0, 4) switch
                 {
@@ -60,7 +60,10 @@ namespace Core.Services
                     3 => _currentPalette.Color4,
                     _ => throw new ArgumentException("Invalid random value"),
                 };
-            }
+            } while (
+                (except != null && color == except.Value) ||
+                (except2 != null && color == except2.Value) ||
+                (except3 != null && color == except3.Value));
 
             return color;
         }

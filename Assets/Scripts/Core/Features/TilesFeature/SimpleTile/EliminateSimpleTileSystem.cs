@@ -13,7 +13,7 @@ using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity;
 using UnityEngine;
 
-namespace Core.Features.TilesFeature
+namespace Core.Features.TilesFeature.SimpleTile
 {
     public sealed partial class EliminateSimpleTileSystem : BaseSystem, IUpdatable
     {

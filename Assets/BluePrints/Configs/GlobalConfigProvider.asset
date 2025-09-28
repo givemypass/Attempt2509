@@ -15,3 +15,5 @@ MonoBehaviour:
   _config:
     SimpleTilePrefab: {fileID: 4946827765781032923, guid: 8ca6f20af4843d844a654afa5237392f,
       type: 3}
+    TileWithInnerActorPrefab: {fileID: 5587817382167064305, guid: 7abe141a01de74e44a7ccb6cdab1c5f2,
+      type: 3}

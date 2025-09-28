@@ -25,7 +25,7 @@ namespace Core.Features.LevelStatesFeature.States
         public EliminateTilesState(StateMachine stateMachine) : base(stateMachine)
         {
 
-            _tileFilter = stateMachine.World.Filter.With<TileCommonTagComponent>().Build();
+            _tileFilter = stateMachine.World.Filter.With<TileCommonTagComponent>().With<GridPositionComponent>().Build();
         }
 
         public override void Enter(Entity entity)
