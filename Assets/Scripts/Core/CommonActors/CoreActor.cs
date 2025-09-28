@@ -1,7 +1,9 @@
 ﻿using Core.CommonSystems;
 using Core.Features.GameScreenFeature.Systems;
+using Core.Features.LevelStatesFeature.States;
 using Core.Features.SwipeDetection.Components;
 using Core.Features.SwipeDetection.Systems;
+using Core.Features.TilesFeature;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Unity;
 using SelfishFramework.Src.Unity.Features.InputFeature.Components;
@@ -21,6 +23,7 @@ namespace Core.CommonActors
             Entity.AddSystem<SwipeDirectionDetectorSystem>();
             Entity.AddSystem<KeyboardSwipeDetectionSystem>();
             Entity.AddSystem<InputListenSystem>();
+            Entity.AddSystem<EliminateSimpleTileSystem>();
         }
     }
 }
