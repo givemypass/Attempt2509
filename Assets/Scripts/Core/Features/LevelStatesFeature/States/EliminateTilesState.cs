@@ -3,6 +3,7 @@ using Core.CommonComponents;
 using Core.Features.GameScreenFeature.Components;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Filter;
+using SelfishFramework.Src.Features.CommonComponents;
 using SelfishFramework.Src.StateMachine;
 using SelfishFramework.Src.Unity.Generated;
 
@@ -20,10 +21,21 @@ namespace Core.Features.LevelStatesFeature.States
                 .With<GameScreenTagComponent>()
                 .With<GridMonoProviderComponent>()
                 .With<ColorComponent>()
+                .Without<VisualInProgressComponent>()
                 .Build();
         }
 
         public override void Enter(Entity entity)
+        {
+            _filter.ForceUpdate();
+        }
+
+        public override void Exit(Entity entity)
+        {
+            
+        }
+
+        public override void Update(Entity entity)
         {
             foreach (var screenEntity in _filter)
             {
@@ -51,16 +63,6 @@ namespace Core.Features.LevelStatesFeature.States
                 EndState();
                 break;
             }
-        }
-
-        public override void Exit(Entity entity)
-        {
-            
-        }
-
-        public override void Update(Entity entity)
-        {
-            
         }
     }
 }

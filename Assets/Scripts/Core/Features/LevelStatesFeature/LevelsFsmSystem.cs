@@ -24,7 +24,7 @@ namespace Core.Features.LevelStatesFeature
             fsm.AddStateTransition(LevelStateIdentifierMap.ChangeColorState, new DefaultTransition(LevelStateIdentifierMap.EliminateTilesState));
             fsm.AddStateTransition(LevelStateIdentifierMap.EliminateTilesState, new DefaultTransition(LevelStateIdentifierMap.SpawnTilesState));
             
-            fsm.ChangeState(LevelStateIdentifierMap.SpawnTilesState);
+            fsm.ChangeState(LevelStateIdentifierMap.ChangeColorState);
             
             fsmComponent.Fsm = fsm;
         }

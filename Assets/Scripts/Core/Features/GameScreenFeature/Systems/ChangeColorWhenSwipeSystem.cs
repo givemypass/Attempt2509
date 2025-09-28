@@ -3,11 +3,15 @@ using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.SwipeDetection.Commands;
 using Core.Services;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
 using SelfishFramework.Src.Core.CommandBus;
 using SelfishFramework.Src.Core.Systems;
+using SelfishFramework.Src.Features.CommonComponents;
 using SelfishFramework.Src.Unity;
+using UnityEngine;
 
 namespace Core.Features.GameScreenFeature.Systems
 {
@@ -32,12 +36,29 @@ namespace Core.Features.GameScreenFeature.Systems
             }
             
             Owner.Remove<WaitForChangingColorComponent>();
+            Owner.Set(new VisualInProgressComponent());
+            
             var color = _colorPaletteService.GetColor(command.Direction);
             Owner.Set(new ColorComponent
             {
                 Color = color,
             });
-            _monoComponent.BackgroundImage.color = color;
+            var transitionImage = _monoComponent.TransitionImage;
+            var transform = (RectTransform)transitionImage.transform;
+            var rect = transform.rect;
+            transform.anchoredPosition = Vector2.Scale(-1 * command.Direction, new Vector2(rect.size.x, rect.size.y)); 
+            transitionImage.transform.gameObject.SetActive(true);
+            transitionImage.color = color;
+            transitionImage.transform.DOLocalMove(Vector2.zero, 0.5f).SetLink(transform.gameObject).OnComplete(() =>
+            {
+                _monoComponent.BackgroundImage.color = color;
+                transitionImage.transform.gameObject.SetActive(false);
+                if (World.IsDisposed(Owner))
+                {
+                    return;
+                }
+                Owner.Remove<VisualInProgressComponent>();  
+            });
         }
     }
 }
