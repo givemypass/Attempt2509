@@ -55,16 +55,16 @@ namespace Core.Features.LevelStatesFeature.States
             foreach (var screenEntity in _filter)
             {
                 Eliminate(screenEntity);
-            }
-            
-            foreach (var tileEntity in _tileFilter)
-            {
-                if (tileEntity.Has<TryEliminateComponent>() || tileEntity.Has<VisualInProgressComponent>())
+
+                foreach (var tileEntity in _tileFilter)
                 {
-                    return;
+                    if (tileEntity.Has<TryEliminateComponent>() || tileEntity.Has<VisualInProgressComponent>())
+                    {
+                        return;
+                    }
                 }
+                EndState();
             }
-            EndState();
         }
 
         private void Eliminate(Entity screenEntity)

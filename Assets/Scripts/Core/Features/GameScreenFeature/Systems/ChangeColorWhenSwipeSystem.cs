@@ -43,6 +43,7 @@ namespace Core.Features.GameScreenFeature.Systems
             
             Owner.Remove<WaitForChangingColorComponent>();
             Owner.Set(new VisualInProgressComponent());
+            Owner.Set(new ColorChangedComponent());
             
             Owner.Set(new ColorComponent
             {

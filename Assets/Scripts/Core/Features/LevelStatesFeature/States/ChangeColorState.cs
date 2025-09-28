@@ -2,8 +2,10 @@
 using Core.Features.GameScreenFeature.Components;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Filter;
+using SelfishFramework.Src.Features.CommonComponents;
 using SelfishFramework.Src.StateMachine;
 using SelfishFramework.Src.Unity.Generated;
+using UnityEditor.Localization.Plugins.XLIFF.V20;
 
 namespace Core.Features.LevelStatesFeature.States
 {
@@ -15,17 +17,11 @@ namespace Core.Features.LevelStatesFeature.States
 
         public ChangeColorState(StateMachine stateMachine) : base(stateMachine)
         {
-            _filter = stateMachine.World.Filter.With<GameScreenUiActorComponent>()
-                .Without<WaitForChangingColorComponent>().Build();
+            _filter = stateMachine.World.Filter.With<GameScreenUiActorComponent>().Build();
         }
 
         public override void Enter(Entity entity)
         {
-            foreach (var screenEntity in _filter)
-            {
-                screenEntity.Set(new WaitForChangingColorComponent()); 
-            }
-            _filter.ForceUpdate();
         }
     
         public override void Exit(Entity entity)
@@ -34,9 +30,19 @@ namespace Core.Features.LevelStatesFeature.States
     
         public override void Update(Entity entity)
         {
-            if (_filter.IsNotEmpty())
+            foreach (var screenEntity in _filter)
             {
-                EndState();
+                if (screenEntity.Has<ColorChangedComponent>())
+                {
+                    screenEntity.Remove<ColorChangedComponent>();
+                    EndState();
+                    return;
+                }
+
+                if (!screenEntity.Has<WaitForChangingColorComponent>() && !screenEntity.Has<VisualInProgressComponent>())
+                {
+                    screenEntity.Set(new WaitForChangingColorComponent()); 
+                }
             }
         }
     }
