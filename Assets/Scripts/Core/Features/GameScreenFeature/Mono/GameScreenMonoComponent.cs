@@ -7,5 +7,6 @@ namespace Core.Features.GameScreenFeature.Mono
     {
         public Image BackgroundImage; 
         public Image TransitionImage;
+        public Image[] ColorSigns;
     }
 }

@@ -45,6 +45,10 @@ namespace Core.Features.GameStatesFeature.Systems.States
             {
                 Color = color,
             });
+            monoComponent.ColorSigns[0].color = _colorPaletteService.GetColor(Vector2Int.right);
+            monoComponent.ColorSigns[1].color = _colorPaletteService.GetColor(Vector2Int.down);
+            monoComponent.ColorSigns[2].color = _colorPaletteService.GetColor(Vector2Int.left);
+            monoComponent.ColorSigns[3].color = _colorPaletteService.GetColor(Vector2Int.up);
         }
     }
 }
