@@ -14,10 +14,15 @@ namespace Core.Features.GameScreenFeature.Mono
         
         public bool TryGetFreeCell(out int x, out int y, out Vector2 pos)
         {
-            for (y = 0; y < _gridSize.y; y++)
+            var startX = Random.Range(0, _gridSize.x);
+            var startY = Random.Range(0, _gridSize.y);
+            
+            for (var i = 0; i < _gridSize.y; i++)
             {
-                for (x = 0; x < _gridSize.x; x++)
+                for (var j = 0; j < _gridSize.x; j++)
                 {
+                    x = (startX + j) % _gridSize.x;
+                    y = (startY + i) % _gridSize.y;
                     if (Tiles.ContainsKey((x,y)))
                         continue;
                     
