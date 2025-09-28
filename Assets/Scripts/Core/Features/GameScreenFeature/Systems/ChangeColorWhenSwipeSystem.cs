@@ -19,7 +19,7 @@ namespace Core.Features.GameScreenFeature.Systems
     public sealed partial class ChangeColorWhenSwipeSystem : BaseSystem,
         IReactGlobal<SwipeDetectedCommand>
     {
-        [Inject] private ColorPaletteService _colorPaletteService;
+        [Inject] private IColorPaletteService _colorPaletteService;
         
         private GameScreenMonoComponent _monoComponent;
 

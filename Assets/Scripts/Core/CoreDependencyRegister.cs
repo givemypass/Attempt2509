@@ -1,4 +1,5 @@
-﻿using Core.Models;
+﻿using Core.Features.TilesFeature.Services;
+using Core.Models;
 using Core.Services;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Unity;
@@ -17,8 +18,9 @@ namespace Core
         {
             Container.Register(_colorPaletteConfigProvider);
             Container.Register(_globalConfigProvider);
-            Container.Register(new SceneService());
-            Container.Register(new ColorPaletteService());
+            Container.Register<ISceneService>(new SceneService());
+            Container.Register<IColorPaletteService>(new ColorPaletteService());
+            Container.Register(new SimpleTileFactoryService());
         }
     }
 }

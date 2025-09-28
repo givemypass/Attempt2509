@@ -3,7 +3,12 @@ using UnityEngine.SceneManagement;
 
 namespace Core.Services
 {
-    public sealed class SceneService
+    public interface ISceneService
+    {
+        UniTask LoadSceneAsync(string sceneName);
+    }
+
+    public sealed class SceneService : ISceneService
     {
         private string _loadedScene;
 

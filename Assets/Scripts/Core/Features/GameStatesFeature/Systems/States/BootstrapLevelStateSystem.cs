@@ -1,12 +1,11 @@
 ﻿using Core.CommonComponents;
-using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Services;
 using Cysharp.Threading.Tasks;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
+using SelfishFramework.Src.Unity.Features.UI.Systems;
 using SelfishFramework.Src.Unity.Generated;
-using SelfishFramework.Src.Unity.UI.Systems;
 using Systems;
 using UnityEngine;
 
@@ -17,9 +16,9 @@ namespace Core.Features.GameStatesFeature.Systems.States
     {
         private const string SCENE_NAME = "Level";
         
-        [Inject] private ColorPaletteService _colorPaletteService;
-        [Inject] private SceneService _sceneManager;
-        [Inject] private UIService _uiService;
+        [Inject] private IColorPaletteService _colorPaletteService;
+        [Inject] private ISceneService _sceneManager;
+        [Inject] private IUIService _uiService;
 
         protected override int State => GameStateIdentifierMap.BootstrapLevelState;
 

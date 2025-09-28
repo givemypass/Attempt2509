@@ -7,8 +7,16 @@ using UnityEngine;
 
 namespace Core.Services
 {
+    public interface IColorPaletteService
+    {
+        void GeneratePalette();
+        ColorPaletteConfig GetCurrentPalette();
+        Color GetColor(Vector2Int direction);
+        Color RandomColorFromCurrentPaletteExcept(Color except);
+    }
+
     [Injectable]
-    public partial class ColorPaletteService
+    public partial class ColorPaletteService : IColorPaletteService
     {
         [Inject] private ColorPaletteConfigProvider _configProvider;
         
