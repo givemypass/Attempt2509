@@ -1,9 +1,14 @@
-﻿using Core.Services;
+﻿using Core.CommonComponents;
+using Core.Features.GameScreenFeature;
+using Core.Features.GameScreenFeature.Mono;
+using Core.Services;
 using Cysharp.Threading.Tasks;
+using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
 using SelfishFramework.Src.Unity.Generated;
 using SelfishFramework.Src.Unity.UI.Systems;
 using Systems;
+using UnityEngine;
 
 namespace Core.Features.GameStatesFeature.Systems.States
 {
@@ -32,7 +37,14 @@ namespace Core.Features.GameStatesFeature.Systems.States
             _colorPaletteService.GeneratePalette();
             
             await _sceneManager.LoadSceneAsync(SCENE_NAME);
-            await _uiService.ShowUIAsync(UIIdentifierMap.GameScreen_UIIdentifier);
+            var screen = await _uiService.ShowUIAsync(UIIdentifierMap.GameScreen_UIIdentifier);
+            screen.TryGetComponent(out GameScreenMonoComponent monoComponent);
+            var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(Color.white);
+            monoComponent.BackgroundImage.color = color;
+            screen.Entity.Set(new ColorComponent
+            {
+                Color = color,
+            });
         }
     }
 }

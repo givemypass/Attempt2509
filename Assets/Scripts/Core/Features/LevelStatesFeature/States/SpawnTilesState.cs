@@ -1,7 +1,9 @@
-﻿using Core.Features.GameScreenFeature.Components;
+﻿using Core.CommonComponents;
+using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Models;
 using Core.Services;
+using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
 using SelfishFramework.Src.Core.Filter;
@@ -30,15 +32,17 @@ namespace Core.Features.LevelStatesFeature.States
             foreach (var screenEntity in _filter)
             {
                 ref var gridMonoProviderComponent = ref screenEntity.Get<GridMonoProviderComponent>();
+                ref var colorComponent = ref screenEntity.Get<ColorComponent>();
                 var grid = gridMonoProviderComponent.Grid;
                 if (grid.TryGetFreeCell(out var x, out var y, out var position))
                 {
                     var tilePrefab = _globalConfigProvider.Get.TilePrefab;
                     var tile = Object.Instantiate(tilePrefab, position, Quaternion.identity, grid.transform);
-                    var color = _colorPaletteService.RandomColorFromCurrentPalette();
+                    tile.transform.localScale = Vector3.zero;
+                    var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(colorComponent.Color);
                     tile.Image.color = color;
-                    tile.Color = color;
                     grid.Tiles[(x, y)] = tile;
+                    tile.transform.DOScale(Vector3.one, 0.2f).SetLink(tile.gameObject);
                 }
                 EndState();
                 break;

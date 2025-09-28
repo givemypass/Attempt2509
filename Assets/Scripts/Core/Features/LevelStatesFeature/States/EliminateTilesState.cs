@@ -1,11 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.CommonComponents;
 using Core.Features.GameScreenFeature.Components;
+using Core.Features.GameScreenFeature.Mono;
+using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Filter;
 using SelfishFramework.Src.Features.CommonComponents;
 using SelfishFramework.Src.StateMachine;
 using SelfishFramework.Src.Unity.Generated;
+using UnityEngine;
 
 namespace Core.Features.LevelStatesFeature.States
 {
@@ -14,6 +19,7 @@ namespace Core.Features.LevelStatesFeature.States
         private readonly Filter _filter;
         public override int StateID => LevelStateIdentifierMap.EliminateTilesState;
 
+        private readonly HashSet<Tween> _tweens = new();
 
         public EliminateTilesState(StateMachine stateMachine) : base(stateMachine)
         {
@@ -21,7 +27,6 @@ namespace Core.Features.LevelStatesFeature.States
                 .With<GameScreenTagComponent>()
                 .With<GridMonoProviderComponent>()
                 .With<ColorComponent>()
-                .Without<VisualInProgressComponent>()
                 .Build();
         }
 
@@ -39,30 +44,51 @@ namespace Core.Features.LevelStatesFeature.States
         {
             foreach (var screenEntity in _filter)
             {
-                ref var gridMonoProviderComponent = ref screenEntity.Get<GridMonoProviderComponent>();
-                var grid = gridMonoProviderComponent.Grid;
-                var currentColor = screenEntity.Get<ColorComponent>().Color;
-                Span<(int, int)> toEliminate = stackalloc (int, int)[grid.Tiles.Count];
-                int count = 0;
-                
-                foreach (var kv in grid.Tiles)
+                if (screenEntity.Has<VisualInProgressComponent>())
                 {
-                    if (kv.Value.Color == currentColor)
-                    {
-                        toEliminate[count++] = kv.Key;
-                    } 
+                    Eliminate(screenEntity);
                 }
-                for (int i = 0; i < count; i++)
+                else if (_tweens.Count == 0)
                 {
-                    var (x, y) = toEliminate[i];
-                    var tile = grid.Tiles[(x, y)];
-                    UnityEngine.Object.Destroy(tile.gameObject);
-                    grid.Tiles.Remove((x, y));
+                    EndState();
                 }
-
-                EndState();
-                break;
             }
+        }
+
+        private void Eliminate(Entity screenEntity)
+        {
+            ref var gridMonoProviderComponent = ref screenEntity.Get<GridMonoProviderComponent>();
+            var grid = gridMonoProviderComponent.Grid;
+            var currentColor = screenEntity.Get<ColorComponent>().Color;
+            Span<(int, int)> toEliminate = stackalloc (int, int)[grid.Tiles.Count];
+            int count = 0;
+                
+            foreach (var kv in grid.Tiles)
+            {
+                if (kv.Value.Image.color == currentColor)
+                {
+                    toEliminate[count++] = kv.Key;
+                } 
+            }
+            for (int i = 0; i < count; i++)
+            {
+                var (x, y) = toEliminate[i];
+                var tile = grid.Tiles[(x, y)];
+                tile.Image.color = Color.white;
+                grid.Tiles.Remove((x, y));
+                Destroy(tile).Forget();
+            }
+        }
+
+        private async UniTask Destroy(TileMonoComponent tile)
+        {
+            var tween = tile.transform.DOScale(Vector3.zero, 0.2f).SetLink(tile.gameObject).OnComplete(() =>
+            {
+                UnityEngine.Object.Destroy(tile.gameObject);
+            });
+            _tweens.Add(tween);
+            await tween;
+            _tweens.Remove(tween);
         }
     }
 }

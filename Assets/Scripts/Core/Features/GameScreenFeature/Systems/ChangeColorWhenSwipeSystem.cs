@@ -34,11 +34,16 @@ namespace Core.Features.GameScreenFeature.Systems
             {
                 return;
             }
+            var color = _colorPaletteService.GetColor(command.Direction);
+            var currentColor = Owner.Get<ColorComponent>().Color;
+            if (color == currentColor)
+            {
+                return;
+            }
             
             Owner.Remove<WaitForChangingColorComponent>();
             Owner.Set(new VisualInProgressComponent());
             
-            var color = _colorPaletteService.GetColor(command.Direction);
             Owner.Set(new ColorComponent
             {
                 Color = color,

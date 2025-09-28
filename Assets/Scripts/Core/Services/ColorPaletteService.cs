@@ -2,6 +2,7 @@
 using Core.Features.SwipeDetection.Commands;
 using Core.Models;
 using SelfishFramework.Src.Core.Attributes;
+using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 namespace Core.Services
@@ -35,19 +36,25 @@ namespace Core.Services
             };
         }
 
-        public Color RandomColorFromCurrentPalette()
+        public Color RandomColorFromCurrentPaletteExcept(Color except)
         {
             if (_currentPalette == null)
                 GeneratePalette();
-            
-            return UnityEngine.Random.Range(0,4) switch
+
+            var color = except;
+            while (color == except)
             {
-                0 => _currentPalette.Color1,
-                1 => _currentPalette.Color2,
-                2 => _currentPalette.Color3,
-                3 => _currentPalette.Color4,
-                _ => throw new ArgumentException("Invalid random value"),
-            };
+                color = UnityEngine.Random.Range(0, 4) switch
+                {
+                    0 => _currentPalette.Color1,
+                    1 => _currentPalette.Color2,
+                    2 => _currentPalette.Color3,
+                    3 => _currentPalette.Color4,
+                    _ => throw new ArgumentException("Invalid random value"),
+                };
+            }
+
+            return color;
         }
     }
 }
