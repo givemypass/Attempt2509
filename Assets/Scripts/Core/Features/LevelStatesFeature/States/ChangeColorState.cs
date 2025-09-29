@@ -5,7 +5,6 @@ using SelfishFramework.Src.Core.Filter;
 using SelfishFramework.Src.Features.CommonComponents;
 using SelfishFramework.Src.StateMachine;
 using SelfishFramework.Src.Unity.Generated;
-using UnityEditor.Localization.Plugins.XLIFF.V20;
 
 namespace Core.Features.LevelStatesFeature.States
 {

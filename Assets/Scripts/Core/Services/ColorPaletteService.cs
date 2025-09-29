@@ -1,8 +1,6 @@
 ﻿using System;
-using Core.Features.SwipeDetection.Commands;
 using Core.Models;
 using SelfishFramework.Src.Core.Attributes;
-using UnityEditor.Localization.Plugins.XLIFF.V12;
 using UnityEngine;
 
 namespace Core.Services
