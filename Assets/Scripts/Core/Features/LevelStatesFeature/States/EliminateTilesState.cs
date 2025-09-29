@@ -45,7 +45,9 @@ namespace Core.Features.LevelStatesFeature.States
         {
             foreach (var tileEntity in _tileFilter)
             {
-                if (tileEntity.Has<TryEliminateComponent>() || tileEntity.Has<VisualInProgressComponent>())
+                if (tileEntity.Has<TryEliminateComponent>() ||
+                    tileEntity.Has<VisualInProgressComponent>() ||
+                    tileEntity.Has<EliminateComponent>())
                 {
                     return;
                 }

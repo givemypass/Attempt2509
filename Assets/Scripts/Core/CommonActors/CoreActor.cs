@@ -1,6 +1,7 @@
 ﻿using Core.CommonSystems;
 using Core.Features.SwipeDetection.Components;
 using Core.Features.SwipeDetection.Systems;
+using Core.Features.TilesFeature;
 using Core.Features.TilesFeature.SimpleTile;
 using Core.Features.TilesFeature.TileWithInner;
 using SelfishFramework.Src.Core;
@@ -22,6 +23,7 @@ namespace Core.CommonActors
             Entity.AddSystem<SwipeDirectionDetectorSystem>();
             Entity.AddSystem<KeyboardSwipeDetectionSystem>();
             Entity.AddSystem<InputListenSystem>();
+            Entity.AddSystem<TryEliminateTileSystem>();
             Entity.AddSystem<EliminateSimpleTileSystem>();
             Entity.AddSystem<EliminateTileWithInnerSystem>();
         }

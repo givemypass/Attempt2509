@@ -30,7 +30,7 @@ namespace Core.Features.TilesFeature.SimpleTile
             
             _simpleTilesFilter = World.Filter
                 .With<SimpleTileActorComponent>()
-                .With<TryEliminateComponent>()
+                .With<EliminateComponent>()
                 .Build();
         }
 
@@ -40,28 +40,15 @@ namespace Core.Features.TilesFeature.SimpleTile
             {
                 ref var gridMonoProviderComponent = ref screenEntity.Get<GridMonoProviderComponent>();
                 var grid = gridMonoProviderComponent.Grid;
-                var currentColor = screenEntity.Get<ColorComponent>().Color;
 
                 foreach (var entity in _simpleTilesFilter)
                 {
-                    entity.Remove<TryEliminateComponent>();
+                    entity.Remove<EliminateComponent>();
                 
-                    var color = entity.Get<ColorComponent>().Color;
-                    if (color != currentColor)
-                    {
-                        continue;
-                    }
                     var position = entity.Get<GridPositionComponent>().Position;
-                    if (!grid.Tiles.ContainsKey((position.x, position.y)))
-                    {
-                        SLog.LogError("Grid does not contain tile at position " + position);
-                        continue;
-                    }
-                
-                    entity.Set(new VisualInProgressComponent());
-                
                     grid.Tiles.Remove((position.x, position.y));
                 
+                    entity.Set(new VisualInProgressComponent());
                     var actor = entity.AsActor();
                     var monoComponent = actor.GetComponent<SimpleTileMonoComponent>();
                     monoComponent.Image.color = Color.white;

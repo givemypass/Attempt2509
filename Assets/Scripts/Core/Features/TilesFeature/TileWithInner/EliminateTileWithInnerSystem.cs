@@ -32,28 +32,21 @@ namespace Core.Features.TilesFeature.TileWithInner
             
             _simpleTilesFilter = World.Filter
                 .With<TileWithInnerActorComponent>()
-                .With<TryEliminateComponent>()
+                .With<EliminateComponent>()
                 .Build();
         }
 
         public void Update()
         {
-            //todo move similar parts to a common system
             foreach (var screenEntity in _filter)
             {
                 ref var gridMonoProviderComponent = ref screenEntity.Get<GridMonoProviderComponent>();
                 var grid = gridMonoProviderComponent.Grid;
-                var currentColor = screenEntity.Get<ColorComponent>().Color;
 
                 foreach (var entity in _simpleTilesFilter)
                 {
-                    entity.Remove<TryEliminateComponent>();
+                    entity.Remove<EliminateComponent>();
                 
-                    var color = entity.Get<ColorComponent>().Color;
-                    if (color != currentColor)
-                    {
-                        continue;
-                    }
                     var position = entity.Get<GridPositionComponent>().Position;
                     if (!grid.Tiles.ContainsKey((position.x, position.y)))
                     {
