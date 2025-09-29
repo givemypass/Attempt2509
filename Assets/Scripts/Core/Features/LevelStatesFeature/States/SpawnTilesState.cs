@@ -46,7 +46,7 @@ namespace Core.Features.LevelStatesFeature.States
                     {
                         var tileActor = Random.value > 0.5
                             ? CreateTileWithSimpleInner(colorComponent.Color, position, grid)
-                            : CreateSimpleTile(colorComponent.Color, position, grid);
+                            : CreateTileWithInnerTileWithSimpleInner(colorComponent.Color, position, grid);
                         tileActor.transform.localScale = Vector3.zero;
                         tileActor.transform.DOScale(Vector3.one, 0.2f).SetLink(tileActor.gameObject);
 
@@ -75,6 +75,33 @@ namespace Core.Features.LevelStatesFeature.States
             });
                     
             var tileActor = _tileWithInnerFactoryService.GetTile(position, grid.transform, color, simpleTileActor);
+            tileActor.Entity.Set(new ColorComponent
+            {
+                Color = color,
+            });
+            return tileActor;
+        }
+        
+        //hehe
+        private Actor CreateTileWithInnerTileWithSimpleInner(Color screenColor, Vector2 position, GridMonoComponent grid)
+        {
+            var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(screenColor);
+            var secondColor = _colorPaletteService.RandomColorFromCurrentPaletteExcept(color);
+            var thirdColor = _colorPaletteService.RandomColorFromCurrentPaletteExcept(secondColor);
+            
+            var thirdInnerTile = _simpleTileFactoryService.GetTile(position, grid.transform, thirdColor);
+            thirdInnerTile.Entity.Set(new ColorComponent
+            {
+                Color = thirdColor,
+            });
+            
+            var innerTile = _tileWithInnerFactoryService.GetTile(position, grid.transform, secondColor, thirdInnerTile);
+            innerTile.Entity.Set(new ColorComponent
+            {
+                Color = secondColor,
+            });
+                    
+            var tileActor = _tileWithInnerFactoryService.GetTile(position, grid.transform, color, innerTile);
             tileActor.Entity.Set(new ColorComponent
             {
                 Color = color,
