@@ -8,16 +8,16 @@ using UnityEngine;
 namespace Core.Features.TilesFeature.TileWithInner
 {
     [Injectable]
-    public partial class TileWithInnerFactoryService
+    public partial class ComplexTileFactoryService
     {
         [Inject] private GlobalConfigProvider _globalConfigProvider;
         
         public Actor GetTile(Vector2 position, Transform parent, Color color, Actor innerTile)
         {
-            var prefab = _globalConfigProvider.Get.TileWithInnerActorPrefab;
+            var prefab = _globalConfigProvider.Get.ComplexTileActorPrefab;
             var tileActor = Object.Instantiate(prefab, position, Quaternion.identity, parent);
             tileActor.TryInitialize();
-            var monoComponent = tileActor.GetComponent<TileWithSimpleInnerMonoComponent>();
+            var monoComponent = tileActor.GetComponent<ComplexTileMonoComponent>();
             monoComponent.Image.color = color;
             innerTile.transform.SetParent(monoComponent.InnerParent, false);
             innerTile.transform.localScale = Vector3.one;

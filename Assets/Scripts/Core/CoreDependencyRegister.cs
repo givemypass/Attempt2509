@@ -22,7 +22,7 @@ namespace Core
             Container.Register<ISceneService>(new SceneService());
             Container.Register<IColorPaletteService>(new ColorPaletteService());
             Container.Register(new SimpleTileFactoryService());
-            Container.Register(new TileWithInnerFactoryService());
+            Container.Register(new ComplexTileFactoryService());
         }
     }
 }

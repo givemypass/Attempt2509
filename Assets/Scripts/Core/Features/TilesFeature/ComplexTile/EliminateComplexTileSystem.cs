@@ -4,6 +4,7 @@ using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.LevelStatesFeature.Component;
 using DG.Tweening;
+using Newtonsoft.Json;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
 using SelfishFramework.Src.Core.Filter;
@@ -17,7 +18,7 @@ using UnityEngine;
 namespace Core.Features.TilesFeature.TileWithInner
 {
     [Injectable]
-    public sealed partial class EliminateTileWithInnerSystem : BaseSystem, IUpdatable
+    public sealed partial class EliminateComplexTileSystem : BaseSystem, IUpdatable
     {
         private Filter _filter;
         private Filter _simpleTilesFilter;
@@ -31,7 +32,7 @@ namespace Core.Features.TilesFeature.TileWithInner
                 .Build();
             
             _simpleTilesFilter = World.Filter
-                .With<TileWithInnerActorComponent>()
+                .With<ComplexTileActorComponent>()
                 .With<EliminateComponent>()
                 .Build();
         }
@@ -59,7 +60,7 @@ namespace Core.Features.TilesFeature.TileWithInner
                     grid.Tiles.Remove((position.x, position.y));
                 
                     var actor = entity.AsActor();
-                    var monoComponent = actor.GetComponent<TileWithSimpleInnerMonoComponent>();
+                    var monoComponent = actor.GetComponent<ComplexTileMonoComponent>();
                     monoComponent.Image.color = Color.white;
                     actor.transform.DOScale(Vector3.zero, 0.2f).SetLink(actor.gameObject).OnComplete(() =>
                     {

@@ -2,6 +2,7 @@
 using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.TilesFeature.TileWithInner;
+using SelfishFramework.Src.Unity.Features.TemperatureWeightedRandomFeature;
 
 namespace Core.Models
 {
@@ -9,6 +10,6 @@ namespace Core.Models
     public struct GlobalConfig
     {
         public SimpleTileActor SimpleTilePrefab;
-        public TileWithInnerActor TileWithInnerActorPrefab;
+        public ComplexTileActor ComplexTileActorPrefab;
     }
 }

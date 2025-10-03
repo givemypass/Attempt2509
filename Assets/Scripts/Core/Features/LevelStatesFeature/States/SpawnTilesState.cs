@@ -21,7 +21,7 @@ namespace Core.Features.LevelStatesFeature.States
     public partial class SpawnTilesState : BaseFSMState
     {
         [Inject] private SimpleTileFactoryService _simpleTileFactoryService;
-        [Inject] private TileWithInnerFactoryService _tileWithInnerFactoryService;
+        [Inject] private ComplexTileFactoryService _complexTileFactoryService;
         
         [Inject] private IColorPaletteService _colorPaletteService;
         
@@ -40,22 +40,19 @@ namespace Core.Features.LevelStatesFeature.States
                 ref var gridMonoProviderComponent = ref screenEntity.Get<GridMonoProviderComponent>();
                 ref var colorComponent = ref screenEntity.Get<ColorComponent>();
                 var grid = gridMonoProviderComponent.Grid;
-                for (int i = 0; i < Random.Range(1, 3); i++)
+                if (grid.TryGetFreeCell(out var x, out var y, out var position))
                 {
-                    if (grid.TryGetFreeCell(out var x, out var y, out var position))
-                    {
-                        var tileActor = Random.value > 0.5
-                            ? CreateTileWithSimpleInner(colorComponent.Color, position, grid)
-                            : CreateTileWithInnerTileWithSimpleInner(colorComponent.Color, position, grid);
-                        tileActor.transform.localScale = Vector3.zero;
-                        tileActor.transform.DOScale(Vector3.one, 0.2f).SetLink(tileActor.gameObject);
+                    var tileActor = Random.value > 0.5
+                        ? CreateTileWithSimpleInner(colorComponent.Color, position, grid)
+                        : CreateTileWithInnerTileWithSimpleInner(colorComponent.Color, position, grid);
+                    tileActor.transform.localScale = Vector3.zero;
+                    tileActor.transform.DOScale(Vector3.one, 0.2f).SetLink(tileActor.gameObject);
 
-                        grid.Tiles[(x, y)] = tileActor.Entity;
-                        tileActor.Entity.Set(new GridPositionComponent
-                        {
-                            Position = new Vector2Int(x, y),
-                        });
-                    }
+                    grid.Tiles[(x, y)] = tileActor.Entity;
+                    tileActor.Entity.Set(new GridPositionComponent
+                    {
+                        Position = new Vector2Int(x, y),
+                    });
                 }
 
                 EndState();
@@ -74,7 +71,7 @@ namespace Core.Features.LevelStatesFeature.States
                 Color = secondColor,
             });
                     
-            var tileActor = _tileWithInnerFactoryService.GetTile(position, grid.transform, color, simpleTileActor);
+            var tileActor = _complexTileFactoryService.GetTile(position, grid.transform, color, simpleTileActor);
             tileActor.Entity.Set(new ColorComponent
             {
                 Color = color,
@@ -95,13 +92,13 @@ namespace Core.Features.LevelStatesFeature.States
                 Color = thirdColor,
             });
             
-            var innerTile = _tileWithInnerFactoryService.GetTile(position, grid.transform, secondColor, thirdInnerTile);
+            var innerTile = _complexTileFactoryService.GetTile(position, grid.transform, secondColor, thirdInnerTile);
             innerTile.Entity.Set(new ColorComponent
             {
                 Color = secondColor,
             });
                     
-            var tileActor = _tileWithInnerFactoryService.GetTile(position, grid.transform, color, innerTile);
+            var tileActor = _complexTileFactoryService.GetTile(position, grid.transform, color, innerTile);
             tileActor.Entity.Set(new ColorComponent
             {
                 Color = color,

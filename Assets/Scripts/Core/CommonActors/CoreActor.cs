@@ -25,7 +25,7 @@ namespace Core.CommonActors
             Entity.AddSystem<InputListenSystem>();
             Entity.AddSystem<TryEliminateTileSystem>();
             Entity.AddSystem<EliminateSimpleTileSystem>();
-            Entity.AddSystem<EliminateTileWithInnerSystem>();
+            Entity.AddSystem<EliminateComplexTileSystem>();
         }
     }
 }
