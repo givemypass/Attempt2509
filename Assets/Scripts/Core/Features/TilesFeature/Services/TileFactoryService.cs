@@ -52,6 +52,10 @@ namespace Core.Features.TilesFeature.Services
             tileActor.transform.localScale = Vector3.zero;
             var monoComponent = tileActor.GetComponent<SimpleTileMonoComponent>();
             monoComponent.Image.color = color;
+            tileActor.Entity.Set(new ColorComponent
+            {
+                Color = color,
+            });
             return tileActor;
         }
 
@@ -65,7 +69,7 @@ namespace Core.Features.TilesFeature.Services
             var monoComponent = tileActor.GetComponent<ComplexTileMonoComponent>();
             monoComponent.Image.color = color;
             
-            var subTile = GetTile(complexModel.SubTile, position, tileActor.transform, color);
+            var subTile = GetTile(complexModel.SubTile, position, monoComponent.InnerParent, color);
             subTile.transform.localScale = Vector3.one;
             subTile.transform.localPosition = Vector3.zero;
             tileActor.Entity.Set(new ColorComponent
