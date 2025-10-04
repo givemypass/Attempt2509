@@ -7,32 +7,23 @@ using SelfishFramework.Src.Unity.Generated;
 
 namespace Core.Features.LevelStatesFeature
 {
-    public sealed partial class LevelsFsmSystem : BaseSystem, IUpdatable
+    public sealed partial class LevelsFsmSystem : BaseSystem
     {
         public override void InitSystem()
         {
             ref var fsmComponent = ref Owner.Get<LevelsFsmComponent>();
             var fsm = new StateMachine(Owner);
             
-            // var spawnTilesState = new SpawnTilesState(fsm);
-            // World.DependencyContainer.Resolve(spawnTilesState);
-            // fsm.AddState(spawnTilesState);
-            
+            fsm.AddState(new CheckConditionsState(fsm));
             fsm.AddState(new ChangeColorState(fsm));
             fsm.AddState(new EliminateTilesState(fsm));
-            // fsm.AddStateTransition(LevelStateIdentifierMap.SpawnTilesState, new DefaultTransition(LevelStateIdentifierMap.ChangeColorState));
             fsm.AddStateTransition(LevelStateIdentifierMap.ChangeColorState, new DefaultTransition(LevelStateIdentifierMap.EliminateTilesState));
-            // fsm.AddStateTransition(LevelStateIdentifierMap.EliminateTilesState, new DefaultTransition(LevelStateIdentifierMap.SpawnTilesState));
-            fsm.AddStateTransition(LevelStateIdentifierMap.EliminateTilesState, new DefaultTransition(LevelStateIdentifierMap.ChangeColorState));
+            fsm.AddStateTransition(LevelStateIdentifierMap.EliminateTilesState, new DefaultTransition(LevelStateIdentifierMap.CheckConditionsState));
+            fsm.AddStateTransition(LevelStateIdentifierMap.CheckConditionsState, new DefaultTransition(LevelStateIdentifierMap.ChangeColorState));
             
             fsm.ChangeState(LevelStateIdentifierMap.ChangeColorState);
             
             fsmComponent.Fsm = fsm;
-        }
-
-        public void Update()
-        {
-            
         }
     }
 }

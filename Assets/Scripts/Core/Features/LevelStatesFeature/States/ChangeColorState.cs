@@ -14,12 +14,10 @@ namespace Core.Features.LevelStatesFeature.States
         public override int StateID => LevelStateIdentifierMap.ChangeColorState;
     
         private readonly Filter _filter;
-        private readonly Single<StepsComponent> _stepsSingleComponent;
 
         public ChangeColorState(StateMachine stateMachine) : base(stateMachine)
         {
             _filter = stateMachine.World.Filter.With<GameScreenUiActorComponent>().Build();
-            _stepsSingleComponent = new Single<StepsComponent>(stateMachine.World);
         }
 
         public override void Enter(Entity entity)
@@ -38,14 +36,6 @@ namespace Core.Features.LevelStatesFeature.States
                 {
                     screenEntity.Remove<ColorChangedComponent>();
                     EndState();
-                    return;
-                }
-
-                ref var stepsComponent = ref _stepsSingleComponent.Get();
-                if (stepsComponent.Steps <= 0)
-                {
-                    stateMachine.World.Command(new StepsRanOutCommand());
-                    stateMachine.Pause(true);
                     return;
                 }
                 if (!screenEntity.Has<WaitForChangingColorComponent>() && !screenEntity.Has<VisualInProgressComponent>())

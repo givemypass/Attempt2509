@@ -9,7 +9,7 @@ using Systems;
 namespace Core.Features.GameStatesFeature.Systems.States
 {
     [Injectable]
-    public sealed partial class LevelStateSystem : BaseGameStateSystem, IReactGlobal<StepsRanOutCommand>
+    public sealed partial class LevelStateSystem : BaseGameStateSystem, IReactGlobal<StepsRanOutCommand>, IReactGlobal<LevelCompletedCommand>
     {
         [Inject] private IUIService _uiService;
         
@@ -32,6 +32,14 @@ namespace Core.Features.GameStatesFeature.Systems.States
             World.Command(new ForceGameStateTransitionGlobalCommand
             {
                 GameState = GameStateIdentifierMap.GameOverState,
+            });
+        }
+
+        public void ReactGlobal(LevelCompletedCommand command)
+        {
+            World.Command(new ForceGameStateTransitionGlobalCommand
+            {
+                GameState = GameStateIdentifierMap.LevelCompletedState,
             });
         }
     }

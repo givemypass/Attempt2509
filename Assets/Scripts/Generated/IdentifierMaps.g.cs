@@ -5,8 +5,8 @@ namespace SelfishFramework.Src.Unity.Generated
     {
         public const int BootstrapLevelState = -1058236071;
         public const int BootstrapState = 1188540995;
-        public const int FinishLevelState = 1590688746;
         public const int GameOverState = -1017332174;
+        public const int LevelCompletedState = 1219910770;
         public const int LevelState = 1862850834;
     }
     public static class InputIdentifierMap
@@ -18,6 +18,7 @@ namespace SelfishFramework.Src.Unity.Generated
     public static class LevelStateIdentifierMap
     {
         public const int ChangeColorState = -1702612233;
+        public const int CheckConditionsState = 646242665;
         public const int EliminateTilesState = 331013733;
         public const int SpawnTilesState = -854198952;
     }
@@ -25,5 +26,6 @@ namespace SelfishFramework.Src.Unity.Generated
     {
         public const int GameOverScreen_UIIdentifier = -337891185;
         public const int GameScreen_UIIdentifier = 892950120;
+        public const int LevelCompletedScreen_UIIdentifier = 583926005;
     }
 }
