@@ -14,15 +14,16 @@ namespace Core.Features.LevelStatesFeature
             ref var fsmComponent = ref Owner.Get<LevelsFsmComponent>();
             var fsm = new StateMachine(Owner);
             
-            var spawnTilesState = new SpawnTilesState(fsm);
-            World.DependencyContainer.Resolve(spawnTilesState);
-            fsm.AddState(spawnTilesState);
+            // var spawnTilesState = new SpawnTilesState(fsm);
+            // World.DependencyContainer.Resolve(spawnTilesState);
+            // fsm.AddState(spawnTilesState);
             
             fsm.AddState(new ChangeColorState(fsm));
             fsm.AddState(new EliminateTilesState(fsm));
-            fsm.AddStateTransition(LevelStateIdentifierMap.SpawnTilesState, new DefaultTransition(LevelStateIdentifierMap.ChangeColorState));
+            // fsm.AddStateTransition(LevelStateIdentifierMap.SpawnTilesState, new DefaultTransition(LevelStateIdentifierMap.ChangeColorState));
             fsm.AddStateTransition(LevelStateIdentifierMap.ChangeColorState, new DefaultTransition(LevelStateIdentifierMap.EliminateTilesState));
-            fsm.AddStateTransition(LevelStateIdentifierMap.EliminateTilesState, new DefaultTransition(LevelStateIdentifierMap.SpawnTilesState));
+            // fsm.AddStateTransition(LevelStateIdentifierMap.EliminateTilesState, new DefaultTransition(LevelStateIdentifierMap.SpawnTilesState));
+            fsm.AddStateTransition(LevelStateIdentifierMap.EliminateTilesState, new DefaultTransition(LevelStateIdentifierMap.ChangeColorState));
             
             fsm.ChangeState(LevelStateIdentifierMap.ChangeColorState);
             

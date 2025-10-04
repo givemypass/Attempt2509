@@ -1,6 +1,6 @@
 [
     {
-        "weight" : 50,
+        "weight" : 25,
         "tile" : {
             "type" : "SimpleTileModel"
         }

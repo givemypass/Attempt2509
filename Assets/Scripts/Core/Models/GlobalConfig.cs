@@ -13,7 +13,5 @@ namespace Core.Models
         public SimpleTileActor SimpleTilePrefab;
         public ComplexTileActor ComplexTileActorPrefab;
         public LevelActor LevelActor;
-        
-        public int InitialSteps;
     }
 }

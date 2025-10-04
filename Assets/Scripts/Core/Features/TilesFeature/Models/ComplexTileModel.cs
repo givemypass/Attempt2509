@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using SelfishFramework.Src.Features.Features.Serialization;
+using UnityEngine;
 
 namespace Core.Features.TilesFeature.Models
 {
@@ -9,5 +10,8 @@ namespace Core.Features.TilesFeature.Models
         [JsonProperty("sub_tile")]
         [JsonConverter(typeof(EmbeddedTypePolyConverter), typeof(ITileModel))]
         public ITileModel SubTile;
+
+        [JsonProperty("color_id")]
+        public int ColorId;
     }
 }

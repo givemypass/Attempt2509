@@ -9,7 +9,6 @@ namespace Core.Features.GameScreenFeature.Mono
         public Image BackgroundImage; 
         public Image TransitionImage;
         public Image[] ColorSigns;
-        public TextMeshProUGUI ScoreText;
         public TextMeshProUGUI StepsText;
     }
 }

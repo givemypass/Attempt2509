@@ -1,15 +1,24 @@
-﻿using Core.CommonComponents;
+﻿using System;
+using Core.CommonComponents;
+using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
+using Core.Features.LevelsFeature.Models;
+using Core.Features.LevelsFeature.Services;
 using Core.Features.StepsFeature;
+using Core.Features.TilesFeature;
+using Core.Features.TilesFeature.Services;
 using Core.Models;
 using Core.Services;
 using Cysharp.Threading.Tasks;
+using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
+using SelfishFramework.Src.Unity.Features.UI.Actors;
 using SelfishFramework.Src.Unity.Features.UI.Systems;
 using SelfishFramework.Src.Unity.Generated;
 using Systems;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Core.Features.GameStatesFeature.Systems.States
 {
@@ -22,6 +31,8 @@ namespace Core.Features.GameStatesFeature.Systems.States
         [Inject] private ISceneService _sceneManager;
         [Inject] private IUIService _uiService;
         [Inject] private GlobalConfigProvider _globalConfigProvider;
+        [Inject] private ILevelsService _levelsService;
+        [Inject] private ITileFactoryService _tileFactoryService;
 
         protected override int State => GameStateIdentifierMap.BootstrapLevelState;
 
@@ -40,11 +51,14 @@ namespace Core.Features.GameStatesFeature.Systems.States
             
             await _sceneManager.LoadSceneAsync(SCENE_NAME);
             
-            InitLevel();
+            var levelId = 0;
+            var level = _levelsService.GetLevel(levelId);
+            
+            InitLevelActor(level.Steps);
 
             var screen = await _uiService.ShowUIAsync(UIIdentifierMap.GameScreen_UIIdentifier);
             screen.TryGetComponent(out GameScreenMonoComponent monoComponent);
-            var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(Color.white);
+            var color = _colorPaletteService.GetColor(level.ColorId);
             monoComponent.BackgroundImage.color = color;
             screen.Entity.Set(new ColorComponent
             {
@@ -54,14 +68,41 @@ namespace Core.Features.GameStatesFeature.Systems.States
             monoComponent.ColorSigns[1].color = _colorPaletteService.GetColor(Vector2Int.down);
             monoComponent.ColorSigns[2].color = _colorPaletteService.GetColor(Vector2Int.left);
             monoComponent.ColorSigns[3].color = _colorPaletteService.GetColor(Vector2Int.up);
+            
+            SpawnTiles(screen, level);
         }
 
-        private void InitLevel()
+        private void SpawnTiles(UIActor screen, LevelConfigModel level)
+        {
+            ref var gridMonoProviderComponent = ref screen.Entity.Get<GridMonoProviderComponent>();
+            var grid = gridMonoProviderComponent.Grid;
+            foreach (var tile in level.Tiles)
+            {
+                if (grid.TryGetFreeCell(out var x, out var y, out var position))
+                {
+                    var tileActor = _tileFactoryService.GetTile(tile.Tile, position, grid.transform);
+                    tileActor.transform.localScale = Vector3.zero;
+                    tileActor.transform.DOScale(Vector3.one, 0.2f).SetLink(tileActor.gameObject);
+
+                    grid.Tiles[(x, y)] = tileActor.Entity;
+                    tileActor.Entity.Set(new GridPositionComponent
+                    {
+                        Position = new Vector2Int(x, y),
+                    });
+                }
+                else
+                {
+                    throw new Exception("No free cell found in grid while spawning initial tiles.");
+                }
+            }
+        }
+
+        private void InitLevelActor(int levelSteps)
         {
             var levelActor = Object.Instantiate(_globalConfigProvider.Get.LevelActor);
             levelActor.TryInitialize();
             ref var stepsComponent = ref levelActor.Entity.Get<StepsComponent>();
-            stepsComponent.Steps = _globalConfigProvider.Get.InitialSteps;
+            stepsComponent.Steps = levelSteps;
         }
     }
 }

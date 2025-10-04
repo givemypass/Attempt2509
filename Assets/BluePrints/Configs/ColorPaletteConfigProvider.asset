@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ColorPaletteConfigProvider
   m_EditorClassIdentifier: 
   _palettes:
-  - {fileID: 11400000, guid: fe2e9d9cb87c6ab428a9f25f2e43d7dc, type: 2}
+  - {fileID: 11400000, guid: 36eaf75548aac4649808a9434ba2791b, type: 2}
