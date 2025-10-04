@@ -1,4 +1,7 @@
-﻿using Core.CommonSystems;
+﻿using Core.CommonComponents;
+using Core.CommonSystems;
+using Core.Features.ScoreFeature;
+using Core.Features.StepsFeature;
 using Core.Features.SwipeDetection.Components;
 using Core.Features.SwipeDetection.Systems;
 using Core.Features.TilesFeature;
@@ -16,6 +19,8 @@ namespace Core.CommonActors
         public InputActionsComponent InputActionsComponent = new();
         public InputListenerTagComponent InputListenerTagComponent = new();
         public SwipeDetectionComponent SwipeDetectionComponent = new();
+        public ScoreComponent ScoreComponent = new();
+        public StepsComponent StepsComponent = new();
         
         protected override void SetSystems()
         {
@@ -26,6 +31,8 @@ namespace Core.CommonActors
             Entity.AddSystem<TryEliminateTileSystem>();
             Entity.AddSystem<EliminateSimpleTileSystem>();
             Entity.AddSystem<EliminateComplexTileSystem>();
+            Entity.AddSystem<ScoreSystem>();
+            Entity.AddSystem<StepsSystem>();
         }
     }
 }

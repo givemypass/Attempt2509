@@ -1,6 +1,7 @@
 ﻿using Core.CommonComponents;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
+using Core.Features.StepsFeature;
 using Core.Features.SwipeDetection.Commands;
 using Core.Services;
 using DG.Tweening;
@@ -21,10 +22,12 @@ namespace Core.Features.GameScreenFeature.Systems
         [Inject] private IColorPaletteService _colorPaletteService;
         
         private GameScreenMonoComponent _monoComponent;
+        private Single<StepsComponent> _stepsSingleComponent;
 
         public override void InitSystem()
         {
             Owner.AsActor().TryGetComponent(out _monoComponent);
+            _stepsSingleComponent = new Single<StepsComponent>(World);
         }
 
         void IReactGlobal<SwipeDetectedCommand>.ReactGlobal(SwipeDetectedCommand command)
@@ -33,6 +36,9 @@ namespace Core.Features.GameScreenFeature.Systems
             {
                 return;
             }
+            ref var stepsComponent = ref _stepsSingleComponent.Get();
+            stepsComponent.Steps -= 1;
+            
             var color = _colorPaletteService.GetColor(command.Direction);
             var currentColor = Owner.Get<ColorComponent>().Color;
             if (color == currentColor)

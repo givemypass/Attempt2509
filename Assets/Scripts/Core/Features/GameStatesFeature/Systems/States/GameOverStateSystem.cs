@@ -1,6 +1,5 @@
 ﻿using Core.Features.StepsFeature;
 using SelfishFramework.Src.Core.Attributes;
-using SelfishFramework.Src.Core.CommandBus;
 using SelfishFramework.Src.Features.GameFSM.Commands;
 using SelfishFramework.Src.Unity.Generated;
 using Systems;
@@ -8,9 +7,9 @@ using Systems;
 namespace Core.Features.GameStatesFeature.Systems.States
 {
     [Injectable]
-    public sealed partial class LevelStateSystem : BaseGameStateSystem, IReactGlobal<StepsRanOutCommand>
+    public sealed partial class GameOverStateSystem : BaseGameStateSystem
     {
-        protected override int State => GameStateIdentifierMap.LevelState;
+        protected override int State => GameStateIdentifierMap.GameOverState;
 
         public override void InitSystem()
         {

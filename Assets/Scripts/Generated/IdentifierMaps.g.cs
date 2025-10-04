@@ -6,6 +6,7 @@ namespace SelfishFramework.Src.Unity.Generated
         public const int BootstrapLevelState = -1058236071;
         public const int BootstrapState = 1188540995;
         public const int FinishLevelState = 1590688746;
+        public const int GameOverState = -1017332174;
         public const int LevelState = 1862850834;
     }
     public static class InputIdentifierMap

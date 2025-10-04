@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Core.Features.GameScreenFeature.Mono
@@ -8,5 +9,7 @@ namespace Core.Features.GameScreenFeature.Mono
         public Image BackgroundImage; 
         public Image TransitionImage;
         public Image[] ColorSigns;
+        public TextMeshProUGUI ScoreText;
+        public TextMeshProUGUI StepsText;
     }
 }

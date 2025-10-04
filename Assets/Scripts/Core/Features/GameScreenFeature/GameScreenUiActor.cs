@@ -16,6 +16,7 @@ namespace Core.Features.GameScreenFeature
             base.SetSystems();
             Entity.AddSystem<LevelsFsmSystem>();
             Entity.AddSystem<ChangeColorWhenSwipeSystem>();
+            Entity.AddSystem<GameScreenUISystem>();
         }
     }
 }

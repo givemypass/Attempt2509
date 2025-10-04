@@ -3,6 +3,7 @@ using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.LevelStatesFeature.Component;
+using Core.Features.StepsFeature;
 using Core.Features.TilesFeature;
 using DG.Tweening;
 using SelfishFramework.Src.Core;
@@ -20,12 +21,13 @@ namespace Core.Features.LevelStatesFeature.States
     {
         private readonly Filter _filter;
         private readonly Filter _tileFilter;
+        private readonly Single<StepsComponent> _stepsSingleComponent;
         public override int StateID => LevelStateIdentifierMap.EliminateTilesState;
 
         public EliminateTilesState(StateMachine stateMachine) : base(stateMachine)
         {
-
-            _tileFilter = stateMachine.World.Filter.With<TileCommonTagComponent>().With<GridPositionComponent>().Build();
+            var world = stateMachine.World;
+            _tileFilter = world.Filter.With<TileCommonTagComponent>().With<GridPositionComponent>().Build();
         }
 
         public override void Enter(Entity entity)

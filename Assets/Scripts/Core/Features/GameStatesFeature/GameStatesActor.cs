@@ -18,6 +18,7 @@ namespace Core.Features.GameStatesFeature
             Entity.AddSystem<BootstrapLevelStateSystem>();
             Entity.AddSystem<LevelStateSystem>();
             Entity.AddSystem<FinishLevelStateSystem>();
+            Entity.AddSystem<GameOverStateSystem>();
         }
     }
 }
