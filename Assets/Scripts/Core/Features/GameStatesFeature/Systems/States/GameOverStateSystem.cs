@@ -38,6 +38,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
         protected override void OnExitState()
         {
             _uiService.CloseUI(UIIdentifierMap.GameOverScreen_UIIdentifier);
+            _uiService.CloseUI(UIIdentifierMap.GameScreen_UIIdentifier);
         }
     }
 }

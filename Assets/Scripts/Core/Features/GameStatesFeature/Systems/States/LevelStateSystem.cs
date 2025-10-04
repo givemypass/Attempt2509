@@ -25,7 +25,6 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         protected override void OnExitState()
         {
-            _uiService.CloseUI(UIIdentifierMap.GameOverScreen_UIIdentifier);
         }
 
         public void ReactGlobal(StepsRanOutCommand command)

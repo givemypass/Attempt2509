@@ -30,6 +30,8 @@ namespace Core.Features.GameScreenFeature.Systems
 
         public void Update()
         {
+            if(!_scoreSingleComponent.Exists() || !_stepsSingleComponent.Exists())
+                return;
             ref var scoreComponent = ref _scoreSingleComponent.Get();
             UpdateScore(scoreComponent.CurrentScore);
             ref var stepsComponent = ref _stepsSingleComponent.Get();
