@@ -3,6 +3,7 @@ using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.TilesFeature;
+using Core.Features.TilesFeature.Services;
 using Core.Features.TilesFeature.SimpleTile;
 using Core.Features.TilesFeature.TileWithInner;
 using Core.Services;
@@ -20,10 +21,8 @@ namespace Core.Features.LevelStatesFeature.States
     [Injectable]
     public partial class SpawnTilesState : BaseFSMState
     {
-        [Inject] private SimpleTileFactoryService _simpleTileFactoryService;
-        [Inject] private ComplexTileFactoryService _complexTileFactoryService;
-        
-        [Inject] private IColorPaletteService _colorPaletteService;
+        [Inject] private TileModelsRandomService _tileModelsRandomService;
+        [Inject] private ITileFactoryService _tileFactoryService;
         
         private readonly Filter _filter;
         public override int StateID => LevelStateIdentifierMap.SpawnTilesState;
@@ -42,9 +41,8 @@ namespace Core.Features.LevelStatesFeature.States
                 var grid = gridMonoProviderComponent.Grid;
                 if (grid.TryGetFreeCell(out var x, out var y, out var position))
                 {
-                    var tileActor = Random.value > 0.5
-                        ? CreateTileWithSimpleInner(colorComponent.Color, position, grid)
-                        : CreateTileWithInnerTileWithSimpleInner(colorComponent.Color, position, grid);
+                    var tileModel = _tileModelsRandomService.Random.Next();
+                    var tileActor = _tileFactoryService.GetTile(tileModel, position, grid.transform, colorComponent.Color);
                     tileActor.transform.localScale = Vector3.zero;
                     tileActor.transform.DOScale(Vector3.one, 0.2f).SetLink(tileActor.gameObject);
 
@@ -58,65 +56,6 @@ namespace Core.Features.LevelStatesFeature.States
                 EndState();
                 break;
             }
-        }
-
-        private Actor CreateTileWithSimpleInner(Color screenColor, Vector2 position, GridMonoComponent grid)
-        {
-            var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(screenColor);
-                    
-            var secondColor = _colorPaletteService.RandomColorFromCurrentPaletteExcept(screenColor, color);
-            var simpleTileActor = _simpleTileFactoryService.GetTile(position, grid.transform, secondColor);
-            simpleTileActor.Entity.Set(new ColorComponent
-            {
-                Color = secondColor,
-            });
-                    
-            var tileActor = _complexTileFactoryService.GetTile(position, grid.transform, color, simpleTileActor);
-            tileActor.Entity.Set(new ColorComponent
-            {
-                Color = color,
-            });
-            return tileActor;
-        }
-        
-        //hehe
-        private Actor CreateTileWithInnerTileWithSimpleInner(Color screenColor, Vector2 position, GridMonoComponent grid)
-        {
-            var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(screenColor);
-            var secondColor = _colorPaletteService.RandomColorFromCurrentPaletteExcept(color);
-            var thirdColor = _colorPaletteService.RandomColorFromCurrentPaletteExcept(secondColor);
-            
-            var thirdInnerTile = _simpleTileFactoryService.GetTile(position, grid.transform, thirdColor);
-            thirdInnerTile.Entity.Set(new ColorComponent
-            {
-                Color = thirdColor,
-            });
-            
-            var innerTile = _complexTileFactoryService.GetTile(position, grid.transform, secondColor, thirdInnerTile);
-            innerTile.Entity.Set(new ColorComponent
-            {
-                Color = secondColor,
-            });
-                    
-            var tileActor = _complexTileFactoryService.GetTile(position, grid.transform, color, innerTile);
-            tileActor.Entity.Set(new ColorComponent
-            {
-                Color = color,
-            });
-            return tileActor;
-        }
-        
-        private Actor CreateSimpleTile(Color screenColor, Vector2 position, GridMonoComponent grid)
-        {
-            var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(screenColor);
-                    
-            var tileActor = _simpleTileFactoryService.GetTile(position, grid.transform, color);
-            tileActor.Entity.Set(new ColorComponent
-            {
-                Color = color,
-            });
-                    
-            return tileActor;
         }
 
         public override void Exit(Entity entity)
