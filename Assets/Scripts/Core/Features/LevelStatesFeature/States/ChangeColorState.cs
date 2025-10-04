@@ -45,7 +45,7 @@ namespace Core.Features.LevelStatesFeature.States
                 if (stepsComponent.Steps <= 0)
                 {
                     stateMachine.World.Command(new StepsRanOutCommand());
-                    stateMachine.Pause(false);
+                    stateMachine.Pause(true);
                     return;
                 }
                 if (!screenEntity.Has<WaitForChangingColorComponent>() && !screenEntity.Has<VisualInProgressComponent>())

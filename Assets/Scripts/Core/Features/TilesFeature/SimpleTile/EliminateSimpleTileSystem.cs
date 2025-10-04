@@ -3,6 +3,7 @@ using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.LevelStatesFeature.Component;
+using Core.Features.TilesFeature.Commands;
 using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Filter;
@@ -56,6 +57,7 @@ namespace Core.Features.TilesFeature.SimpleTile
                     {
                         Object.Destroy(actor);
                     });
+                    World.Command(new TileEliminatedCommand());
                 }
             } 
         }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Core.CommonActors;
 using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.TilesFeature.TileWithInner;
@@ -11,5 +12,8 @@ namespace Core.Models
     {
         public SimpleTileActor SimpleTilePrefab;
         public ComplexTileActor ComplexTileActorPrefab;
+        public LevelActor LevelActor;
+        
+        public int InitialSteps;
     }
 }

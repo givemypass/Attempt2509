@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UIBluePrint
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 71a990d266a5e844393e82f433a7cd2b
+    m_Address: Assets/BluePrints/UIBluePrints/GameOverScreen_UIBluePrint.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIBluePrint
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b5f7fcd3ce18f38489e83126a570c5b5, type: 2}
   m_SchemaSet:

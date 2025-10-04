@@ -1,5 +1,7 @@
 ﻿using Core.CommonComponents;
 using Core.Features.GameScreenFeature.Mono;
+using Core.Features.StepsFeature;
+using Core.Models;
 using Core.Services;
 using Cysharp.Threading.Tasks;
 using SelfishFramework.Src.Core;
@@ -19,6 +21,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
         [Inject] private IColorPaletteService _colorPaletteService;
         [Inject] private ISceneService _sceneManager;
         [Inject] private IUIService _uiService;
+        [Inject] private GlobalConfigProvider _globalConfigProvider;
 
         protected override int State => GameStateIdentifierMap.BootstrapLevelState;
 
@@ -36,6 +39,9 @@ namespace Core.Features.GameStatesFeature.Systems.States
             _colorPaletteService.GeneratePalette();
             
             await _sceneManager.LoadSceneAsync(SCENE_NAME);
+            
+            InitLevel();
+
             var screen = await _uiService.ShowUIAsync(UIIdentifierMap.GameScreen_UIIdentifier);
             screen.TryGetComponent(out GameScreenMonoComponent monoComponent);
             var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(Color.white);
@@ -48,6 +54,14 @@ namespace Core.Features.GameStatesFeature.Systems.States
             monoComponent.ColorSigns[1].color = _colorPaletteService.GetColor(Vector2Int.down);
             monoComponent.ColorSigns[2].color = _colorPaletteService.GetColor(Vector2Int.left);
             monoComponent.ColorSigns[3].color = _colorPaletteService.GetColor(Vector2Int.up);
+        }
+
+        private void InitLevel()
+        {
+            var levelActor = Object.Instantiate(_globalConfigProvider.Get.LevelActor);
+            levelActor.TryInitialize();
+            ref var stepsComponent = ref levelActor.Entity.Get<StepsComponent>();
+            stepsComponent.Steps = _globalConfigProvider.Get.InitialSteps;
         }
     }
 }

@@ -23,6 +23,7 @@ namespace SelfishFramework.Src.Unity.Generated
     }
     public static class UIIdentifierMap
     {
+        public const int GameOverScreen_UIIdentifier = -337891185;
         public const int GameScreen_UIIdentifier = 892950120;
     }
 }

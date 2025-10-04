@@ -17,3 +17,6 @@ MonoBehaviour:
       type: 3}
     ComplexTileActorPrefab: {fileID: 5587817382167064305, guid: 7abe141a01de74e44a7ccb6cdab1c5f2,
       type: 3}
+    LevelActor: {fileID: 4758071955217356937, guid: 97a62a8524b4cd14ea53759a4a677ebe,
+      type: 3}
+    InitialSteps: 10
