@@ -1,5 +1,4 @@
-﻿using Core.Features.TilesFeature.SimpleTile;
-using Core.Features.TilesFeature.TileWithInner;
+﻿using Core.Features.TilesFeature.Services;
 using Core.Models;
 using Core.Services;
 using SelfishFramework.Src.Core;
@@ -21,8 +20,8 @@ namespace Core
             Container.Register(_globalConfigProvider);
             Container.Register<ISceneService>(new SceneService());
             Container.Register<IColorPaletteService>(new ColorPaletteService());
-            Container.Register(new SimpleTileFactoryService());
-            Container.Register(new TileWithInnerFactoryService());
+            Container.Register<ITileFactoryService>(new TileFactoryService());
+            Container.Register(new TileModelsRandomService());
         }
     }
 }

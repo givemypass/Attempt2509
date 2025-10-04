@@ -30,7 +30,7 @@ namespace Core.CommonSystems
             
             Owner.GetWorld().Command(new SwipeDetectedCommand
             {
-                Direction = new Vector2Int((int)direction.x, (int)direction.y),
+                Direction = new Vector2Int(-(int)direction.x, -(int)direction.y),
             });
         }
     }
