@@ -3,7 +3,6 @@ using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.SwipeDetection.Commands;
 using Core.Services;
-using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
