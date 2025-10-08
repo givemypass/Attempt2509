@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Core.CommonComponents;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
@@ -13,11 +14,13 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
+using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity.Features.UI.Actors;
 using SelfishFramework.Src.Unity.Features.UI.Systems;
 using SelfishFramework.Src.Unity.Generated;
 using Systems;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
 
 namespace Core.Features.GameStatesFeature.Systems.States
@@ -70,6 +73,8 @@ namespace Core.Features.GameStatesFeature.Systems.States
             monoComponent.ColorSigns[3].color = _colorPaletteService.GetColor(Vector2Int.up);
             
             SpawnTiles(screen, level);
+            var minSteps = MinStepCalculatorUtils.CalculateMinSteps(level);
+            SLog.Log($"Min moves to complete level: {minSteps.steps} : {MinStepCalculatorUtils.Encode(minSteps.path)}");
         }
 
         private void SpawnTiles(UIActor screen, LevelConfigModel level)

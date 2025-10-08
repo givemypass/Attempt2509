@@ -26,14 +26,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
             Application.targetFrameRate = 60;
             World.Command(new LoadProgressCommand());
             JsonPolyTypeCache.Prewarm();
-            var textAsset = Resources.Load<TextAsset>("weightedTiles");
-            if (textAsset == null || string.IsNullOrEmpty(textAsset.text))
-            {
-                Debug.LogError("Failed to load weightedTiles from Resources.");
-                return;
-            }
-            var models = JsonConvert.DeserializeObject<TilesWeightedConfigModel[]>(textAsset.text);
-            _tileModelsRandomService.Initialize(models);
+            _tileModelsRandomService.Initialize();
             EndState();
         }
     }

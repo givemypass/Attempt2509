@@ -13,5 +13,14 @@ namespace Core.Features.TilesFeature.Models
 
         [JsonProperty("color_id")]
         public int ColorId;
+
+        public object Clone()
+        {
+            return new ComplexTileModel
+            {
+                ColorId = ColorId,
+                SubTile = (ITileModel)SubTile.Clone(),
+            };
+        }
     }
 }

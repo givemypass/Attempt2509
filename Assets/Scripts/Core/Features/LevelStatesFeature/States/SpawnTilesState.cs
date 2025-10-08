@@ -3,6 +3,7 @@ using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.TilesFeature;
+using Core.Features.TilesFeature.Models;
 using Core.Features.TilesFeature.Services;
 using Core.Features.TilesFeature.SimpleTile;
 using Core.Features.TilesFeature.TileWithInner;

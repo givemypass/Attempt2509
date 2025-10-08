@@ -1,6 +1,8 @@
-﻿namespace Core.Features.TilesFeature.Models
+﻿using System;
+
+namespace Core.Features.TilesFeature.Models
 {
-    public interface ITileModel
+    public interface ITileModel : ICloneable
     {
     }
 }
