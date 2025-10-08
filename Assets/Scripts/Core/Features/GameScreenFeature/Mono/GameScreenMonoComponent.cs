@@ -10,5 +10,7 @@ namespace Core.Features.GameScreenFeature.Mono
         public Image TransitionImage;
         public Image[] ColorSigns;
         public TextMeshProUGUI StepsText;
+        
+        public GridMonoComponent[] Grids;
     }
 }

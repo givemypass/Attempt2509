@@ -8,10 +8,11 @@ namespace Core.Features.GameScreenFeature.Mono
     {
         [SerializeField] private Vector2 _offset;
         [SerializeField] private Vector2 _size;
-        
         [SerializeField] private Vector2Int _gridSize;
 
         public readonly Dictionary<(int, int), Entity> Tiles = new();
+        
+        public int MaxTiles => _gridSize.x * _gridSize.y;
         
         public bool TryGetFreeCell(out int x, out int y, out Vector2 pos)
         {

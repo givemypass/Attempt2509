@@ -25,6 +25,7 @@ namespace Core
             Container.Register<IColorPaletteService>(new ColorPaletteService());
             Container.Register<ITileFactoryService>(new TileFactoryService());
             Container.Register<ILevelsService>(new LevelsService(_levelsConfig));
+            Container.Register(new TileModelsService());
             Container.Register(new TileModelsRandomService());
         }
     }

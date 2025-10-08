@@ -11,6 +11,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
     [Injectable]
     public sealed partial class BootstrapStateSystem : BaseGameStateSystem
     {
+        [Inject] private TileModelsService _tileModelsService;
         [Inject] private TileModelsRandomService _tileModelsRandomService;
         
         protected override int State => GameStateIdentifierMap.BootstrapState;
@@ -24,6 +25,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
             Application.targetFrameRate = 60;
             World.Command(new LoadProgressCommand());
             JsonPolyTypeCache.Prewarm();
+            _tileModelsService.Initialize();
             _tileModelsRandomService.Initialize();
             EndState();
         }

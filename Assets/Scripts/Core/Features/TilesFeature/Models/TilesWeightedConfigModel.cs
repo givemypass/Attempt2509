@@ -1,6 +1,5 @@
 ﻿using System;
 using Newtonsoft.Json;
-using SelfishFramework.Src.Features.Features.Serialization;
 
 namespace Core.Features.TilesFeature.Models
 {
@@ -10,8 +9,7 @@ namespace Core.Features.TilesFeature.Models
     {
         [JsonProperty("weight")]
         public int Weight;
-        [JsonProperty("tile")]
-        [JsonConverter(typeof(EmbeddedTypePolyConverter), typeof(ITileModel))]
-        public ITileModel TileModel;
+        [JsonProperty("tile_id")] 
+        public string TileId;
     }
 }

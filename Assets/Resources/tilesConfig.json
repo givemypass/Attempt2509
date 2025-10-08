@@ -1,0 +1,44 @@
+[
+    {
+        "id": "x1",
+        "tile" : {
+            "type" : "SimpleTileModel"
+        }
+    },
+    {
+        "id": "x2",
+        "tile" : {
+            "type" : "ComplexTileModel",
+            "sub_tile" : {
+                "type" : "SimpleTileModel"
+            }
+        }
+    },
+    {
+        "id": "x3",
+        "tile" : {
+            "type" : "ComplexTileModel",
+            "sub_tile" : {
+                "type" : "ComplexTileModel",
+                "sub_tile" : {
+                    "type" : "SimpleTileModel"
+                }
+            }
+        }
+    },
+    {
+        "id": "x4",
+        "tile" : {
+            "type" : "ComplexTileModel",
+            "sub_tile" : {
+                "type" : "ComplexTileModel",
+                "sub_tile" : {
+                    "type" : "ComplexTileModel",
+                    "sub_tile" : {
+                        "type" : "SimpleTileModel"
+                    }
+                }
+            }
+        }
+    }
+]

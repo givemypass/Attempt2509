@@ -29,16 +29,12 @@ namespace Editor
 
         public class SO : ScriptableObject
         {
-            public int TilesCount;
-            public float Temperature = 1f;
             public string FileName;
-            private TileModelsRandomService _tileRandom;
+            public string Configuration;
             private readonly Random _random = new();
             
             public void Init()
             {
-                _tileRandom = new TileModelsRandomService();
-                _tileRandom.Initialize();
                 UpdateFileName();
             }
 
@@ -51,36 +47,22 @@ namespace Editor
             [Button]
             private void GenerateLevel()
             {
-                if (_tileRandom == null)
-                {
-                    Debug.LogError("Random service not initialized");
-                    return;
-                }
-
-                if (TilesCount <= 0)
-                {
-                    Debug.LogError("Set TilesCount > 0");
-                    return;
-                }
-
-                _tileRandom.Random.Temperature = Temperature;
-
-                var level = new LevelConfigModel
-                {
-                    ColorId = RandomColorExcept(-1),
-                    Tiles = new List<TileConfigModel>(TilesCount),
-                };
-                for (var i = 0; i < TilesCount; i++)
-                {
-                    var tile = (ITileModel)_tileRandom.Random.Next().Clone();
-                    SetColor(tile, level.ColorId);
-                    level.Tiles.Add(new TileConfigModel { Tile = tile });
-                }
-
-                var data = MinStepCalculatorUtils.CalculateMinSteps(level);
-                level.Steps = data.steps;
-                var json = JsonConvert.SerializeObject(level, Formatting.Indented);
-                SaveToResources(json, FileName);
+                // var level = new LevelConfigModel
+                // {
+                //     ColorId = RandomColorExcept(-1),
+                //     Tiles = new List<TileConfigModel>(TilesCount),
+                // };
+                // for (var i = 0; i < TilesCount; i++)
+                // {
+                //     var tile = (ITileModel)_tileRandom.Random.Next().Clone();
+                //     SetColor(tile, level.ColorId);
+                //     level.Tiles.Add(new TileConfigModel { Tile = tile });
+                // }
+                //
+                // var data = MinStepCalculatorUtils.CalculateMinSteps(level);
+                // level.Steps = data.steps;
+                // var json = JsonConvert.SerializeObject(level, Formatting.Indented);
+                // SaveToResources(json, FileName);
             }
 
             private static void SaveToResources(string data, string fileName)

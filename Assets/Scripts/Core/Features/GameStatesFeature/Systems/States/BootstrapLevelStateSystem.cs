@@ -66,6 +66,21 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
             var screen = await _uiService.ShowUIAsync(UIIdentifierMap.GameScreen_UIIdentifier);
             screen.TryGetComponent(out GameScreenMonoComponent monoComponent);
+            Array.Sort(monoComponent.Grids, (a, b) => a.MaxTiles.CompareTo(b.MaxTiles));
+            foreach (var grid in monoComponent.Grids)
+            {
+                if (grid.MaxTiles < level.Tiles.Count)
+                {
+                    continue;
+                }
+                grid.gameObject.SetActive(true);
+                screen.Entity.Set(new GridMonoProviderComponent
+                {
+                    Grid = grid,
+                });
+                break;
+            }
+            
             var color = _colorPaletteService.GetColor(level.ColorId);
             monoComponent.BackgroundImage.color = color;
             screen.Entity.Set(new ColorComponent

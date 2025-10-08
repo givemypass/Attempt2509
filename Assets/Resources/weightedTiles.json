@@ -1,44 +1,18 @@
 [
     {
-        "weight" : 25,
-        "tile" : {
-            "type" : "SimpleTileModel"
-        }
+        "id": 25,
+        "tile_id" : "x1"
     },
     {
-        "weight" : 25,
-        "tile" : {
-            "type" : "ComplexTileModel",
-            "sub_tile" : {
-                "type" : "SimpleTileModel"
-            }
-        }
+        "id": 25,
+        "tile_id" : "x2"
     },
     {
-        "weight" : 25,
-        "tile" : {
-            "type" : "ComplexTileModel",
-            "sub_tile" : {
-                "type" : "ComplexTileModel",
-                "sub_tile" : {
-                    "type" : "SimpleTileModel"
-                }
-            }
-        }
+        "id": 25,
+        "tile_id" : "x3"
     },
     {
-        "weight" : 25,
-        "tile" : {
-            "type" : "ComplexTileModel",
-            "sub_tile" : {
-                "type" : "ComplexTileModel",
-                "sub_tile" : {
-                    "type" : "ComplexTileModel",
-                    "sub_tile" : {
-                        "type" : "SimpleTileModel"
-                    }
-                }
-            }
-        }
+        "id": 25,
+        "tile_id" : "x4"
     }
 ]
