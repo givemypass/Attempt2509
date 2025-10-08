@@ -13,4 +13,15 @@ MonoBehaviour:
   m_Name: LevelsConfig
   m_EditorClassIdentifier: 
   LevelsJson:
+  - {fileID: 4900000, guid: 21e68b053346ba74aaf7602f203669ce, type: 3}
+  - {fileID: 4900000, guid: 6ad10350e35003d4d9146b1c1c7bcdb0, type: 3}
+  - {fileID: 4900000, guid: c1946b189b4721c4aa64bfa5dc6a4270, type: 3}
+  - {fileID: 4900000, guid: b7c9d769e24d1b64cae0e75722c2bb48, type: 3}
+  - {fileID: 4900000, guid: 33b8268aac396944396d6783ed8fcc12, type: 3}
+  - {fileID: 4900000, guid: 3b0ff1de7c2f3bb46806c68dee166f58, type: 3}
+  - {fileID: 4900000, guid: c39e9e65a2378fe4e83647a02926033d, type: 3}
+  - {fileID: 4900000, guid: 67013a20efa3146419f4179dc8c3ea2a, type: 3}
+  - {fileID: 4900000, guid: 9013320a0a60fdf4abcdc2218946cc5e, type: 3}
   - {fileID: 4900000, guid: 6d21bcbcaa195ea46bdcdb530a0194ed, type: 3}
+  - {fileID: 4900000, guid: 7b2d103ce300d5843b00c6cc7f8bf766, type: 3}
+  - {fileID: 4900000, guid: c33241fd60a952a4d98b78f109b032fa, type: 3}

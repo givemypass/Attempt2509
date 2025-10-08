@@ -5,6 +5,7 @@ using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.LevelsFeature.Models;
 using Core.Features.LevelsFeature.Services;
+using Core.Features.PlayerProgressFeature;
 using Core.Features.StepsFeature;
 using Core.Features.TilesFeature;
 using Core.Features.TilesFeature.Services;
@@ -36,11 +37,14 @@ namespace Core.Features.GameStatesFeature.Systems.States
         [Inject] private GlobalConfigProvider _globalConfigProvider;
         [Inject] private ILevelsService _levelsService;
         [Inject] private ITileFactoryService _tileFactoryService;
+        
+        private Single<PlayerProgressComponent> _playerProgressSingle;
 
         protected override int State => GameStateIdentifierMap.BootstrapLevelState;
 
         public override void InitSystem()
         {
+            _playerProgressSingle = new Single<PlayerProgressComponent>(World);
         }
 
         protected override void ProcessState(int from, int to)
@@ -53,8 +57,9 @@ namespace Core.Features.GameStatesFeature.Systems.States
             _colorPaletteService.GeneratePalette();
             
             await _sceneManager.LoadSceneAsync(SCENE_NAME);
-            
-            var levelId = 0;
+
+            _playerProgressSingle.ForceUpdate();
+            var levelId = _playerProgressSingle.Get().CurrentLevel;
             var level = _levelsService.GetLevel(levelId);
             
             InitLevelActor(level.Steps);

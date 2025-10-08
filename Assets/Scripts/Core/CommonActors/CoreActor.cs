@@ -1,4 +1,5 @@
 ﻿using Core.CommonSystems;
+using Core.Features.PlayerProgressFeature;
 using Core.Features.SwipeDetection.Components;
 using Core.Features.SwipeDetection.Systems;
 using SelfishFramework.Src.Core;
@@ -20,6 +21,7 @@ namespace Core.CommonActors
             Entity.AddSystem<SwipeDirectionDetectorSystem>();
             Entity.AddSystem<KeyboardSwipeDetectionSystem>();
             Entity.AddSystem<InputListenSystem>();
+            Entity.AddSystem<SaveLoadPlayerProgressSystem>();
         }
     }
 }

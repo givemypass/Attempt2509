@@ -36,8 +36,6 @@ namespace Core.Features.GameScreenFeature.Systems
             {
                 return;
             }
-            ref var stepsComponent = ref _stepsSingleComponent.Get();
-            stepsComponent.Steps -= 1;
             
             var color = _colorPaletteService.GetColor(command.Direction);
             var currentColor = Owner.Get<ColorComponent>().Color;
@@ -45,6 +43,9 @@ namespace Core.Features.GameScreenFeature.Systems
             {
                 return;
             }
+            
+            ref var stepsComponent = ref _stepsSingleComponent.Get();
+            stepsComponent.Steps -= 1;           
             
             Owner.Remove<WaitForChangingColorComponent>();
             Owner.Set(new VisualInProgressComponent());

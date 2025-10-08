@@ -25,5 +25,20 @@
                 }
             }
         }
+    },
+    {
+        "weight" : 25,
+        "tile" : {
+            "type" : "ComplexTileModel",
+            "sub_tile" : {
+                "type" : "ComplexTileModel",
+                "sub_tile" : {
+                    "type" : "ComplexTileModel",
+                    "sub_tile" : {
+                        "type" : "SimpleTileModel"
+                    }
+                }
+            }
+        }
     }
 ]
