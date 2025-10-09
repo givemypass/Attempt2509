@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using Core.Utils;
 using Newtonsoft.Json;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.CommandBus;
@@ -7,6 +8,7 @@ using SelfishFramework.Src.Core.Systems;
 using SelfishFramework.Src.Features.Features.Serialization;
 using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity.CommonCommands;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Core.Features.PlayerProgressFeature
@@ -20,6 +22,13 @@ namespace Core.Features.PlayerProgressFeature
 
         private void Save()
         {
+#if UNITY_EDITOR
+            if (EditorPlayArguments.IsTestMode())
+            {
+                SLog.Log("Test mode active, skipping save.");
+                return;
+            }
+#endif
             ref var playerProgress = ref Owner.Get<PlayerProgressComponent>(); 
             var saveModel = new SaveModel
             {
@@ -32,23 +41,28 @@ namespace Core.Features.PlayerProgressFeature
 
         private void Load()
         {
+            int levelIndex = 0;
             if (JsonHelper.TryLoadJson(SavePath(), out var json))
             {
                 var saveModel = JsonConvert.DeserializeObject<SaveModel>(json);
-                Owner.Set(new PlayerProgressComponent
-                {
-                    CurrentLevel = saveModel.LevelIndex,
-                });
+                levelIndex = saveModel.LevelIndex;
                 SLog.Log("Game loaded successfully.");
             }
             else
             {
-                Owner.Set(new PlayerProgressComponent
-                {
-                    CurrentLevel = 0,
-                });
+                levelIndex = 0;
                 SLog.Log("No save data found.");
-            } 
+            }
+#if UNITY_EDITOR
+            if (EditorPlayArguments.IsTestMode())
+            {
+                levelIndex = 0;
+            }
+#endif
+            Owner.Set(new PlayerProgressComponent
+            {
+                CurrentLevel = levelIndex,
+            });
         }
 
         private static string SavePath()

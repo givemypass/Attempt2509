@@ -282,6 +282,8 @@ MonoBehaviour:
   _globalConfigProvider: {fileID: 11400000, guid: 4bc59b51c120d1c40b46f5c3ff143623,
     type: 2}
   _levelsConfig: {fileID: 11400000, guid: afb4bd90af68c6e45b039328baa23a03, type: 2}
+  _editorLevelsConfig: {fileID: 11400000, guid: 512a6e86921f6894288e1bb8eae66915,
+    type: 2}
 --- !u!114 &1537049736
 MonoBehaviour:
   m_ObjectHideFlags: 0
