@@ -38,7 +38,7 @@ namespace Core.Utils
         {
             EditorApplication.playModeStateChanged += state =>
             {
-                if (state == PlayModeStateChange.ExitingPlayMode)
+                if (state == PlayModeStateChange.EnteredEditMode)
                 {
                     EditorPlayArguments.SetTestMode(false);
                 }
