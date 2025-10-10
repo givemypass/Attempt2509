@@ -8,7 +8,7 @@ namespace Core.Services
     public interface IColorPaletteService
     {
         void GeneratePalette();
-        ColorPaletteConfig GetCurrentPalette();
+        Color[] GetCurrentPalette();
         Color GetColor(Vector2Int direction);
         Color RandomColorFromCurrentPaletteExcept(Color? except = null, Color? except2 = null, Color? except3 = null);
         Color GetColor(int id);
@@ -19,14 +19,20 @@ namespace Core.Services
     {
         [Inject] private ColorPaletteConfigProvider _configProvider;
         
-        private ColorPaletteConfig _currentPalette;
+        private Color[] _currentPalette;
         
         public void GeneratePalette()
         {
-            _currentPalette = _configProvider.GetRandomPalette();
+            var palette = _configProvider.GetRandomPalette();
+            var i = 0;
+            _currentPalette ??= new Color[4];
+            foreach (var color in palette.AllColors)
+            {
+                _currentPalette[i++] = color;
+            }
         }
         
-        public ColorPaletteConfig GetCurrentPalette() => _currentPalette;
+        public Color[] GetCurrentPalette() => _currentPalette;
         
         public Color GetColor(Vector2Int direction)
         {
@@ -35,10 +41,10 @@ namespace Core.Services
         
             return direction switch
             {
-                _ when direction == Vector2Int.up => _currentPalette.Color1,
-                _ when direction == Vector2Int.right => _currentPalette.Color2,
-                _ when direction == Vector2Int.down => _currentPalette.Color3,
-                _ when direction == Vector2Int.left => _currentPalette.Color4,
+                _ when direction == Vector2Int.up => _currentPalette![0],
+                _ when direction == Vector2Int.right => _currentPalette![1],
+                _ when direction == Vector2Int.down => _currentPalette![2],
+                _ when direction == Vector2Int.left => _currentPalette![3],
                 _ => throw new ArgumentException("Invalid direction"),
             };
         }
@@ -69,10 +75,10 @@ namespace Core.Services
         
             return id switch
             {
-                0 => _currentPalette.Color1,
-                1 => _currentPalette.Color2,
-                2 => _currentPalette.Color3,
-                3 => _currentPalette.Color4,
+                0 => _currentPalette![0],
+                1 => _currentPalette![1],
+                2 => _currentPalette![2],
+                3 => _currentPalette![3],
                 _ => throw new ArgumentException("Invalid color id"),
             };
         }
