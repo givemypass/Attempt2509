@@ -72,15 +72,11 @@ namespace Core.Services
         {
             if (_currentPalette == null)
                 GeneratePalette();
-        
-            return id switch
-            {
-                0 => _currentPalette![0],
-                1 => _currentPalette![1],
-                2 => _currentPalette![2],
-                3 => _currentPalette![3],
-                _ => throw new ArgumentException("Invalid color id"),
-            };
+            
+            if (id < 0 || id >= _currentPalette!.Length)
+                throw new ArgumentOutOfRangeException(nameof(id), "Color ID is out of range.");
+
+            return _currentPalette![id];
         }
     }
 }
