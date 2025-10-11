@@ -104,7 +104,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
             monoComponent.LevelText.text = $"{levelId + 1}";
             
-            SpawnTiles(screen, level);
+            await SpawnTiles(screen, level);
             var minSteps = MinStepCalculatorUtils.CalculateMinSteps(level);
             SLog.Log($"Min moves to complete level: {minSteps.steps} : {MinStepCalculatorUtils.Encode(minSteps.path)}");
         }
@@ -122,12 +122,13 @@ namespace Core.Features.GameStatesFeature.Systems.States
             });
         }
 
-        private void SpawnTiles(UIActor screen, LevelConfigModel level)
+        private async UniTask SpawnTiles(UIActor screen, LevelConfigModel level)
         {
-            ref var gridMonoProviderComponent = ref screen.Entity.Get<GridMonoProviderComponent>();
-            var grid = gridMonoProviderComponent.Grid;
+            var grid = screen.Entity.Get<GridMonoProviderComponent>().Grid;
+            const int delay = 50;
             foreach (var tile in level.Tiles)
             {
+                await UniTask.Delay(delay);
                 if (grid.TryGetFreeCell(out var x, out var y, out var position))
                 {
                     var tileActor = _tileFactoryService.GetTile(tile.Tile, position, grid.transform);

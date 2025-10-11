@@ -8,8 +8,10 @@ using SelfishFramework.Src.Core.Systems;
 using SelfishFramework.Src.Features.Features.Serialization;
 using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity.CommonCommands;
-using UnityEditor;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 namespace Core.Features.PlayerProgressFeature
 {
@@ -70,6 +72,7 @@ namespace Core.Features.PlayerProgressFeature
             return Path.Combine(Application.persistentDataPath, "save.json");
         }
 
+#if UNITY_EDITOR
         [MenuItem("Tools/Delete Save")]
         private static void DeleteSave()
         {
@@ -84,6 +87,7 @@ namespace Core.Features.PlayerProgressFeature
                 SLog.Log("No save file found to delete.");
             } 
         }
+#endif
 
         [JsonObject]
         [Serializable]

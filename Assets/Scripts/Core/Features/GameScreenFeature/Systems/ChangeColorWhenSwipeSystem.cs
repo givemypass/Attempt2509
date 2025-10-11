@@ -71,6 +71,20 @@ namespace Core.Features.GameScreenFeature.Systems
                 }
                 Owner.Remove<VisualInProgressComponent>();  
             });
+            foreach (var grid in _monoComponent.Grids)
+            {
+                if(!grid.gameObject.activeSelf)
+                {
+                    continue; 
+                }
+                foreach (var sign in grid.ColorSigns)
+                {
+                    if (sign.color == color)
+                    {
+                        sign.transform.DOPunchScale(sign.transform.localScale * 1.1f, 0.25f).SetEase(Ease.OutElastic).SetLink(sign.gameObject);
+                    }
+                }
+            }
         }
     }
 }
