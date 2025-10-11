@@ -30,7 +30,7 @@ namespace Core.Features.LevelStatesFeature.States
 
         public SpawnTilesState(StateMachine stateMachine) : base(stateMachine)
         {
-            _filter = stateMachine.World.Filter.With<GameScreenUiActorComponent>().With<GridMonoProviderComponent>().Build();
+            _filter = stateMachine.World.Filter.With<LevelScreenUiActorComponent>().With<GridMonoProviderComponent>().Build();
         }
 
         public override void Enter(Entity entity)

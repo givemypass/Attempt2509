@@ -4,7 +4,7 @@ using SelfishFramework.Src.Unity.Features.UI.Actors;
 
 namespace Core.Features.GameScreenFeature
 {
-    public partial class GameScreenUiActor : UIActor
+    public partial class LevelScreenUiActor : UIActor
     {
         protected override void SetSystems()
         {

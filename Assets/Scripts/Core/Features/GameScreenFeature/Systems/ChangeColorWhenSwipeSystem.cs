@@ -21,7 +21,7 @@ namespace Core.Features.GameScreenFeature.Systems
     {
         [Inject] private IColorPaletteService _colorPaletteService;
         
-        private GameScreenMonoComponent _monoComponent;
+        private LevelScreenMonoComponent _monoComponent;
         private Single<StepsComponent> _stepsSingleComponent;
 
         public override void InitSystem()

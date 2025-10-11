@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Core.CommonComponents;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
@@ -20,6 +21,7 @@ using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity.Features.UI.Actors;
 using SelfishFramework.Src.Unity.Features.UI.Systems;
 using SelfishFramework.Src.Unity.Generated;
+using SelfishFramework.Src.Unity.Identifiers;
 using Systems;
 using UnityEngine;
 using UnityEngine.Tilemaps;
@@ -65,8 +67,15 @@ namespace Core.Features.GameStatesFeature.Systems.States
             
             InitLevelActor(level.Steps);
 
-            var screen = await _uiService.ShowUIAsync(UIIdentifierMap.GameScreen_UIIdentifier);
-            screen.TryGetComponent(out GameScreenMonoComponent monoComponent);
+            await UniTask.WhenAll(ShowHandlersScreen(), ShowLevelScreen(level, levelId));
+            EndState();
+        }
+
+        private async UniTask ShowLevelScreen(LevelConfigModel level, int levelId)
+        {
+            var screen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelScreen_UIIdentifier, additionalCanvas: AdditionalCanvasIdentifierMap.GameCanvas);
+
+            screen.TryGetComponent(out LevelScreenMonoComponent monoComponent);
             Array.Sort(monoComponent.Grids, (a, b) => a.MaxTiles.CompareTo(b.MaxTiles));
             foreach (var grid in monoComponent.Grids)
             {
@@ -94,7 +103,16 @@ namespace Core.Features.GameStatesFeature.Systems.States
             });
 
             monoComponent.LevelText.text = $"{levelId + 1}";
-            monoComponent.ResetButton.onClick.AddListener(() =>
+            
+            SpawnTiles(screen, level);
+            var minSteps = MinStepCalculatorUtils.CalculateMinSteps(level);
+            SLog.Log($"Min moves to complete level: {minSteps.steps} : {MinStepCalculatorUtils.Encode(minSteps.path)}");
+        }
+
+        private async UniTask ShowHandlersScreen()
+        {
+            var handlersScreen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelHandlersScreen_UIIdentifier);
+            handlersScreen.GetComponent<LevelHandlersScreenMonoComponent>().ResetButton.onClick.AddListener(() =>
             {
                 _uiService.CloseAllUI();
                 World.Command(new ForceGameStateTransitionGlobalCommand
@@ -102,10 +120,6 @@ namespace Core.Features.GameStatesFeature.Systems.States
                     GameState = GameStateIdentifierMap.BootstrapLevelState,
                 });
             });
-            
-            SpawnTiles(screen, level);
-            var minSteps = MinStepCalculatorUtils.CalculateMinSteps(level);
-            SLog.Log($"Min moves to complete level: {minSteps.steps} : {MinStepCalculatorUtils.Encode(minSteps.path)}");
         }
 
         private void SpawnTiles(UIActor screen, LevelConfigModel level)

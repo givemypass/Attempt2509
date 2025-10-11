@@ -17,7 +17,7 @@ namespace Core.Features.LevelStatesFeature.States
 
         public ChangeColorState(StateMachine stateMachine) : base(stateMachine)
         {
-            _filter = stateMachine.World.Filter.With<GameScreenUiActorComponent>().Build();
+            _filter = stateMachine.World.Filter.With<LevelScreenUiActorComponent>().Build();
         }
 
         public override void Enter(Entity entity)

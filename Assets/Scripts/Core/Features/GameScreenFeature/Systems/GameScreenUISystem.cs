@@ -11,7 +11,7 @@ namespace Core.Features.GameScreenFeature.Systems
     {
         private Single<StepsComponent> _stepsSingleComponent;
         
-        private GameScreenMonoComponent _monoComponent;
+        private LevelScreenMonoComponent _monoComponent;
         
         private int _prevFrameScore;
         private int _prevFrameSteps;

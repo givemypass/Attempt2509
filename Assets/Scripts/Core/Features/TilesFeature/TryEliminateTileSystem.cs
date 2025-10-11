@@ -19,7 +19,7 @@ namespace Core.Features.TilesFeature
             _filter = World.Filter.With<TileCommonTagComponent>().With<TryEliminateComponent>().Build();
             
             _screenFilter = World.Filter
-                .With<GameScreenUiActorComponent>()
+                .With<LevelScreenUiActorComponent>()
                 .With<GridMonoProviderComponent>()
                 .With<ColorComponent>()
                 .Build();

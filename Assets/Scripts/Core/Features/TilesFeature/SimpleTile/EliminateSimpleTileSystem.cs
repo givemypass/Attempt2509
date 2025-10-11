@@ -24,7 +24,7 @@ namespace Core.Features.TilesFeature.SimpleTile
         public override void InitSystem()
         {
             _filter = World.Filter
-                .With<GameScreenUiActorComponent>()
+                .With<LevelScreenUiActorComponent>()
                 .With<GridMonoProviderComponent>()
                 .With<ColorComponent>()
                 .Build();

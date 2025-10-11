@@ -17,6 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 5119c9cf3e932a8408ee47ce067d980a
   m_SerializeEntries:
+  - m_GUID: 1d4c58df748c89640898c7bc22bcd368
+    m_Address: Assets/BluePrints/UIBluePrints/LevelHandlersScreen_UIBluePrint.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIBluePrint
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 6a816b5bc6e423f4fa9050055f584691
     m_Address: Assets/BluePrints/UIBluePrints/GameScreen_UIBluePrint.asset
     m_ReadOnly: 0
