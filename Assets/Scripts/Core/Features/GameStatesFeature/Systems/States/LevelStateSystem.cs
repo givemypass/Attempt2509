@@ -25,6 +25,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         protected override void OnExitState()
         {
+            
         }
 
         public void ReactGlobal(StepsRanOutCommand command)

@@ -1,11 +1,14 @@
 ﻿using System.Collections.Generic;
 using SelfishFramework.Src.Core;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Core.Features.GameScreenFeature.Mono
 {
     public class GridMonoComponent : MonoBehaviour
     {
+        public Image[] ColorSigns;
+        
         [SerializeField] private Vector2 _offset;
         [SerializeField] private Vector2 _size;
         [SerializeField] private Vector2Int _gridSize;

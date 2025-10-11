@@ -15,6 +15,7 @@ using Cysharp.Threading.Tasks;
 using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
+using SelfishFramework.Src.Features.GameFSM.Commands;
 using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity.Features.UI.Actors;
 using SelfishFramework.Src.Unity.Features.UI.Systems;
@@ -78,6 +79,10 @@ namespace Core.Features.GameStatesFeature.Systems.States
                 {
                     Grid = grid,
                 });
+                grid.ColorSigns[0].color = _colorPaletteService.GetColor(Vector2Int.right);
+                grid.ColorSigns[1].color = _colorPaletteService.GetColor(Vector2Int.down);
+                grid.ColorSigns[2].color = _colorPaletteService.GetColor(Vector2Int.left);
+                grid.ColorSigns[3].color = _colorPaletteService.GetColor(Vector2Int.up);
                 break;
             }
             
@@ -87,10 +92,16 @@ namespace Core.Features.GameStatesFeature.Systems.States
             {
                 Color = color,
             });
-            monoComponent.ColorSigns[0].color = _colorPaletteService.GetColor(Vector2Int.right);
-            monoComponent.ColorSigns[1].color = _colorPaletteService.GetColor(Vector2Int.down);
-            monoComponent.ColorSigns[2].color = _colorPaletteService.GetColor(Vector2Int.left);
-            monoComponent.ColorSigns[3].color = _colorPaletteService.GetColor(Vector2Int.up);
+
+            monoComponent.LevelText.text = $"{levelId + 1}";
+            monoComponent.ResetButton.onClick.AddListener(() =>
+            {
+                _uiService.CloseAllUI();
+                World.Command(new ForceGameStateTransitionGlobalCommand
+                {
+                    GameState = GameStateIdentifierMap.BootstrapLevelState,
+                });
+            });
             
             SpawnTiles(screen, level);
             var minSteps = MinStepCalculatorUtils.CalculateMinSteps(level);

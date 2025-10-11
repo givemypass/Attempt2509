@@ -8,8 +8,9 @@ namespace Core.Features.GameScreenFeature.Mono
     {
         public Image BackgroundImage; 
         public Image TransitionImage;
-        public Image[] ColorSigns;
         public TextMeshProUGUI StepsText;
+        public TextMeshProUGUI LevelText;
+        public Button ResetButton;
         
         public GridMonoComponent[] Grids;
     }

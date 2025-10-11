@@ -8,7 +8,7 @@ using SelfishFramework.Src.Core.Systems;
 using SelfishFramework.Src.Features.Features.Serialization;
 using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity.CommonCommands;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 namespace Core.Features.PlayerProgressFeature
@@ -69,7 +69,22 @@ namespace Core.Features.PlayerProgressFeature
         {
             return Path.Combine(Application.persistentDataPath, "save.json");
         }
-        
+
+        [MenuItem("Tools/Delete Save")]
+        private static void DeleteSave()
+        {
+            var path = SavePath();
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                SLog.Log("Save file deleted.");
+            }
+            else
+            {
+                SLog.Log("No save file found to delete.");
+            } 
+        }
+
         [JsonObject]
         [Serializable]
         private struct SaveModel
@@ -77,6 +92,5 @@ namespace Core.Features.PlayerProgressFeature
             [JsonProperty("LevelIndex")]
             public int LevelIndex;
         }
-
     }
 }
