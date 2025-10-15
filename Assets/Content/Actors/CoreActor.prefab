@@ -57,7 +57,7 @@ MonoBehaviour:
     - ActionName: Arrows
       Identifier: {fileID: 11400000, guid: 65a85422114fa984da7d237deefe87ea, type: 2}
   SwipeDetectionComponent:
-    MinSwipeDistance: 0.1
+    MinSwipeDistance: 0.3
     Detecting: 0
     StartPosition: {x: 0, y: 0}
     Position: {x: 0, y: 0}
