@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Core.CommonComponents;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
+using Core.Features.HintsFeature;
 using Core.Features.LevelsFeature.Models;
 using Core.Features.LevelsFeature.Services;
 using Core.Features.PlayerProgressFeature;
@@ -21,10 +20,8 @@ using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity.Features.UI.Actors;
 using SelfishFramework.Src.Unity.Features.UI.Systems;
 using SelfishFramework.Src.Unity.Generated;
-using SelfishFramework.Src.Unity.Identifiers;
 using Systems;
 using UnityEngine;
-using UnityEngine.Tilemaps;
 using Object = UnityEngine.Object;
 
 namespace Core.Features.GameStatesFeature.Systems.States
@@ -40,6 +37,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
         [Inject] private GlobalConfigProvider _globalConfigProvider;
         [Inject] private ILevelsService _levelsService;
         [Inject] private ITileFactoryService _tileFactoryService;
+        [Inject] private MinStepsCalculator _minStepsCalculator;
         
         private Single<PlayerProgressComponent> _playerProgressSingle;
 
@@ -105,20 +103,26 @@ namespace Core.Features.GameStatesFeature.Systems.States
             monoComponent.LevelText.text = $"{levelId + 1}";
             
             await SpawnTiles(screen, level);
-            var minSteps = MinStepCalculatorUtils.CalculateMinSteps(level);
-            SLog.Log($"Min moves to complete level: {minSteps.steps} : {MinStepCalculatorUtils.Encode(minSteps.path)}");
+            var state = MinStepCalculatorUtils.GetState(level);
+            var minStepsResult = _minStepsCalculator.MinSteps(state);
+            SLog.Log($"Min moves to complete level: {minStepsResult.steps} : {MinStepCalculatorUtils.Encode(minStepsResult.path)}");
         }
 
         private async UniTask ShowHandlersScreen()
         {
             var handlersScreen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelHandlersScreen_UIIdentifier);
-            handlersScreen.GetComponent<LevelHandlersScreenMonoComponent>().ResetButton.onClick.AddListener(() =>
+            var monoComponent = handlersScreen.GetComponent<LevelHandlersScreenMonoComponent>();
+            monoComponent.ResetButton.onClick.AddListener(() =>
             {
                 _uiService.CloseAllUI();
                 World.Command(new ForceGameStateTransitionGlobalCommand
                 {
                     GameState = GameStateIdentifierMap.BootstrapLevelState,
                 });
+            });
+            monoComponent.HintButton.onClick.AddListener(() =>
+            {
+                World.Command(new ShowHintCommand());
             });
         }
 

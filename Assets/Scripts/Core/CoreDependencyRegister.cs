@@ -36,6 +36,9 @@ namespace Core
             Container.Register<ILevelsService>(new LevelsService(levelsConfig));
             Container.Register(new TileModelsService());
             Container.Register(new TileModelsRandomService());
+            var minStepsCalculator = new MinStepsCalculator();
+            minStepsCalculator.InitializePools(16);
+            Container.Register(minStepsCalculator);
         }
     }
 }

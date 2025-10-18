@@ -61,17 +61,17 @@ namespace Editor
                     }
                 }
 
-                var data = MinStepCalculatorUtils.CalculateMinSteps(level);
-                level.Steps = data.steps;
-                var json = JsonConvert.SerializeObject(level, Formatting.Indented);
-                var fileName = new StringBuilder("level");
-                foreach (var tileConfig in TileConfigs)
-                {
-                    var args = tileConfig.Split("__");
-                    fileName.Append("__").Append(args[0]).Append("_").Append(args[1]); 
-                }
-
-                SaveToResources(json, fileName.ToString());
+                // var data = MinStepCalculatorUtils.GetState(level);
+                // level.Steps = data.steps;
+                // var json = JsonConvert.SerializeObject(level, Formatting.Indented);
+                // var fileName = new StringBuilder("level");
+                // foreach (var tileConfig in TileConfigs)
+                // {
+                //     var args = tileConfig.Split("__");
+                //     fileName.Append("__").Append(args[0]).Append("_").Append(args[1]); 
+                // }
+                //
+                // SaveToResources(json, fileName.ToString());
             }
 
             private static void SaveToResources(string data, string fileName)
