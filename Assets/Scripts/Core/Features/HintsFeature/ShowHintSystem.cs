@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Core.Features.GameScreenFeature.Components;
+using Core.Features.GameScreenFeature.Mono;
 using Core.Features.MinStepsCalculationFeature;
 using Core.Features.TilesFeature;
 using Core.Features.TilesFeature.Models;
@@ -10,6 +11,7 @@ using SelfishFramework.Src.Core.CommandBus;
 using SelfishFramework.Src.Core.Filter;
 using SelfishFramework.Src.Core.Systems;
 using SelfishFramework.Src.SLogs;
+using SelfishFramework.Src.Unity;
 
 namespace Core.Features.HintsFeature
 {
@@ -50,6 +52,18 @@ namespace Core.Features.HintsFeature
             var nextMove = path[0];
             var direction = _colorPaletteService.GetDirection(nextMove);
             SLog.Log($"HINT: {direction}");
+            
+            var monoComponent = Owner.AsActor().GetComponent<LevelScreenMonoComponent>();
+            foreach (var grid in monoComponent.Grids)
+            {
+                if (!grid.gameObject.activeSelf)
+                {
+                    continue; 
+                }
+
+                var sign = grid.GetSignImage(direction);
+                sign.PlayHintState();
+            }
         }
     }
 }

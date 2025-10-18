@@ -111,7 +111,8 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         private void SetColorSign(GridMonoComponent grid, Vector2Int dir)
         {
-            grid.GetSignImage(dir).color = _colorPaletteService.GetColor(dir);
+            var color = _colorPaletteService.GetColor(dir);
+            grid.GetSignImage(dir).SetColor(color);
         }
 
         private async UniTask ShowHandlersScreen()

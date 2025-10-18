@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using SelfishFramework.Src.Core;
 using UnityEngine;
-using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Core.Features.GameScreenFeature.Mono
 {
     public class GridMonoComponent : MonoBehaviour
     {
-        public Image ColorUp;
-        public Image ColorRight;
-        public Image ColorDown;
-        public Image ColorLeft;
+        public ColorSignMonoComponent ColorUp;
+        public ColorSignMonoComponent ColorRight;
+        public ColorSignMonoComponent ColorDown;
+        public ColorSignMonoComponent ColorLeft;
         
         [SerializeField] private Vector2 _offset;
         [SerializeField] private Vector2 _size;
@@ -20,7 +19,7 @@ namespace Core.Features.GameScreenFeature.Mono
 
         public readonly Dictionary<(int, int), Entity> Tiles = new();
 
-        public Image GetSignImage(Vector2Int dir)
+        public ColorSignMonoComponent GetSignImage(Vector2Int dir)
         {
             return dir switch
             {
@@ -32,7 +31,7 @@ namespace Core.Features.GameScreenFeature.Mono
             };
         }
         
-        public IEnumerable<Image> ColorSigns()
+        public IEnumerable<ColorSignMonoComponent> ColorSigns()
         {
             yield return ColorUp;
             yield return ColorRight;

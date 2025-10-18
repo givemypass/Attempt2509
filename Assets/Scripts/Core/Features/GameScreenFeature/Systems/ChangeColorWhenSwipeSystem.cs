@@ -78,8 +78,13 @@ namespace Core.Features.GameScreenFeature.Systems
                     continue; 
                 }
 
-                var sign = grid.GetSignImage(command.Direction);
-                sign.transform.DOPunchScale(sign.transform.localScale * 1.1f, 0.25f).SetEase(Ease.OutElastic).SetLink(sign.gameObject);
+                foreach (var sign in grid.ColorSigns())
+                {
+                    sign.RewindState();
+                }
+
+                var selectedSign = grid.GetSignImage(command.Direction);
+                selectedSign.PlaySelectedState();
             }
         }
     }
