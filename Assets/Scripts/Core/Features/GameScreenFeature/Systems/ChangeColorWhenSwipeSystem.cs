@@ -21,7 +21,7 @@ namespace Core.Features.GameScreenFeature.Systems
     {
         [Inject] private IColorPaletteService _colorPaletteService;
         
-        private GameScreenMonoComponent _monoComponent;
+        private LevelScreenMonoComponent _monoComponent;
         private Single<StepsComponent> _stepsSingleComponent;
 
         public override void InitSystem()
@@ -36,8 +36,6 @@ namespace Core.Features.GameScreenFeature.Systems
             {
                 return;
             }
-            ref var stepsComponent = ref _stepsSingleComponent.Get();
-            stepsComponent.Steps -= 1;
             
             var color = _colorPaletteService.GetColor(command.Direction);
             var currentColor = Owner.Get<ColorComponent>().Color;
@@ -45,6 +43,9 @@ namespace Core.Features.GameScreenFeature.Systems
             {
                 return;
             }
+            
+            ref var stepsComponent = ref _stepsSingleComponent.Get();
+            stepsComponent.Steps -= 1;           
             
             Owner.Remove<WaitForChangingColorComponent>();
             Owner.Set(new VisualInProgressComponent());
@@ -70,6 +71,21 @@ namespace Core.Features.GameScreenFeature.Systems
                 }
                 Owner.Remove<VisualInProgressComponent>();  
             });
+            foreach (var grid in _monoComponent.Grids)
+            {
+                if(!grid.gameObject.activeSelf)
+                {
+                    continue; 
+                }
+
+                foreach (var sign in grid.ColorSigns())
+                {
+                    sign.RewindState();
+                }
+
+                var selectedSign = grid.GetSignImage(command.Direction);
+                selectedSign.PlaySelectedState();
+            }
         }
     }
 }

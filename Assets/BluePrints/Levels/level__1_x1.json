@@ -1,0 +1,12 @@
+{
+  "color_id": 2,
+  "steps": 1,
+  "tiles": [
+    {
+      "tile": {
+        "type": "SimpleTileModel",
+        "color_id": 3
+      }
+    }
+  ]
+}

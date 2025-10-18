@@ -26,9 +26,6 @@ namespace Core.Features.GameStatesFeature.Systems
                 case GameStateIdentifierMap.BootstrapLevelState:
                     ChangeGameState(GameStateIdentifierMap.LevelState);
                     break;
-                case GameStateIdentifierMap.LevelState:
-                    ChangeGameState(GameStateIdentifierMap.FinishLevelState);
-                    break;
             }
         }
     }

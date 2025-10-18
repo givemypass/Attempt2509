@@ -16,10 +16,10 @@ namespace Core.Features.TilesFeature
 
         public override void InitSystem()
         {
-            _filter = World.Filter.With<TileCommonTagComponent>().With<TryEliminateComponent>().Build();
+            _filter = World.Filter.With<TileCommonComponent>().With<TryEliminateComponent>().Build();
             
             _screenFilter = World.Filter
-                .With<GameScreenUiActorComponent>()
+                .With<LevelScreenUiActorComponent>()
                 .With<GridMonoProviderComponent>()
                 .With<ColorComponent>()
                 .Build();

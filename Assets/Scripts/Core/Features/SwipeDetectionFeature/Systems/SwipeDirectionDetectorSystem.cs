@@ -44,17 +44,23 @@ namespace Core.Features.SwipeDetection.Systems
             component.Detecting = false;
             var minSwipeDistance = component.MinSwipeDistance;
             var dif = component.Position - component.StartPosition;
+            var dpi = Screen.dpi;
+            if(dpi == 0) dpi = 96; // default dpi
             
             Vector2Int direction;
-            if (math.abs(dif.x) / Screen.width > minSwipeDistance)
+            if (math.abs(dif.x) / dpi > minSwipeDistance || math.abs(dif.y) / dpi > minSwipeDistance)
             {
-                direction = new Vector2Int(dif.x > 0 ? 1 : -1, 0);
+                var normalized = dif.normalized;
+                if (math.abs(normalized.x) > math.abs(normalized.y))
+                {
+                    direction = normalized.x > 0 ? new Vector2Int(1, 0) : new Vector2Int(-1, 0);
+                }
+                else
+                {
+                    direction = normalized.y > 0 ? new Vector2Int(0, 1) : new Vector2Int(0, -1);
+                }
             }
-            else if (math.abs(dif.y) / Screen.height > minSwipeDistance)
-            {
-                direction = new Vector2Int(0, dif.y > 0 ? 1 : -1);
-            }
-            else 
+            else
             {
                 return;
             }

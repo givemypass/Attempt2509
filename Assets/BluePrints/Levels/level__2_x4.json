@@ -1,0 +1,42 @@
+{
+  "color_id": 3,
+  "steps": 6,
+  "tiles": [
+    {
+      "tile": {
+        "type": "ComplexTileModel",
+        "sub_tile": {
+          "type": "ComplexTileModel",
+          "sub_tile": {
+            "type": "ComplexTileModel",
+            "sub_tile": {
+              "type": "SimpleTileModel",
+              "color_id": 2
+            },
+            "color_id": 0
+          },
+          "color_id": 1
+        },
+        "color_id": 2
+      }
+    },
+    {
+      "tile": {
+        "type": "ComplexTileModel",
+        "sub_tile": {
+          "type": "ComplexTileModel",
+          "sub_tile": {
+            "type": "ComplexTileModel",
+            "sub_tile": {
+              "type": "SimpleTileModel",
+              "color_id": 1
+            },
+            "color_id": 0
+          },
+          "color_id": 1
+        },
+        "color_id": 0
+      }
+    }
+  ]
+}

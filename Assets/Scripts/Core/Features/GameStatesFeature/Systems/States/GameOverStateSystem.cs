@@ -1,6 +1,7 @@
 ﻿using Core.Features.GameOverScreenFeature.Mono;
 using Cysharp.Threading.Tasks;
 using SelfishFramework.Src.Core.Attributes;
+using SelfishFramework.Src.Features.GameFSM.Commands;
 using SelfishFramework.Src.Unity.Features.UI.Systems;
 using SelfishFramework.Src.Unity.Generated;
 using Systems;
@@ -28,7 +29,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
             var actor = await _uiService.ShowUIAsync(UIIdentifierMap.GameOverScreen_UIIdentifier);    
             actor.GetComponent<GameOverMonoComponent>().Reset.onClick.AddListener(() =>
             {
-                World.Command(new SelfishFramework.Src.Features.GameFSM.Commands.ForceGameStateTransitionGlobalCommand
+                World.Command(new ForceGameStateTransitionGlobalCommand
                 {
                     GameState = GameStateIdentifierMap.BootstrapLevelState,
                 });
@@ -37,8 +38,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         protected override void OnExitState()
         {
-            _uiService.CloseUI(UIIdentifierMap.GameOverScreen_UIIdentifier);
-            _uiService.CloseUI(UIIdentifierMap.GameScreen_UIIdentifier);
+            _uiService.CloseAllUI();
         }
     }
 }

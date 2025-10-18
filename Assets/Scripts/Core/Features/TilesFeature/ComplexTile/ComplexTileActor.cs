@@ -5,6 +5,6 @@ namespace Core.Features.TilesFeature.TileWithInner
 {
     public partial class ComplexTileActor : Actor
     {
-        public TileCommonTagComponent TileCommonTagComponent;
+        public TileCommonComponent TileCommonComponent;
     }
 }

@@ -22,8 +22,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2f13b40375a715647918f0e520ae417d
+    m_Address: Assets/Content/Actors/UI/LevelCompletedScreen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: b5d20fdc25a5b164191dc996cf05656b
     m_Address: Assets/Content/Actors/UI/GameOverScreen.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3a01ab71431e8f4683c1ef04d148df8
+    m_Address: Assets/Content/Actors/UI/LevelHandlersScreen.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
