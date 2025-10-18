@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Core.CommonComponents;
+using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.TilesFeature.Models;
 using Core.Features.TilesFeature.TileWithInner;
@@ -42,12 +43,19 @@ namespace Core.Features.TilesFeature.Services
         {
             var factory = _tileFactories[model.GetType().Name];
             var color = _colorPaletteService.RandomColorFromCurrentPaletteExcept(exceptColor);
-            return factory(model, position, parent, color);
+            var tileActor = factory(model, position, parent, color);
+            ref var tileCommonComponent = ref tileActor.Entity.Get<TileCommonComponent>();
+            tileCommonComponent.Model = model;
+            return tileActor;
         }
+        
         public Actor GetTile(ITileModel model, Vector2 position, Transform parent)
         {
             var factory = _tileFactories[model.GetType().Name];
-            return factory(model, position, parent, null);
+            var tileActor = factory(model, position, parent, null);
+            ref var tileCommonComponent = ref tileActor.Entity.Get<TileCommonComponent>();
+            tileCommonComponent.Model = model;
+            return tileActor;
         }
         
         private Actor CreateSimple(ITileModel model, Vector2 position, Transform parent, Color? overrideColor)

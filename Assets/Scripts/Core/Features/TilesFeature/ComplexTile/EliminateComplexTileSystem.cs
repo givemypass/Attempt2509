@@ -1,10 +1,9 @@
 ﻿using Core.CommonComponents;
 using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Components;
-using Core.Features.GameScreenFeature.Mono;
 using Core.Features.LevelStatesFeature.Component;
+using Core.Features.TilesFeature.TileWithInner;
 using DG.Tweening;
-using Newtonsoft.Json;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
 using SelfishFramework.Src.Core.Filter;
@@ -15,7 +14,7 @@ using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity;
 using UnityEngine;
 
-namespace Core.Features.TilesFeature.TileWithInner
+namespace Core.Features.TilesFeature.ComplexTile
 {
     [Injectable]
     public sealed partial class EliminateComplexTileSystem : BaseSystem, IUpdatable

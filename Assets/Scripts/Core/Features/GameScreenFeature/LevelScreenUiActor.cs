@@ -1,4 +1,5 @@
 ﻿using Core.Features.GameScreenFeature.Systems;
+using Core.Features.HintsFeature;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Unity.Features.UI.Actors;
 
@@ -10,6 +11,7 @@ namespace Core.Features.GameScreenFeature
         {
             base.SetSystems();
             Entity.AddSystem<ChangeColorWhenSwipeSystem>();
+            Entity.AddSystem<ShowHintSystem>();
             Entity.AddSystem<GameScreenUISystem>();
         }
     }

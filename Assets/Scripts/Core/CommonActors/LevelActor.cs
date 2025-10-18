@@ -1,8 +1,8 @@
 ﻿using Core.Features.LevelStatesFeature;
 using Core.Features.StepsFeature;
 using Core.Features.TilesFeature;
+using Core.Features.TilesFeature.ComplexTile;
 using Core.Features.TilesFeature.SimpleTile;
-using Core.Features.TilesFeature.TileWithInner;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Unity;
 

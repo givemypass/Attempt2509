@@ -17,7 +17,7 @@ namespace Core.Features.LevelStatesFeature.States
         public CheckConditionsState(StateMachine stateMachine) : base(stateMachine)
         {
             _stepsSingleComponent = new Single<StepsComponent>(stateMachine.World);
-            _tilesFilter = stateMachine.World.Filter.With<TileCommonTagComponent>().Build();
+            _tilesFilter = stateMachine.World.Filter.With<TileCommonComponent>().Build();
         }
 
         public override void Enter(Entity entity)

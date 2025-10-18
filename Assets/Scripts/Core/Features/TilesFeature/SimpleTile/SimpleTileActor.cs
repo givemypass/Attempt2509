@@ -5,6 +5,6 @@ namespace Core.Features.GameScreenFeature
 {
     public partial class SimpleTileActor : Actor
     {
-        public TileCommonTagComponent TileCommonTagComponent;
+        public TileCommonComponent TileCommonComponent;
     }
 }

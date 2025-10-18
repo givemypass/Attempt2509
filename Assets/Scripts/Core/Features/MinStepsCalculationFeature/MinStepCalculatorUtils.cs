@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using Core.Features.LevelsFeature.Models;
 using Core.Features.MinStepsCalculationFeature;
@@ -11,12 +12,18 @@ namespace Core
     {
         public static State GetState(LevelConfigModel level)
         {
+            return GetState(level.Tiles.Select(a => a.Tile));
+
+        }
+        
+        public static State GetState(IEnumerable<ITileModel> tiles)
+        {
             var setup = new List<List<int>>();
 
-            foreach (var tile in level.Tiles)
+            foreach (var tile in tiles)
             {
                 var list = new List<int>();
-                GetColor(tile.Tile, list);
+                GetColor(tile, list);
                 setup.Add(list);
             }
 

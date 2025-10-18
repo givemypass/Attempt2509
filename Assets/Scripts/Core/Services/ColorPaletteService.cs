@@ -12,6 +12,7 @@ namespace Core.Services
         Color GetColor(Vector2Int direction);
         Color RandomColorFromCurrentPaletteExcept(Color? except = null, Color? except2 = null, Color? except3 = null);
         Color GetColor(int id);
+        Vector2Int GetDirection(int colorId);
     }
 
     [Injectable]
@@ -44,6 +45,18 @@ namespace Core.Services
                 _ when direction == Vector2Int.left => GetColor(3),
                 _ => throw new ArgumentException("Invalid direction"),
             };
+        }
+
+        public Vector2Int GetDirection(int colorId)
+        {
+            return colorId switch
+            {
+                0 => Vector2Int.up,
+                1 => Vector2Int.right,
+                2 => Vector2Int.down,
+                3 => Vector2Int.left,
+                _ => throw new ArgumentOutOfRangeException(nameof(colorId), "Color ID is out of range."),
+            };     
         }
 
         public Color RandomColorFromCurrentPaletteExcept(Color? except = null, Color? except2 = null, Color? except3 = null)
