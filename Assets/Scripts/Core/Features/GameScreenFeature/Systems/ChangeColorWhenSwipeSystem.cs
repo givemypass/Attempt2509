@@ -77,13 +77,9 @@ namespace Core.Features.GameScreenFeature.Systems
                 {
                     continue; 
                 }
-                foreach (var sign in grid.ColorSigns)
-                {
-                    if (sign.color == color)
-                    {
-                        sign.transform.DOPunchScale(sign.transform.localScale * 1.1f, 0.25f).SetEase(Ease.OutElastic).SetLink(sign.gameObject);
-                    }
-                }
+
+                var sign = grid.GetSignImage(command.Direction);
+                sign.transform.DOPunchScale(sign.transform.localScale * 1.1f, 0.25f).SetEase(Ease.OutElastic).SetLink(sign.gameObject);
             }
         }
     }

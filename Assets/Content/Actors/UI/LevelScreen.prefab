@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 6625809485872207453}
   - component: {fileID: 5067914239625811509}
   m_Layer: 5
-  m_Name: ColorSignRight
+  m_Name: ColorSignLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -162,7 +162,7 @@ GameObject:
   - component: {fileID: 8921805863689238998}
   - component: {fileID: 1466034692094540249}
   m_Layer: 5
-  m_Name: ColorSignUp
+  m_Name: ColorSignDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -472,6 +472,10 @@ MonoBehaviour:
   - {fileID: 1466034692094540249}
   - {fileID: 5067914239625811509}
   - {fileID: 4786084326599900126}
+  ColorUp: {fileID: 4786084326599900126}
+  ColorRight: {fileID: 7811452161198332805}
+  ColorDown: {fileID: 1466034692094540249}
+  ColorLeft: {fileID: 5067914239625811509}
   _offset: {x: 0, y: 0}
   _size: {x: 500, y: 500}
   _gridSize: {x: 2, y: 2}
@@ -487,7 +491,7 @@ GameObject:
   - component: {fileID: 3349548312334790127}
   - component: {fileID: 6754500629288736764}
   m_Layer: 5
-  m_Name: ColorSignDown
+  m_Name: ColorSignUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -773,7 +777,7 @@ GameObject:
   - component: {fileID: 5328762853667275915}
   - component: {fileID: 3677836911236636431}
   m_Layer: 5
-  m_Name: ColorSignLeft
+  m_Name: ColorSignRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -884,7 +888,7 @@ GameObject:
   - component: {fileID: 5284948135443310661}
   - component: {fileID: 4786084326599900126}
   m_Layer: 5
-  m_Name: ColorSignDown
+  m_Name: ColorSignUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1034,7 +1038,7 @@ GameObject:
   - component: {fileID: 2891041863155687889}
   - component: {fileID: 2663326102673656655}
   m_Layer: 5
-  m_Name: ColorSignRight
+  m_Name: ColorSignLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1245,7 +1249,7 @@ GameObject:
   - component: {fileID: 396172332018954408}
   - component: {fileID: 3037922697094566734}
   m_Layer: 5
-  m_Name: ColorSignUp
+  m_Name: ColorSignDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1320,7 +1324,7 @@ GameObject:
   - component: {fileID: 7606073905303769166}
   - component: {fileID: 7811452161198332805}
   m_Layer: 5
-  m_Name: ColorSignLeft
+  m_Name: ColorSignRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1530,7 +1534,7 @@ GameObject:
   - component: {fileID: 4283972085924653004}
   - component: {fileID: 7757464759936475296}
   m_Layer: 5
-  m_Name: ColorSignRight
+  m_Name: ColorSignLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1690,6 +1694,10 @@ MonoBehaviour:
   - {fileID: 3037922697094566734}
   - {fileID: 2663326102673656655}
   - {fileID: 67737680148464773}
+  ColorUp: {fileID: 67737680148464773}
+  ColorRight: {fileID: 3677836911236636431}
+  ColorDown: {fileID: 3037922697094566734}
+  ColorLeft: {fileID: 2663326102673656655}
   _offset: {x: 0, y: 0}
   _size: {x: 731, y: 731}
   _gridSize: {x: 3, y: 3}
@@ -1869,6 +1877,10 @@ MonoBehaviour:
   - {fileID: 6926850529729166441}
   - {fileID: 7757464759936475296}
   - {fileID: 6754500629288736764}
+  ColorUp: {fileID: 6754500629288736764}
+  ColorRight: {fileID: 3329484848130390413}
+  ColorDown: {fileID: 6926850529729166441}
+  ColorLeft: {fileID: 7757464759936475296}
   _offset: {x: 0, y: 0}
   _size: {x: 248, y: 248}
   _gridSize: {x: 1, y: 1}
@@ -1884,7 +1896,7 @@ GameObject:
   - component: {fileID: 2813046830264997553}
   - component: {fileID: 6926850529729166441}
   m_Layer: 5
-  m_Name: ColorSignUp
+  m_Name: ColorSignDown
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1959,7 +1971,7 @@ GameObject:
   - component: {fileID: 5486460589066673913}
   - component: {fileID: 3329484848130390413}
   m_Layer: 5
-  m_Name: ColorSignLeft
+  m_Name: ColorSignRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2034,7 +2046,7 @@ GameObject:
   - component: {fileID: 3263502070147596461}
   - component: {fileID: 67737680148464773}
   m_Layer: 5
-  m_Name: ColorSignDown
+  m_Name: ColorSignUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

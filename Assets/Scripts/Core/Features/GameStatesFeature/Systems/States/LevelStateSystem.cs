@@ -44,7 +44,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
                         continue; 
                     }
 
-                    foreach (var sign in grid.ColorSigns)
+                    foreach (var sign in grid.ColorSigns())
                     {
                         DOTween.Kill(sign.gameObject);
                         sign.transform.DOScale(0,0.3f).SetEase(Ease.InBack).SetLink(sign.gameObject);

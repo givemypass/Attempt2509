@@ -1,19 +1,44 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using SelfishFramework.Src.Core;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace Core.Features.GameScreenFeature.Mono
 {
     public class GridMonoComponent : MonoBehaviour
     {
-        public Image[] ColorSigns;
+        public Image ColorUp;
+        public Image ColorRight;
+        public Image ColorDown;
+        public Image ColorLeft;
         
         [SerializeField] private Vector2 _offset;
         [SerializeField] private Vector2 _size;
         [SerializeField] private Vector2Int _gridSize;
 
         public readonly Dictionary<(int, int), Entity> Tiles = new();
+
+        public Image GetSignImage(Vector2Int dir)
+        {
+            return dir switch
+            {
+                _ when dir == Vector2Int.up => ColorUp,
+                _ when dir == Vector2Int.right => ColorRight,
+                _ when dir == Vector2Int.down => ColorDown,
+                _ when dir == Vector2Int.left => ColorLeft,
+                _ => throw new Exception("Invalid direction"),
+            };
+        }
+        
+        public IEnumerable<Image> ColorSigns()
+        {
+            yield return ColorUp;
+            yield return ColorRight;
+            yield return ColorDown;
+            yield return ColorLeft;
+        }
         
         public int MaxTiles => _gridSize.x * _gridSize.y;
         

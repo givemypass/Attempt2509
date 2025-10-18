@@ -5,6 +5,7 @@ using Core.Features.GameScreenFeature.Mono;
 using Core.Features.HintsFeature;
 using Core.Features.LevelsFeature.Models;
 using Core.Features.LevelsFeature.Services;
+using Core.Features.MinStepsCalculationFeature;
 using Core.Features.PlayerProgressFeature;
 using Core.Features.StepsFeature;
 using Core.Features.TilesFeature;
@@ -86,10 +87,10 @@ namespace Core.Features.GameStatesFeature.Systems.States
                 {
                     Grid = grid,
                 });
-                grid.ColorSigns[0].color = _colorPaletteService.GetColor(Vector2Int.right);
-                grid.ColorSigns[1].color = _colorPaletteService.GetColor(Vector2Int.down);
-                grid.ColorSigns[2].color = _colorPaletteService.GetColor(Vector2Int.left);
-                grid.ColorSigns[3].color = _colorPaletteService.GetColor(Vector2Int.up);
+                SetColorSign(grid, Vector2Int.right);
+                SetColorSign(grid, Vector2Int.left);
+                SetColorSign(grid, Vector2Int.up);
+                SetColorSign(grid, Vector2Int.down);
                 break;
             }
             
@@ -106,6 +107,11 @@ namespace Core.Features.GameStatesFeature.Systems.States
             var state = MinStepCalculatorUtils.GetState(level);
             var minStepsResult = _minStepsCalculator.MinSteps(state);
             SLog.Log($"Min moves to complete level: {minStepsResult.steps} : {MinStepCalculatorUtils.Encode(minStepsResult.path)}");
+        }
+
+        private void SetColorSign(GridMonoComponent grid, Vector2Int dir)
+        {
+            grid.GetSignImage(dir).color = _colorPaletteService.GetColor(dir);
         }
 
         private async UniTask ShowHandlersScreen()

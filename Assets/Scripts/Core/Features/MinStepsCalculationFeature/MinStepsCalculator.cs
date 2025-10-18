@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Core
+namespace Core.Features.MinStepsCalculationFeature
 {
     public class Attempt
     {
@@ -144,7 +144,6 @@ namespace Core
                 result.Data.Add(tile);
             }
 
-            // result.Sort(CompareSequences);
             return result;
         }
         

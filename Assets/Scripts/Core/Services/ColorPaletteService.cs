@@ -36,15 +36,12 @@ namespace Core.Services
         
         public Color GetColor(Vector2Int direction)
         {
-            if (_currentPalette == null)
-                GeneratePalette();
-        
             return direction switch
             {
-                _ when direction == Vector2Int.up => _currentPalette![0],
-                _ when direction == Vector2Int.right => _currentPalette![1],
-                _ when direction == Vector2Int.down => _currentPalette![2],
-                _ when direction == Vector2Int.left => _currentPalette![3],
+                _ when direction == Vector2Int.up => GetColor(0),
+                _ when direction == Vector2Int.right => GetColor(1),
+                _ when direction == Vector2Int.down => GetColor(2),
+                _ when direction == Vector2Int.left => GetColor(3),
                 _ => throw new ArgumentException("Invalid direction"),
             };
         }
