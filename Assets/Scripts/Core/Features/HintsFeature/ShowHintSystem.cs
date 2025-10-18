@@ -51,7 +51,6 @@ namespace Core.Features.HintsFeature
 
             var nextMove = path[0];
             var direction = _colorPaletteService.GetDirection(nextMove);
-            SLog.Log($"HINT: {direction}");
             
             var monoComponent = Owner.AsActor().GetComponent<LevelScreenMonoComponent>();
             foreach (var grid in monoComponent.Grids)

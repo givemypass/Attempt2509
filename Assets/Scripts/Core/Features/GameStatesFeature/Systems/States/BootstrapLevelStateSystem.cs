@@ -5,7 +5,6 @@ using Core.Features.GameScreenFeature.Mono;
 using Core.Features.HintsFeature;
 using Core.Features.LevelsFeature.Models;
 using Core.Features.LevelsFeature.Services;
-using Core.Features.MinStepsCalculationFeature;
 using Core.Features.PlayerProgressFeature;
 using Core.Features.StepsFeature;
 using Core.Features.TilesFeature;
@@ -17,7 +16,6 @@ using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
 using SelfishFramework.Src.Features.GameFSM.Commands;
-using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity.Features.UI.Actors;
 using SelfishFramework.Src.Unity.Features.UI.Systems;
 using SelfishFramework.Src.Unity.Generated;
@@ -38,7 +36,6 @@ namespace Core.Features.GameStatesFeature.Systems.States
         [Inject] private GlobalConfigProvider _globalConfigProvider;
         [Inject] private ILevelsService _levelsService;
         [Inject] private ITileFactoryService _tileFactoryService;
-        [Inject] private MinStepsCalculator _minStepsCalculator;
         
         private Single<PlayerProgressComponent> _playerProgressSingle;
 
@@ -104,9 +101,6 @@ namespace Core.Features.GameStatesFeature.Systems.States
             monoComponent.LevelText.text = $"{levelId + 1}";
             
             await SpawnTiles(screen, level);
-            var state = MinStepCalculatorUtils.GetState(level);
-            var minStepsResult = _minStepsCalculator.MinSteps(state);
-            SLog.Log($"Min moves to complete level: {minStepsResult.steps} : {MinStepCalculatorUtils.Encode(minStepsResult.path)}");
         }
 
         private void SetColorSign(GridMonoComponent grid, Vector2Int dir)
