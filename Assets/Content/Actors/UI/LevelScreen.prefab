@@ -317,10 +317,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6dcd6205ab48b8bf71e54e78880434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ColorUp: {fileID: 776627280680314904}
-  ColorRight: {fileID: 8891552282258652329}
-  ColorDown: {fileID: 5330870489799345894}
-  ColorLeft: {fileID: 4998436064529745241}
+  _colorUp: {fileID: 776627280680314904}
+  _colorRight: {fileID: 8891552282258652329}
+  _colorDown: {fileID: 5330870489799345894}
+  _colorLeft: {fileID: 4998436064529745241}
   _offset: {x: 0, y: 0}
   _size: {x: 500, y: 500}
   _gridSize: {x: 2, y: 2}
@@ -1009,10 +1009,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6dcd6205ab48b8bf71e54e78880434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ColorUp: {fileID: 8865854912476572601}
-  ColorRight: {fileID: 5867620787371568206}
-  ColorDown: {fileID: 3467445685674009198}
-  ColorLeft: {fileID: 7551161088096080824}
+  _colorUp: {fileID: 8865854912476572601}
+  _colorRight: {fileID: 5867620787371568206}
+  _colorDown: {fileID: 3467445685674009198}
+  _colorLeft: {fileID: 7551161088096080824}
   _offset: {x: 0, y: 0}
   _size: {x: 731, y: 731}
   _gridSize: {x: 3, y: 3}
@@ -1187,10 +1187,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd6dcd6205ab48b8bf71e54e78880434, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ColorUp: {fileID: 400532084196651647}
-  ColorRight: {fileID: 5104219984397382458}
-  ColorDown: {fileID: 5187919185810150298}
-  ColorLeft: {fileID: 7033855721906558071}
+  _colorUp: {fileID: 400532084196651647}
+  _colorRight: {fileID: 5104219984397382458}
+  _colorDown: {fileID: 5187919185810150298}
+  _colorLeft: {fileID: 7033855721906558071}
   _offset: {x: 0, y: 0}
   _size: {x: 248, y: 248}
   _gridSize: {x: 1, y: 1}

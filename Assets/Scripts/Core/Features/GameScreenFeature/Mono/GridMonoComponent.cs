@@ -8,11 +8,10 @@ namespace Core.Features.GameScreenFeature.Mono
 {
     public class GridMonoComponent : MonoBehaviour
     {
-        public ColorSignMonoComponent ColorUp;
-        public ColorSignMonoComponent ColorRight;
-        public ColorSignMonoComponent ColorDown;
-        public ColorSignMonoComponent ColorLeft;
-        
+        [SerializeField] private ColorSignMonoComponent _colorUp;
+        [SerializeField] private ColorSignMonoComponent _colorRight;
+        [SerializeField] private ColorSignMonoComponent _colorDown;
+        [SerializeField] private ColorSignMonoComponent _colorLeft;
         [SerializeField] private Vector2 _offset;
         [SerializeField] private Vector2 _size;
         [SerializeField] private Vector2Int _gridSize;
@@ -23,20 +22,20 @@ namespace Core.Features.GameScreenFeature.Mono
         {
             return dir switch
             {
-                _ when dir == Vector2Int.up => ColorUp,
-                _ when dir == Vector2Int.right => ColorRight,
-                _ when dir == Vector2Int.down => ColorDown,
-                _ when dir == Vector2Int.left => ColorLeft,
+                _ when dir == Vector2Int.up => _colorUp,
+                _ when dir == Vector2Int.right => _colorRight,
+                _ when dir == Vector2Int.down => _colorDown,
+                _ when dir == Vector2Int.left => _colorLeft,
                 _ => throw new Exception("Invalid direction"),
             };
         }
         
         public IEnumerable<ColorSignMonoComponent> ColorSigns()
         {
-            yield return ColorUp;
-            yield return ColorRight;
-            yield return ColorDown;
-            yield return ColorLeft;
+            yield return _colorUp;
+            yield return _colorRight;
+            yield return _colorDown;
+            yield return _colorLeft;
         }
         
         public int MaxTiles => _gridSize.x * _gridSize.y;
