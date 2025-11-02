@@ -13,7 +13,6 @@ namespace Core
         public static State GetState(LevelConfigModel level)
         {
             return GetState(level.Tiles.Select(a => a.Tile));
-
         }
         
         public static State GetState(IEnumerable<ITileModel> tiles)
@@ -37,7 +36,7 @@ namespace Core
             switch (tile)
             {
                 case SimpleTileModel simpleTile:
-                    list.Add(simpleTile.ColorId);
+                    list.Add(simpleTile.Colors.ColorId1.Value);
                     break;
                 case ComplexTileModel complexTile:
                     list.Add(complexTile.ColorId);

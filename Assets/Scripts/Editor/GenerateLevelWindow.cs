@@ -90,22 +90,22 @@ namespace Editor
 
             private void SetColor(ITileModel tile, int externalColorId)
             {
-                while (true)
-                {
-                    switch (tile)
-                    {
-                        case SimpleTileModel simpleTile:
-                            simpleTile.ColorId = RandomColorExcept(externalColorId);
-                            break;
-                        case ComplexTileModel complexTileModel:
-                            complexTileModel.ColorId = RandomColorExcept(externalColorId);
-                            tile = complexTileModel.SubTile;
-                            externalColorId = complexTileModel.ColorId;
-                            continue;
-                    }
-
-                    break;
-                }
+                // while (true)
+                // {
+                //     switch (tile)
+                //     {
+                //         case SimpleTileModel simpleTile:
+                //             simpleTile.ColorId = RandomColorExcept(externalColorId);
+                //             break;
+                //         case ComplexTileModel complexTileModel:
+                //             complexTileModel.ColorId = RandomColorExcept(externalColorId);
+                //             tile = complexTileModel.SubTile;
+                //             externalColorId = complexTileModel.ColorId;
+                //             continue;
+                //     }
+                //
+                //     break;
+                // }
             }
 
             private int RandomColorExcept(int except)

@@ -10,6 +10,7 @@ namespace Core.Services
         void GeneratePalette();
         Color[] GetCurrentPalette();
         Color GetColor(Vector2Int direction);
+        int GetColorId(Color color);
         Color RandomColorFromCurrentPaletteExcept(Color? except = null, Color? except2 = null, Color? except3 = null);
         Color GetColor(int id);
         Vector2Int GetDirection(int colorId);
@@ -45,6 +46,18 @@ namespace Core.Services
                 _ when direction == Vector2Int.left => GetColor(3),
                 _ => throw new ArgumentException("Invalid direction"),
             };
+        }
+
+        public int GetColorId(Color color)
+        {
+            for (int i = 0; i < _currentPalette.Length; i++)
+            {
+                if (_currentPalette[i] == color)
+                {
+                    return i;
+                }
+            }
+            throw new ArgumentException("Color not found in current palette.");
         }
 
         public Vector2Int GetDirection(int colorId)

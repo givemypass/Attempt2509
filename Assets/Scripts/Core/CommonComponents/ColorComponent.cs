@@ -8,5 +8,6 @@ namespace Core.CommonComponents
     public struct ColorComponent : IComponent
     {
         public Color Color;
+        public int ColorId;
     }
 }

@@ -5,13 +5,17 @@
     {
       "tile": {
         "type": "SimpleTileModel",
-        "color_id": 0
+        "colors": {
+          "color_1": 0
+        }
       }
     },
     {
       "tile": {
         "type": "SimpleTileModel",
-        "color_id": 0
+        "colors": {
+          "color_1": 0
+        }
       }
     },
     {
@@ -19,7 +23,9 @@
         "type": "ComplexTileModel",
         "sub_tile": {
           "type": "SimpleTileModel",
-          "color_id": 1
+          "colors": {
+            "color_1": 1
+          }
         },
         "color_id": 3
       }
@@ -29,7 +35,9 @@
         "type": "ComplexTileModel",
         "sub_tile": {
           "type": "SimpleTileModel",
-          "color_id": 2
+          "colors": {
+            "color_1": 2
+          }
         },
         "color_id": 3
       }
@@ -39,7 +47,9 @@
         "type": "ComplexTileModel",
         "sub_tile": {
           "type": "SimpleTileModel",
-          "color_id": 0
+          "colors": {
+            "color_1": 0
+          }
         },
         "color_id": 3
       }

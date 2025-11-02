@@ -5,31 +5,41 @@
     {
       "tile": {
         "type": "SimpleTileModel",
-        "color_id": 0
+        "colors": {
+          "color_1": 0
+        }
       }
     },
     {
       "tile": {
         "type": "SimpleTileModel",
-        "color_id": 3
+        "colors": {
+          "color_1": 3
+        }
       }
     },
     {
       "tile": {
         "type": "SimpleTileModel",
-        "color_id": 1
+        "colors": {
+          "color_1": 1
+        }
       }
     },
     {
       "tile": {
         "type": "SimpleTileModel",
-        "color_id": 0
+        "colors": {
+          "color_1": 0
+        }
       }
     },
     {
       "tile": {
         "type": "SimpleTileModel",
-        "color_id": 3
+        "colors": {
+          "color_1": 3
+        }
       }
     }
   ]

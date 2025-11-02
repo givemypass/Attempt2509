@@ -5,7 +5,9 @@
     {
       "tile": {
         "type": "SimpleTileModel",
-        "color_id": 3
+        "colors": {
+          "color_1": 3
+        }
       }
     }
   ]

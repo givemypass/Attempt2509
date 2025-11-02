@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using SelfishFramework.Src.Features.Features.Serialization;
-using UnityEngine;
 
 namespace Core.Features.TilesFeature.Models
 {

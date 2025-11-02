@@ -5,7 +5,9 @@
     {
       "tile": {
         "type": "SimpleTileModel",
-        "color_id": 3
+        "colors": {
+          "color_1": 3
+        }
       }
     },
     {
@@ -13,7 +15,9 @@
         "type": "ComplexTileModel",
         "sub_tile": {
           "type": "SimpleTileModel",
-          "color_id": 2
+          "colors": {
+            "color_1": 2
+          }
         },
         "color_id": 1
       }
@@ -25,7 +29,9 @@
           "type": "ComplexTileModel",
           "sub_tile": {
             "type": "SimpleTileModel",
-            "color_id": 1
+            "colors": {
+              "color_1": 1
+            }
           },
           "color_id": 2
         },

@@ -11,7 +11,9 @@
             "type": "ComplexTileModel",
             "sub_tile": {
               "type": "SimpleTileModel",
-              "color_id": 3
+              "colors": {
+                "color_1": 3
+              }
             },
             "color_id": 1
           },
