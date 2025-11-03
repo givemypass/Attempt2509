@@ -17,11 +17,11 @@ namespace Core
         
         public static State GetState(IEnumerable<ITileModel> tiles)
         {
-            var setup = new List<List<int>>();
+            var setup = new List<List<ColorsModel>>();
 
             foreach (var tile in tiles)
             {
-                var list = new List<int>();
+                var list = new List<ColorsModel>();
                 GetColor(tile, list);
                 setup.Add(list);
             }
@@ -31,15 +31,15 @@ namespace Core
             return state;
         }
 
-        private static void GetColor(ITileModel tile, List<int> list)
+        private static void GetColor(ITileModel tile, List<ColorsModel> list)
         {
             switch (tile)
             {
                 case SimpleTileModel simpleTile:
-                    list.Add(simpleTile.Colors.ColorId1.Value);
+                    list.Add(simpleTile.Colors);
                     break;
                 case ComplexTileModel complexTile:
-                    list.Add(complexTile.ColorId);
+                    list.Add(new ColorsModel{ColorId1 = complexTile.ColorId});
                     GetColor(complexTile.SubTile, list);
                     break;
             }

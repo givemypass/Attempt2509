@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Core.Features.TilesFeature;
+using Core.Features.TilesFeature.Models;
 
 namespace Core.Features.MinStepsCalculationFeature
 {
@@ -12,7 +14,7 @@ namespace Core.Features.MinStepsCalculationFeature
 
     public class State
     {
-        public readonly List<List<int>> Data = new();
+        public readonly List<List<ColorsModel>> Data = new();
 
         public override int GetHashCode()
         {
@@ -49,7 +51,7 @@ namespace Core.Features.MinStepsCalculationFeature
         
         private readonly Queue<State> _statePool = new();
         private readonly Queue<Attempt> _attemptPool = new();
-        private readonly Queue<List<int>> _stateDataPool = new();
+        private readonly Queue<List<ColorsModel>> _stateDataPool = new();
         
         public void InitializePools(int initialCapacity)
         {
@@ -57,7 +59,7 @@ namespace Core.Features.MinStepsCalculationFeature
             {
                 _statePool.Enqueue(new State());
                 _attemptPool.Enqueue(new Attempt());
-                _stateDataPool.Enqueue(new List<int>());
+                _stateDataPool.Enqueue(new List<ColorsModel>());
             }
         }
 
@@ -125,7 +127,7 @@ namespace Core.Features.MinStepsCalculationFeature
                     continue;
 
                 var tile = GetPooledStateData();
-                if (seq[0] == choice)
+                if (seq[0].ContainsColor(choice))
                 {
                     if (seq.Count <= 1) continue;
                     for (int j = 1; j < seq.Count; j++)
@@ -178,9 +180,9 @@ namespace Core.Features.MinStepsCalculationFeature
             _attemptPool.Enqueue(attempt);
         }
         
-        private List<int> GetPooledStateData()
+        private List<ColorsModel> GetPooledStateData()
         {
-            return _stateDataPool.Count > 0 ? _stateDataPool.Dequeue() : new List<int>();
+            return _stateDataPool.Count > 0 ? _stateDataPool.Dequeue() : new List<ColorsModel>();
         }
     }
 }
