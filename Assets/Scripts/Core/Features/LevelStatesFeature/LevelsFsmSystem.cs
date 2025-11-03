@@ -14,9 +14,9 @@ namespace Core.Features.LevelStatesFeature
             ref var fsmComponent = ref Owner.Get<LevelsFsmComponent>();
             var fsm = new StateMachine(Owner);
             
-            fsm.AddState(new CheckConditionsState(fsm));
-            fsm.AddState(new ChangeColorState(fsm));
-            fsm.AddState(new EliminateTilesState(fsm));
+            fsm.AddState(World.DependencyContainer.Resolve(new CheckConditionsState(fsm)));
+            fsm.AddState(World.DependencyContainer.Resolve(new ChangeColorState(fsm)));
+            fsm.AddState(World.DependencyContainer.Resolve(new EliminateTilesState(fsm)));
             fsm.AddStateTransition(LevelStateIdentifierMap.ChangeColorState, new DefaultTransition(LevelStateIdentifierMap.EliminateTilesState));
             fsm.AddStateTransition(LevelStateIdentifierMap.EliminateTilesState, new DefaultTransition(LevelStateIdentifierMap.CheckConditionsState));
             fsm.AddStateTransition(LevelStateIdentifierMap.CheckConditionsState, new DefaultTransition(LevelStateIdentifierMap.ChangeColorState));

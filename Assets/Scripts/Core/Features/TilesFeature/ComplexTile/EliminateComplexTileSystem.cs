@@ -2,6 +2,7 @@
 using Core.Features.GameScreenFeature;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.LevelStatesFeature.Component;
+using Core.Features.TilesFeature.Models;
 using Core.Features.TilesFeature.TileWithInner;
 using DG.Tweening;
 using SelfishFramework.Src.Core;
@@ -32,7 +33,7 @@ namespace Core.Features.TilesFeature.ComplexTile
             
             _simpleTilesFilter = World.Filter
                 .With<ComplexTileActorComponent>()
-                .With<EliminateComponent>()
+                .With<TryEliminateComponent>()
                 .Build();
         }
 
@@ -45,7 +46,16 @@ namespace Core.Features.TilesFeature.ComplexTile
 
                 foreach (var entity in _simpleTilesFilter)
                 {
-                    entity.Remove<EliminateComponent>();
+                    ref var tryEliminateComponent = ref entity.Get<TryEliminateComponent>();
+                    var targetColorId = tryEliminateComponent.ColorId;
+                    entity.Remove<TryEliminateComponent>();
+                    
+                    var model = (ComplexTileModel)entity.Get<TileCommonComponent>().Model;
+                    var colorId = model.ColorId;
+                    if (colorId != targetColorId)
+                    {
+                        continue;
+                    }
                 
                     var position = entity.Get<GridPositionComponent>().Position;
                     if (!grid.Tiles.ContainsKey((position.x, position.y)))
