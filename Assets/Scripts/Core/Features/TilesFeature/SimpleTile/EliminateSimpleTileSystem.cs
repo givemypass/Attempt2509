@@ -61,7 +61,8 @@ namespace Core.Features.TilesFeature.SimpleTile
                     entity.Set(new VisualInProgressComponent());
                     var actor = entity.AsActor();
                     var monoComponent = actor.GetComponent<SimpleTileMonoComponent>();
-                    monoComponent.Image.color = Color.white;
+                    var image = monoComponent.SetConfiguration(1).Images[0];
+                    image.color = Color.white;
                     actor.transform.DOScale(Vector3.zero, 0.2f).SetLink(actor.gameObject).OnComplete(() =>
                     {
                         Object.Destroy(actor);

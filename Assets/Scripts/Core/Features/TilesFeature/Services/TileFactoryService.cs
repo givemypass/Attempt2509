@@ -67,8 +67,19 @@ namespace Core.Features.TilesFeature.Services
             tileActor.TryInitialize();
             tileActor.transform.localScale = Vector3.zero;
             var monoComponent = tileActor.GetComponent<SimpleTileMonoComponent>();
-            var color = overrideColor ?? _colorPaletteService.GetColor(simpleModel.Colors.ColorId1.Value);
-            monoComponent.Image.color = color;
+            var countColors = simpleModel.Colors.Count();
+            var configuration = monoComponent.SetConfiguration(countColors);
+            int index = 0;
+            foreach (var colorId in simpleModel.Colors.AsSpan())
+            {
+                if (!colorId.HasValue)
+                {
+                    continue;
+                }
+                var color = _colorPaletteService.GetColor(colorId.Value);
+                configuration.Images[index].color = color;
+                index++;
+            }
             return tileActor;
         }
 
