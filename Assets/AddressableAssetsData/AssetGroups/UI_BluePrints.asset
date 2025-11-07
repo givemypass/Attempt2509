@@ -35,6 +35,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - UIBluePrint
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cbd3ae7516f94dd49845016c376f18aa
+    m_Address: Assets/BluePrints/UIBluePrints/BackColorScreen_UIBluePrint.asset
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - UIBluePrint
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: f8f7875568c3b454dbd5cdbaf5a3afba
     m_Address: Assets/BluePrints/UIBluePrints/LevelCompletedScreen_UIBluePrint.asset
     m_ReadOnly: 0

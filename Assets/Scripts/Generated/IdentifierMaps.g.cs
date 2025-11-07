@@ -26,8 +26,13 @@ namespace SelfishFramework.Src.Unity.Generated
         public const int EliminateTilesState = 331013733;
         public const int SpawnTilesState = -854198952;
     }
+    public static class UIGroupIdentifierMap
+    {
+        public const int LevelUIGroup = -617279230;
+    }
     public static class UIIdentifierMap
     {
+        public const int BackColorScreen_UIIdentifier = -397848853;
         public const int GameOverScreen_UIIdentifier = -337891185;
         public const int LevelCompletedScreen_UIIdentifier = 583926005;
         public const int LevelHandlersScreen_UIIdentifier = -584328891;

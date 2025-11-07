@@ -22,15 +22,17 @@ namespace Core.Features.HintsFeature
         [Inject] private IColorPaletteService _colorPaletteService;
         
         private Filter _filter;
+        private Filter _waitForChangingColorFilter;
 
         public override void InitSystem()
         {
             _filter = World.Filter.With<TileCommonComponent>().With<GridPositionComponent>().Build();
+            _waitForChangingColorFilter = World.Filter.With<WaitForChangingColorComponent>().Build();
         }
 
         void IReactGlobal<ShowHintCommand>.ReactGlobal(ShowHintCommand command)
         {
-            if (!Owner.Has<WaitForChangingColorComponent>())
+            if (!_waitForChangingColorFilter.IsNotEmpty())
             {
                 return;
             }

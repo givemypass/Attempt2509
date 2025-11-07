@@ -22,41 +22,34 @@ namespace Core.Features.LevelStatesFeature.States
         private readonly Filter _tileFilter;
         private readonly Filter _screenFilter;
         private readonly Single<StepsComponent> _stepsSingleComponent;
+        private readonly Single<MainColorComponent> _mainColorSingle;
         public override int StateID => LevelStateIdentifierMap.EliminateTilesState;
 
         public EliminateTilesState(StateMachine stateMachine) : base(stateMachine)
         {
             var world = stateMachine.World;
             _tileFilter = world.Filter.With<TileCommonComponent>().With<GridPositionComponent>().Build();
-            _screenFilter = stateMachine.World.Filter 
-                .With<LevelScreenUiActorComponent>()
-                .With<GridMonoProviderComponent>()
-                .With<ColorComponent>()
-                .Build();
+            _mainColorSingle = new Single<MainColorComponent>(world);
         }
 
-        public override void Enter(Entity entity)
+        public override void Enter(Entity fsmEntity)
         {
-            foreach (var screenEntity in _screenFilter)
+            _mainColorSingle.ForceUpdate();
+            var currentColor = _mainColorSingle.Get().Color;
+            var currentColorId = _colorPaletteService.GetColorId(currentColor);
+
+            foreach (var tileEntity in _tileFilter)
             {
-                var currentColor = screenEntity.Get<ColorComponent>().Color;
-                var currentColorId = _colorPaletteService.GetColorId(currentColor);
-
-                foreach (var tileEntity in _tileFilter)
-                {
-                    tileEntity.Set(new TryEliminateComponent { ColorId =  currentColorId});
-                }
-
-                break;
+                tileEntity.Set(new TryEliminateComponent { ColorId =  currentColorId});
             }
         }
 
-        public override void Exit(Entity entity)
+        public override void Exit(Entity fsmEntity)
         {
             
         }
 
-        public override void Update(Entity entity)
+        public override void Update(Entity fsmEntity)
         {
             foreach (var tileEntity in _tileFilter)
             {

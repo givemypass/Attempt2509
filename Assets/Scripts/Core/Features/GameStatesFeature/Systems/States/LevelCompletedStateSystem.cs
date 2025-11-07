@@ -34,7 +34,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         private async UniTask ProcessAsync()
         {
-            var actor = await _uiService.ShowUIAsync(UIIdentifierMap.LevelCompletedScreen_UIIdentifier);    
+            var actor = await _uiService.ShowUIAsync(UIIdentifierMap.LevelCompletedScreen_UIIdentifier, groupId : UIGroupIdentifierMap.LevelUIGroup);    
             actor.GetComponent<LevelCompletedMonoComponent>().NextLevel.onClick.AddListener(() =>
             {
                 World.Command(new SelfishFramework.Src.Features.GameFSM.Commands.ForceGameStateTransitionGlobalCommand
@@ -46,7 +46,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         protected override void OnExitState()
         {
-            _uiService.CloseAllUI();
+            _uiService.CloseAllUIGroup(UIGroupIdentifierMap.LevelUIGroup);
         }
     }
 }

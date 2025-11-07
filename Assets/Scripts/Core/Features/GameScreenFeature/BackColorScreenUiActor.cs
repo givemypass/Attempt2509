@@ -1,18 +1,16 @@
 ﻿using Core.Features.GameScreenFeature.Systems;
-using Core.Features.HintsFeature;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Unity.Features.UI.Actors;
 
 namespace Core.Features.GameScreenFeature
 {
-    public partial class LevelScreenUiActor : UIActor
+    public partial class BackColorScreenUiActor : UIActor
     {
         protected override void SetSystems()
         {
             base.SetSystems();
-            Entity.AddSystem<ShowHintSystem>();
-            Entity.AddSystem<GameScreenUISystem>();
-            Entity.AddSystem<ColorHandlersAnimateSystem>();
+            Entity.AddSystem<ChangeColorWhenSwipeSystem>();
+            Entity.AddSystem<ChangeColorSystem>();
         }
     }
 }

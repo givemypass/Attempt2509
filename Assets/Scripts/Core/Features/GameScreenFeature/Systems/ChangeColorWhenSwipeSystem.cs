@@ -1,17 +1,13 @@
 ﻿using Core.CommonComponents;
+using Core.Features.GameScreenFeature.Commands;
 using Core.Features.GameScreenFeature.Components;
-using Core.Features.GameScreenFeature.Mono;
 using Core.Features.StepsFeature;
 using Core.Features.SwipeDetection.Commands;
 using Core.Services;
-using DG.Tweening;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Attributes;
 using SelfishFramework.Src.Core.CommandBus;
 using SelfishFramework.Src.Core.Systems;
-using SelfishFramework.Src.Features.CommonComponents;
-using SelfishFramework.Src.Unity;
-using UnityEngine;
 
 namespace Core.Features.GameScreenFeature.Systems
 {
@@ -21,12 +17,10 @@ namespace Core.Features.GameScreenFeature.Systems
     {
         [Inject] private IColorPaletteService _colorPaletteService;
         
-        private LevelScreenMonoComponent _monoComponent;
         private Single<StepsComponent> _stepsSingleComponent;
 
         public override void InitSystem()
         {
-            Owner.AsActor().TryGetComponent(out _monoComponent);
             _stepsSingleComponent = new Single<StepsComponent>(World);
         }
 
@@ -36,9 +30,10 @@ namespace Core.Features.GameScreenFeature.Systems
             {
                 return;
             }
+            Owner.Remove<WaitForChangingColorComponent>();
             
             var color = _colorPaletteService.GetColor(command.Direction);
-            var currentColor = Owner.Get<ColorComponent>().Color;
+            var currentColor = Owner.Get<MainColorComponent>().Color;
             if (color == currentColor)
             {
                 return;
@@ -46,46 +41,11 @@ namespace Core.Features.GameScreenFeature.Systems
             
             ref var stepsComponent = ref _stepsSingleComponent.Get();
             stepsComponent.Steps -= 1;           
-            
-            Owner.Remove<WaitForChangingColorComponent>();
-            Owner.Set(new VisualInProgressComponent());
-            Owner.Set(new ColorChangedComponent());
-            
-            Owner.Set(new ColorComponent
+            Owner.Command(new ChangeColorCommand
             {
                 Color = color,
+                Direction = command.Direction,
             });
-            var transitionImage = _monoComponent.TransitionImage;
-            var transform = (RectTransform)transitionImage.transform;
-            var rect = transform.rect;
-            transform.anchoredPosition = Vector2.Scale(-1 * command.Direction, new Vector2(rect.size.x, rect.size.y)); 
-            transitionImage.transform.gameObject.SetActive(true);
-            transitionImage.color = color;
-            transitionImage.transform.DOLocalMove(Vector2.zero, 0.5f).SetLink(transform.gameObject).OnComplete(() =>
-            {
-                _monoComponent.BackgroundImage.color = color;
-                transitionImage.transform.gameObject.SetActive(false);
-                if (World.IsDisposed(Owner))
-                {
-                    return;
-                }
-                Owner.Remove<VisualInProgressComponent>();  
-            });
-            foreach (var grid in _monoComponent.Grids)
-            {
-                if(!grid.gameObject.activeSelf)
-                {
-                    continue; 
-                }
-
-                foreach (var sign in grid.ColorSigns())
-                {
-                    sign.RewindState();
-                }
-
-                var selectedSign = grid.GetSignImage(command.Direction);
-                selectedSign.PlaySelectedState();
-            }
         }
     }
 }

@@ -20,7 +20,7 @@ namespace Core.Features.LevelStatesFeature.States
             _tilesFilter = stateMachine.World.Filter.With<TileCommonComponent>().Build();
         }
 
-        public override void Enter(Entity entity)
+        public override void Enter(Entity fsmEntity)
         {
             _tilesFilter.ForceUpdate();
             if (_tilesFilter.SlowCount() == 0)
@@ -40,11 +40,11 @@ namespace Core.Features.LevelStatesFeature.States
             EndState();
         }
     
-        public override void Exit(Entity entity)
+        public override void Exit(Entity fsmEntity)
         {
         }
     
-        public override void Update(Entity entity)
+        public override void Update(Entity fsmEntity)
         {
         }
     }

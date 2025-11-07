@@ -1,7 +1,9 @@
 using Core.Features.TilesFeature.Services;
+using Cysharp.Threading.Tasks;
 using SelfishFramework.Src.Core.Attributes;
 using SelfishFramework.Src.Features.Features.Serialization;
 using SelfishFramework.Src.Unity.CommonCommands;
+using SelfishFramework.Src.Unity.Features.UI.Systems;
 using SelfishFramework.Src.Unity.Generated;
 using Systems;
 using UnityEngine;
@@ -11,6 +13,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
     [Injectable]
     public sealed partial class BootstrapStateSystem : BaseGameStateSystem
     {
+        [Inject] private IUIService _uiService;
         [Inject] private TileModelsService _tileModelsService;
         [Inject] private TileModelsRandomService _tileModelsRandomService;
         
@@ -27,7 +30,13 @@ namespace Core.Features.GameStatesFeature.Systems.States
             JsonPolyTypeCache.Prewarm();
             _tileModelsService.Initialize();
             _tileModelsRandomService.Initialize();
-            EndState();
+
+            ShowMainScreen().ContinueWith(EndState);
+        }
+
+        private async UniTask ShowMainScreen()
+        {
+            await _uiService.ShowUIAsync(UIIdentifierMap.BackColorScreen_UIIdentifier, additionalCanvas: AdditionalCanvasIdentifierMap.GameCanvas);
         }
     }
 }

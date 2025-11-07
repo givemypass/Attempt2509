@@ -1,5 +1,7 @@
 ﻿using System;
 using Core.CommonComponents;
+using Core.Features.GameScreenFeature;
+using Core.Features.GameScreenFeature.Commands;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
 using Core.Features.HintsFeature;
@@ -38,12 +40,14 @@ namespace Core.Features.GameStatesFeature.Systems.States
         [Inject] private ITileFactoryService _tileFactoryService;
         
         private Single<PlayerProgressComponent> _playerProgressSingle;
+        private Single<BackColorScreenUiActorComponent> _backColorActorSingle;
 
         protected override int State => GameStateIdentifierMap.BootstrapLevelState;
 
         public override void InitSystem()
         {
             _playerProgressSingle = new Single<PlayerProgressComponent>(World);
+            _backColorActorSingle = new Single<BackColorScreenUiActorComponent>(World);
         }
 
         protected override void ProcessState(int from, int to)
@@ -69,7 +73,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         private async UniTask ShowLevelScreen(LevelConfigModel level, int levelId)
         {
-            var screen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelScreen_UIIdentifier, additionalCanvas: AdditionalCanvasIdentifierMap.GameCanvas);
+            var screen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelScreen_UIIdentifier, additionalCanvas: AdditionalCanvasIdentifierMap.GameCanvas, groupId : UIGroupIdentifierMap.LevelUIGroup);
 
             screen.TryGetComponent(out LevelScreenMonoComponent monoComponent);
             Array.Sort(monoComponent.Grids, (a, b) => a.MaxTiles.CompareTo(b.MaxTiles));
@@ -92,12 +96,13 @@ namespace Core.Features.GameStatesFeature.Systems.States
             }
             
             var color = _colorPaletteService.GetColor(level.ColorId);
-            monoComponent.BackgroundImage.color = color;
-            screen.Entity.Set(new ColorComponent
+            
+            _backColorActorSingle.ForceUpdate();
+            _backColorActorSingle.GetEnt().Command(new ChangeColorCommand
             {
                 Color = color,
+                Direction = _colorPaletteService.GetDirection(level.ColorId),
             });
-
             monoComponent.LevelText.text = $"{levelId + 1}";
             
             await SpawnTiles(screen, level);
@@ -111,11 +116,11 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         private async UniTask ShowHandlersScreen()
         {
-            var handlersScreen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelHandlersScreen_UIIdentifier);
+            var handlersScreen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelHandlersScreen_UIIdentifier, groupId : UIGroupIdentifierMap.LevelUIGroup);
             var monoComponent = handlersScreen.GetComponent<LevelHandlersScreenMonoComponent>();
             monoComponent.ResetButton.onClick.AddListener(() =>
             {
-                _uiService.CloseAllUI();
+                _uiService.CloseAllUIGroup(UIGroupIdentifierMap.LevelUIGroup);
                 World.Command(new ForceGameStateTransitionGlobalCommand
                 {
                     GameState = GameStateIdentifierMap.BootstrapLevelState,

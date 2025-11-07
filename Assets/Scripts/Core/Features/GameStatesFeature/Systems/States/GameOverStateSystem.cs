@@ -26,7 +26,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         private async UniTask ProcessAsync()
         {
-            var actor = await _uiService.ShowUIAsync(UIIdentifierMap.GameOverScreen_UIIdentifier);    
+            var actor = await _uiService.ShowUIAsync(UIIdentifierMap.GameOverScreen_UIIdentifier, groupId : UIGroupIdentifierMap.LevelUIGroup);    
             actor.GetComponent<GameOverMonoComponent>().Reset.onClick.AddListener(() =>
             {
                 World.Command(new ForceGameStateTransitionGlobalCommand
@@ -38,7 +38,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         protected override void OnExitState()
         {
-            _uiService.CloseAllUI();
+            _uiService.CloseAllUIGroup(UIGroupIdentifierMap.LevelUIGroup);
         }
     }
 }

@@ -28,7 +28,6 @@ namespace Core.Features.TilesFeature.ComplexTile
             _filter = World.Filter
                 .With<LevelScreenUiActorComponent>()
                 .With<GridMonoProviderComponent>()
-                .With<ColorComponent>()
                 .Build();
             
             _simpleTilesFilter = World.Filter
