@@ -65,9 +65,9 @@ namespace Core.Features.GameStatesFeature.Systems.States
             var levelId = _playerProgressSingle.Get().CurrentLevel;
             var level = _levelsService.GetLevel(levelId);
             
-            InitLevelActor(level.Steps);
-
             await UniTask.WhenAll(ShowHandlersScreen(), ShowLevelScreen(level, levelId));
+            
+            InitLevelActor(level.Steps);
             EndState();
         }
 

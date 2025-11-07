@@ -79,7 +79,6 @@ namespace Core.Features.SwipeDetection.Systems
                 return;
             }
             var pos = command.Context.ReadValue<Vector2>();
-            SLog.Log($"touch pos {pos}");
 
             ref var swipeDetectionComponent = ref Owner.Get<SwipeDetectionComponent>();
             if (!swipeDetectionComponent.Detecting)

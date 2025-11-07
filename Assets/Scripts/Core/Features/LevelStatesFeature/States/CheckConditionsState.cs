@@ -2,6 +2,7 @@
 using Core.Features.StepsFeature;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Core.Filter;
+using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.StateMachine;
 using SelfishFramework.Src.Unity.Generated;
 
@@ -25,6 +26,7 @@ namespace Core.Features.LevelStatesFeature.States
             _tilesFilter.ForceUpdate();
             if (_tilesFilter.SlowCount() == 0)
             {
+                SLog.Log("Level Completed!");
                 stateMachine.World.Command(new LevelCompletedCommand());
                 stateMachine.Pause(true);
                 return;
@@ -33,6 +35,7 @@ namespace Core.Features.LevelStatesFeature.States
             ref var stepsComponent = ref _stepsSingleComponent.Get();
             if (stepsComponent.Steps <= 0)
             {
+                SLog.Log("Steps ran out!");
                 stateMachine.World.Command(new StepsRanOutCommand());
                 stateMachine.Pause(true);
                 return;
