@@ -324,6 +324,7 @@ MonoBehaviour:
   _offset: {x: 0, y: 0}
   _size: {x: 500, y: 500}
   _gridSize: {x: 2, y: 2}
+  _gridImage: {fileID: 425327693486907928}
 --- !u!1 &2303707900551950711
 GameObject:
   m_ObjectHideFlags: 0
@@ -939,6 +940,7 @@ MonoBehaviour:
   _offset: {x: 0, y: 0}
   _size: {x: 731, y: 731}
   _gridSize: {x: 3, y: 3}
+  _gridImage: {fileID: 1037346167133146192}
 --- !u!1 &4447982744797013447
 GameObject:
   m_ObjectHideFlags: 0
@@ -1085,6 +1087,7 @@ MonoBehaviour:
   _offset: {x: 0, y: 0}
   _size: {x: 248, y: 248}
   _gridSize: {x: 1, y: 1}
+  _gridImage: {fileID: 0}
 --- !u!1001 &1097036068591783407
 PrefabInstance:
   m_ObjectHideFlags: 0

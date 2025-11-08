@@ -73,28 +73,6 @@ namespace Core.Features.GameStatesFeature.Systems.States
 
         private async UniTask ShowLevelScreen(LevelConfigModel level, int levelId)
         {
-            var screen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelScreen_UIIdentifier, additionalCanvas: AdditionalCanvasIdentifierMap.GameCanvas, groupId : UIGroupIdentifierMap.LevelUIGroup);
-
-            screen.TryGetComponent(out LevelScreenMonoComponent monoComponent);
-            Array.Sort(monoComponent.Grids, (a, b) => a.MaxTiles.CompareTo(b.MaxTiles));
-            foreach (var grid in monoComponent.Grids)
-            {
-                if (grid.MaxTiles < level.Tiles.Count)
-                {
-                    continue;
-                }
-                grid.gameObject.SetActive(true);
-                screen.Entity.Set(new GridMonoProviderComponent
-                {
-                    Grid = grid,
-                });
-                SetColorSign(grid, Vector2Int.right);
-                SetColorSign(grid, Vector2Int.left);
-                SetColorSign(grid, Vector2Int.up);
-                SetColorSign(grid, Vector2Int.down);
-                break;
-            }
-            
             var color = _colorPaletteService.GetColor(level.ColorId);
             
             _backColorActorSingle.ForceUpdate();
@@ -103,15 +81,51 @@ namespace Core.Features.GameStatesFeature.Systems.States
                 Color = color,
                 Direction = _colorPaletteService.GetDirection(level.ColorId),
             });
-            monoComponent.LevelText.text = $"{levelId + 1}";
             
+            var screen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelScreen_UIIdentifier, additionalCanvas: AdditionalCanvasIdentifierMap.GameCanvas, groupId : UIGroupIdentifierMap.LevelUIGroup);
+            screen.TryGetComponent(out LevelScreenMonoComponent monoComponent);
+            Array.Sort(monoComponent.Grids, (a, b) => a.MaxTiles.CompareTo(b.MaxTiles));
+            foreach (var grid in monoComponent.Grids)
+            {
+                if (grid.MaxTiles < level.Tiles.Count)
+                {
+                    continue;
+                }
+
+                ShowGrid(grid, screen);
+                break;
+            }
+            monoComponent.LevelText.text = $"{levelId + 1}";
             await SpawnTiles(screen, level);
+        }
+
+        private void ShowGrid(GridMonoComponent grid, UIActor screen)
+        {
+            if (grid.GridImage != null)
+            {
+                var color = grid.GridImage.color;
+                color.a = 0;
+                grid.GridImage.color = color;
+                grid.GridImage.DOFade(1, 0.25f);
+            }
+
+            grid.gameObject.SetActive(true);
+            screen.Entity.Set(new GridMonoProviderComponent
+            {
+                Grid = grid,
+            });
+            SetColorSign(grid, Vector2Int.right);
+            SetColorSign(grid, Vector2Int.left);
+            SetColorSign(grid, Vector2Int.up);
+            SetColorSign(grid, Vector2Int.down);
         }
 
         private void SetColorSign(GridMonoComponent grid, Vector2Int dir)
         {
             var color = _colorPaletteService.GetColor(dir);
-            grid.GetSignImage(dir).SetColor(color);
+            var sign = grid.GetSignImage(dir);
+            sign.SetColor(color);
+            sign.PlayShowState();
         }
 
         private async UniTask ShowHandlersScreen()

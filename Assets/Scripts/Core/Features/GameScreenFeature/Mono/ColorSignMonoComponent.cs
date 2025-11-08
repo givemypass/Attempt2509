@@ -22,6 +22,15 @@ namespace Core.Features.GameScreenFeature.Mono
             _tween = transform.DOScale(0,0.3f).SetEase(Ease.InBack).SetLink(gameObject);
         }
         
+        public void PlayShowState()
+        {
+            _tween?.Rewind();
+            _tween?.Kill();
+            var scale = transform.localScale;
+            transform.localScale = Vector3.zero;
+            _tween = transform.DOScale(scale,0.3f).SetLink(gameObject);
+        }
+        
         public void PlaySelectedState()
         {
             _tween?.Rewind();

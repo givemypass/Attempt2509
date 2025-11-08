@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using SelfishFramework.Src.Core;
 using UnityEngine;
+using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
 namespace Core.Features.GameScreenFeature.Mono
@@ -15,9 +16,12 @@ namespace Core.Features.GameScreenFeature.Mono
         [SerializeField] private Vector2 _offset;
         [SerializeField] private Vector2 _size;
         [SerializeField] private Vector2Int _gridSize;
+        [SerializeField] private Image _gridImage; 
 
         public readonly Dictionary<(int, int), Entity> Tiles = new();
 
+        public Image GridImage => _gridImage;
+        
         public ColorSignMonoComponent GetSignImage(Vector2Int dir)
         {
             return dir switch

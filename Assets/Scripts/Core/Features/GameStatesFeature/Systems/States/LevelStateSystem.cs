@@ -44,6 +44,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
                         continue; 
                     }
 
+                    grid.GridImage.DOFade(0, 0.25f);
                     foreach (var sign in grid.ColorSigns())
                     {
                         sign.PlayHideState();
