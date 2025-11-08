@@ -2,6 +2,8 @@
 using Core.Features.PlayerProgressFeature;
 using Core.Features.SwipeDetection.Components;
 using Core.Features.SwipeDetection.Systems;
+using Core.Features.TilesFeature.ComplexTile;
+using Core.Features.TilesFeature.SimpleTile;
 using SelfishFramework.Src.Core;
 using SelfishFramework.Src.Unity;
 using SelfishFramework.Src.Unity.Features.InputFeature.Components;
@@ -22,6 +24,9 @@ namespace Core.CommonActors
             Entity.AddSystem<KeyboardSwipeDetectionSystem>();
             Entity.AddSystem<InputListenSystem>();
             Entity.AddSystem<SaveLoadPlayerProgressSystem>();
+            Entity.AddSystem<UpdateComplexTileSystem>();
+            Entity.AddSystem<EliminateSimpleTileSystem>();
+            Entity.AddSystem<EliminateComplexTileSystem>();
         }
     }
 }

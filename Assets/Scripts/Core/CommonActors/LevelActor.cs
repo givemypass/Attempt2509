@@ -17,9 +17,6 @@ namespace Core.CommonActors
         {
             base.SetSystems();
             Entity.AddSystem<LevelsFsmSystem>();
-            Entity.AddSystem<EliminateSimpleTileSystem>();
-            Entity.AddSystem<EliminateComplexTileSystem>();
-            Entity.AddSystem<UpdateComplexTileSystem>();
         }
     }
 }
