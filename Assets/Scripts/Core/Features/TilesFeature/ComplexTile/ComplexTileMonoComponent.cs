@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace Core.Features.TilesFeature.TileWithInner
@@ -7,5 +8,6 @@ namespace Core.Features.TilesFeature.TileWithInner
     {
         public Image Image;
         public RectTransform InnerParent;
+        public TextMeshProUGUI DeepText;
     }
 }

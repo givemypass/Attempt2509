@@ -20,17 +20,16 @@ namespace Core.Features.TilesFeature.ComplexTile
     [Injectable]
     public sealed partial class EliminateComplexTileSystem : BaseSystem, IUpdatable
     {
-        private Filter _filter;
-        private Filter _simpleTilesFilter;
+        private Filter _gridFilter;
+        private Filter _tilesFilter;
 
         public override void InitSystem()
         {
-            _filter = World.Filter
-                .With<LevelScreenUiActorComponent>()
+            _gridFilter = World.Filter
                 .With<GridMonoProviderComponent>()
                 .Build();
             
-            _simpleTilesFilter = World.Filter
+            _tilesFilter = World.Filter
                 .With<ComplexTileActorComponent>()
                 .With<TryEliminateComponent>()
                 .Build();
@@ -38,12 +37,12 @@ namespace Core.Features.TilesFeature.ComplexTile
 
         public void Update()
         {
-            foreach (var screenEntity in _filter)
+            foreach (var screenEntity in _gridFilter)
             {
                 ref var gridMonoProviderComponent = ref screenEntity.Get<GridMonoProviderComponent>();
                 var grid = gridMonoProviderComponent.Grid;
 
-                foreach (var entity in _simpleTilesFilter)
+                foreach (var entity in _tilesFilter)
                 {
                     ref var tryEliminateComponent = ref entity.Get<TryEliminateComponent>();
                     var targetColorId = tryEliminateComponent.ColorId;
@@ -68,7 +67,8 @@ namespace Core.Features.TilesFeature.ComplexTile
                     grid.Tiles.Remove((position.x, position.y));
                 
                     var actor = entity.AsActor();
-                    var monoComponent = actor.GetComponent<ComplexTileMonoComponent>();
+                    ref var tileMonoProviderComponent = ref entity.Get<TileMonoProviderComponent<ComplexTileMonoComponent>>();
+                    var monoComponent = tileMonoProviderComponent.Get;
                     monoComponent.Image.color = Color.white;
                     actor.transform.DOScale(Vector3.zero, 0.2f).SetLink(actor.gameObject).OnComplete(() =>
                     {
@@ -83,6 +83,7 @@ namespace Core.Features.TilesFeature.ComplexTile
                         Position = position,
                     });
                     grid.Tiles[(position.x, position.y)] = tileActor.Entity;
+                    tileActor.Entity.Set(new UpdateTileComponent());
                 }
             } 
         }

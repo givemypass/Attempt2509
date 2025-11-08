@@ -1,0 +1,39 @@
+{
+  "color_id": 1,
+  "steps": 10,
+  "tiles": [
+    {
+      "tile": {
+        "type": "SimpleTileModel",
+        "colors": {
+          "color_1": 2
+        }
+      }
+    },
+    {
+      "tile": {
+        "type": "ComplexTileModel",
+        "sub_tile": {
+          "type": "SimpleTileModel",
+          "colors": {
+            "color_1": 1,
+            "color_2": 2
+          }
+        },
+        "color_id": 3
+      }
+    },
+    {
+      "tile": {
+        "type": "ComplexTileModel",
+        "sub_tile": {
+          "type": "SimpleTileModel",
+          "colors": {
+            "color_1": 1
+          }
+        },
+        "color_id": 0
+      }
+    }
+  ]
+}

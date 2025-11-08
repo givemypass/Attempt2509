@@ -11,7 +11,6 @@ using SelfishFramework.Src.Core.Filter;
 using SelfishFramework.Src.Core.SystemModules;
 using SelfishFramework.Src.Core.Systems;
 using SelfishFramework.Src.Features.CommonComponents;
-using SelfishFramework.Src.SLogs;
 using SelfishFramework.Src.Unity;
 using UnityEngine;
 
@@ -19,17 +18,16 @@ namespace Core.Features.TilesFeature.SimpleTile
 {
     public sealed partial class EliminateSimpleTileSystem : BaseSystem, IUpdatable
     {
-        private Filter _filter;
-        private Filter _simpleTilesFilter;
+        private Filter _gridFilter;
+        private Filter _tilesFilter;
 
         public override void InitSystem()
         {
-            _filter = World.Filter
-                .With<LevelScreenUiActorComponent>()
+            _gridFilter = World.Filter
                 .With<GridMonoProviderComponent>()
                 .Build();
             
-            _simpleTilesFilter = World.Filter
+            _tilesFilter = World.Filter
                 .With<SimpleTileActorComponent>()
                 .With<TryEliminateComponent>()
                 .Build();
@@ -37,12 +35,12 @@ namespace Core.Features.TilesFeature.SimpleTile
 
         public void Update()
         {
-            foreach (var screenEntity in _filter)
+            foreach (var screenEntity in _gridFilter)
             {
                 ref var gridMonoProviderComponent = ref screenEntity.Get<GridMonoProviderComponent>();
                 var grid = gridMonoProviderComponent.Grid;
 
-                foreach (var entity in _simpleTilesFilter)
+                foreach (var entity in _tilesFilter)
                 {
                     ref var tryEliminateComponent = ref entity.Get<TryEliminateComponent>();
                     var targetColorId = tryEliminateComponent.ColorId;

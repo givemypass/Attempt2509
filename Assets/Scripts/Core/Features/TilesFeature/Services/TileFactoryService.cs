@@ -2,6 +2,7 @@
 using Core.CommonComponents;
 using Core.Features.GameScreenFeature.Components;
 using Core.Features.GameScreenFeature.Mono;
+using Core.Features.LevelStatesFeature.Component;
 using Core.Features.TilesFeature.Models;
 using Core.Features.TilesFeature.TileWithInner;
 using Core.Models;
@@ -90,6 +91,7 @@ namespace Core.Features.TilesFeature.Services
             var prefab = _globalConfigProvider.Get.ComplexTileActorPrefab;
             var tileActor = Object.Instantiate(prefab, position, Quaternion.identity, parent);
             tileActor.TryInitialize();
+            tileActor.Entity.Set(new UpdateTileComponent());
             var monoComponent = tileActor.GetComponent<ComplexTileMonoComponent>();
             var color = overrideColor ?? _colorPaletteService.GetColor(complexModel.ColorId);
             monoComponent.Image.color = color;

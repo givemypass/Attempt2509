@@ -82,7 +82,8 @@ namespace Core.Features.GameStatesFeature.Systems.States
                 Direction = _colorPaletteService.GetDirection(level.ColorId),
             });
             
-            var screen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelScreen_UIIdentifier, additionalCanvas: AdditionalCanvasIdentifierMap.GameCanvas, groupId : UIGroupIdentifierMap.LevelUIGroup);
+            var screen = await _uiService.ShowUIAsync(UIIdentifierMap.LevelScreen_UIIdentifier,
+                additionalCanvas: AdditionalCanvasIdentifierMap.GameCanvas, groupId: UIGroupIdentifierMap.LevelUIGroup);
             screen.TryGetComponent(out LevelScreenMonoComponent monoComponent);
             Array.Sort(monoComponent.Grids, (a, b) => a.MaxTiles.CompareTo(b.MaxTiles));
             foreach (var grid in monoComponent.Grids)
