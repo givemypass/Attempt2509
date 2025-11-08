@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: EditorLevelsConfig
   m_EditorClassIdentifier: 
   LevelsJson:
-  - {fileID: 4900000, guid: e2b3ff00f023fee4f90ed0ba691a9f84, type: 3}
+  - {fileID: 4900000, guid: c39e9e65a2378fe4e83647a02926033d, type: 3}

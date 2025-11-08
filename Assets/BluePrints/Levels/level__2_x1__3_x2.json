@@ -14,7 +14,7 @@
       "tile": {
         "type": "SimpleTileModel",
         "colors": {
-          "color_1": 0
+          "color_1": 2
         }
       }
     },

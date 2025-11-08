@@ -45,7 +45,8 @@ namespace Core.Features.HintsFeature
             }
 
             var state = MinStepCalculatorUtils.GetState(tileModels);
-            var (_, path) = _minStepsCalculator.MinSteps(state);
+            var (minSteps, path) = _minStepsCalculator.MinSteps(state);
+            SLog.Log("Showing hint with min steps = " + minSteps);
             if (path.Length == 0)
             {
                 SLog.LogError("No possible moves to show as hint");

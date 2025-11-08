@@ -35,18 +35,6 @@
             "color_1": 2
           }
         },
-        "color_id": 0
-      }
-    },
-    {
-      "tile": {
-        "type": "ComplexTileModel",
-        "sub_tile": {
-          "type": "SimpleTileModel",
-          "colors": {
-            "color_1": 2
-          }
-        },
         "color_id": 3
       }
     },
