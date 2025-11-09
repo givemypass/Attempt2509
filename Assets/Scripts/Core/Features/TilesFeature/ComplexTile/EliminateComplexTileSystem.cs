@@ -70,6 +70,7 @@ namespace Core.Features.TilesFeature.ComplexTile
                     ref var tileMonoProviderComponent = ref entity.Get<TileMonoProviderComponent<ComplexTileMonoComponent>>();
                     var monoComponent = tileMonoProviderComponent.Get;
                     monoComponent.Image.color = Color.white;
+                    var scale = actor.transform.localScale;
                     actor.transform.DOScale(Vector3.zero, 0.2f).SetLink(actor.gameObject).OnComplete(() =>
                     {
                         Object.Destroy(actor);
@@ -77,7 +78,7 @@ namespace Core.Features.TilesFeature.ComplexTile
                     
                     var tileActor = monoComponent.InnerParent.GetChild(0).GetComponent<Actor>();
                     tileActor.transform.SetParent(grid.transform, true);
-                    tileActor.transform.DOScale(Vector3.one, 0.1f).SetLink(tileActor.gameObject);
+                    tileActor.transform.DOScale(scale, 0.1f).SetLink(tileActor.gameObject);
                     tileActor.Entity.Set(new GridPositionComponent
                     {
                         Position = position,

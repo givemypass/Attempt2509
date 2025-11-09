@@ -158,7 +158,7 @@ namespace Core.Features.GameStatesFeature.Systems.States
                 {
                     var tileActor = _tileFactoryService.GetTile(tile.Tile, position, grid.transform);
                     tileActor.transform.localScale = Vector3.zero;
-                    tileActor.transform.DOScale(Vector3.one, 0.2f).SetLink(tileActor.gameObject);
+                    tileActor.transform.DOScale(Vector3.one * grid.Scale, 0.2f).SetLink(tileActor.gameObject);
 
                     grid.Tiles[(x, y)] = tileActor.Entity;
                     tileActor.Entity.Set(new GridPositionComponent

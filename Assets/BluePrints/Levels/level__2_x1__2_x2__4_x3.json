@@ -1,6 +1,6 @@
 {
-  "color_id": 0,
-  "steps": 10,
+  "color_id": 3,
+  "steps": 6,
   "tiles": [
     {
       "tile": {
@@ -10,24 +10,12 @@
           "sub_tile": {
             "type": "SimpleTileModel",
             "colors": {
-              "color_1": 2
+              "color_1": 3
             }
           },
           "color_id": 2
         },
-        "color_id": 3
-      }
-    },
-    {
-      "tile": {
-        "type": "ComplexTileModel",
-        "sub_tile": {
-          "type": "SimpleTileModel",
-          "colors": {
-            "color_1": 2
-          }
-        },
-        "color_id": 2
+        "color_id": 0
       }
     },
     {
@@ -43,6 +31,69 @@
           },
           "color_id": 3
         },
+        "color_id": 2
+      }
+    },
+    {
+      "tile": {
+        "type": "ComplexTileModel",
+        "sub_tile": {
+          "type": "ComplexTileModel",
+          "sub_tile": {
+            "type": "SimpleTileModel",
+            "colors": {
+              "color_1": 3
+            }
+          },
+          "color_id": 1
+        },
+        "color_id": 0
+      }
+    },
+
+    {
+      "tile": {
+        "type": "SimpleTileModel",
+        "colors": {
+          "color_1": 0
+        }
+      }
+    },
+    {
+      "tile": {
+        "type": "SimpleTileModel",
+        "colors": {
+          "color_1": 2,
+          "color_2": 0
+        }
+      }
+    },
+    {
+      "tile": {
+        "type": "ComplexTileModel",
+        "sub_tile": {
+          "type": "SimpleTileModel",
+          "colors": {
+            "color_1": 1
+          }
+        },
+        "color_id": 2
+      }
+    },
+    {
+      "tile": {
+        "type": "ComplexTileModel",
+        "sub_tile": {
+          "type": "ComplexTileModel",
+          "sub_tile": {
+            "type": "SimpleTileModel",
+            "colors": {
+              "color_1": 0,
+              "color_2": 1
+            }
+          },
+          "color_id": 2
+        },
         "color_id": 1
       }
     },
@@ -54,61 +105,13 @@
           "sub_tile": {
             "type": "SimpleTileModel",
             "colors": {
-              "color_1": 3,
-              "color_2": 2
+              "color_1": 1,
+              "color_2": 0
             }
           },
-          "color_id": 1
+          "color_id": 3
         },
-        "color_id": 2
-      }
-    },
-    {
-      "tile": {
-        "type": "ComplexTileModel",
-        "sub_tile": {
-          "type": "SimpleTileModel",
-          "colors": {
-            "color_1": 3
-          }
-        },
-        "color_id": 2
-      }
-    },
-    {
-      "tile": {
-        "type": "ComplexTileModel",
-        "sub_tile": {
-          "type": "SimpleTileModel",
-          "colors": {
-            "color_1": 3
-          }
-        },
-        "color_id": 1
-      }
-    },
-    {
-      "tile": {
-        "type": "ComplexTileModel",
-        "sub_tile": {
-          "type": "SimpleTileModel",
-          "colors": {
-            "color_1": 0
-          }
-        },
-        "color_id": 1
-      }
-    },
-    {
-      "tile": {
-        "type": "ComplexTileModel",
-        "sub_tile": {
-          "type": "SimpleTileModel",
-          "colors": {
-            "color_1": 0
-          }
-        },
-        "color_id": 1
+        "color_id": 0
       }
     },
     {
@@ -118,28 +121,6 @@
           "type": "SimpleTileModel",
           "colors": {
             "color_1": 2
-          }
-        },
-        "color_id": 2
-      }
-    },
-    {
-      "tile": {
-        "type": "SimpleTileModel",
-        "colors": {
-          "color_1": 3,
-          "color_2": 0
-        }
-      }
-    },
-    {
-      "tile": {
-        "type": "ComplexTileModel",
-        "sub_tile": {
-          "type": "SimpleTileModel",
-          "colors": {
-            "color_1": 1,
-            "color_2": 2
           }
         },
         "color_id": 1

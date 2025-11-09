@@ -16,11 +16,13 @@ namespace Core.Features.GameScreenFeature.Mono
         [SerializeField] private Vector2 _offset;
         [SerializeField] private Vector2 _size;
         [SerializeField] private Vector2Int _gridSize;
-        [SerializeField] private Image _gridImage; 
+        [SerializeField] private Image _gridImage;
+        [SerializeField] private float _scale;
 
         public readonly Dictionary<(int, int), Entity> Tiles = new();
 
         public Image GridImage => _gridImage;
+        public float Scale => _scale;
         
         public ColorSignMonoComponent GetSignImage(Vector2Int dir)
         {
